@@ -5,25 +5,24 @@ class HourlyWeatherBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Card(
       child: SizedBox(
-        height: height * 0.14,
-        width: height * 0.14,
+        height: 105,
+        width: 105,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
               "Hour",
-              style: TextStyle(fontSize: height * 0.02),
+              style: TextStyle(fontSize: 15),
             ),
             Icon(
               Icons.cloud,
-              size: height * 0.06,
+              size: 45,
             ),
             Text(
               "Temp",
-              style: TextStyle(fontSize: height * 0.02),
+              style: TextStyle(fontSize: 15),
             ),
           ],
         ),

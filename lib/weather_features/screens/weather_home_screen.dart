@@ -8,14 +8,13 @@ class WeatherHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             // main city weather
             SizedBox(
-              height: height * 0.26,
+              height: 195,
               child: Card(
                 elevation: 10,
                 shape: const RoundedRectangleBorder(
@@ -35,7 +34,7 @@ class WeatherHomeScreen extends StatelessWidget {
                       sigmaY: 25,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: height * 0.02),
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -45,7 +44,7 @@ class WeatherHomeScreen extends StatelessWidget {
                               Text(
                                 "City Name",
                                 style: TextStyle(
-                                  fontSize: height * 0.04,
+                                  fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -53,7 +52,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                 onPressed: () {},
                                 icon: Icon(
                                   Icons.menu,
-                                  size: height * 0.04,
+                                  size: 30,
                                 ),
                               ),
                             ],
@@ -65,7 +64,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.cloud,
-                                    size: height * 0.07,
+                                    size: 52.5,
                                   ),
                                   Text("Cloudy"),
                                 ],
@@ -74,7 +73,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.cloud,
-                                    size: height * 0.07,
+                                    size: 52.5,
                                   ),
                                   Text("Cloudy"),
                                 ],
@@ -83,7 +82,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.cloud,
-                                    size: height * 0.07,
+                                    size: 52.5,
                                   ),
                                   Text("Cloudy"),
                                 ],
@@ -92,7 +91,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.cloud,
-                                    size: height * 0.07,
+                                    size: 52.5,
                                   ),
                                   Text("Cloudy"),
                                 ],
@@ -108,9 +107,9 @@ class WeatherHomeScreen extends StatelessWidget {
             ),
             // hourly weather list
             Padding(
-              padding: EdgeInsets.all(height * 0.02),
+              padding: EdgeInsets.all(15),
               child: SizedBox(
-                height: height * 0.15,
+                height: 112.5,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
@@ -134,7 +133,7 @@ class WeatherHomeScreen extends StatelessWidget {
                   Text(
                     "Saved Cities",
                     style: TextStyle(
-                      fontSize: height * 0.04,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -142,11 +141,11 @@ class WeatherHomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: height * 0.02),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Column(
                 children: [
                   SizedBox(
-                    height: height * 0.35,
+                    height: 275,
                     child: ListView(
                       children: [
                         SavedCityWeatherBox(),
@@ -166,7 +165,7 @@ class WeatherHomeScreen extends StatelessWidget {
                       "Add new city",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: height * 0.035,
+                        fontSize: 27.5,
                       ),
                     ),
                   ),

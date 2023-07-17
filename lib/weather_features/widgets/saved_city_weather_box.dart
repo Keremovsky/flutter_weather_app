@@ -5,14 +5,13 @@ class SavedCityWeatherBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: height * 0.01),
+      padding: EdgeInsets.symmetric(vertical: 7.5),
       child: SizedBox(
         width: double.infinity,
         child: Card(
           child: Padding(
-            padding: EdgeInsets.all(height * 0.02),
+            padding: EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -20,13 +19,13 @@ class SavedCityWeatherBox extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.cloud,
-                      size: height * 0.06,
+                      size: 45,
                     ),
-                    SizedBox(width: height * 0.02),
+                    const SizedBox(width: 15),
                     Text(
                       "Saved City",
                       style: TextStyle(
-                        fontSize: height * 0.03,
+                        fontSize: 22.5,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -35,7 +34,7 @@ class SavedCityWeatherBox extends StatelessWidget {
                 Text(
                   "Temp",
                   style: TextStyle(
-                    fontSize: height * 0.02,
+                    fontSize: 15,
                   ),
                 ),
               ],
