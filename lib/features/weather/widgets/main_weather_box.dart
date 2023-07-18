@@ -1,18 +1,51 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/weather_features/widgets/hourly_weather_box.dart';
-import 'package:flutter_weather_app/weather_features/widgets/saved_city_weather_box.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/features/weather/controller/weather_controller.dart';
+import 'package:flutter_weather_app/models/city_info.dart';
 
-class WeatherHomeScreen extends StatelessWidget {
-  const WeatherHomeScreen({super.key});
+import 'hourly_weather_box.dart';
+
+class MainWeatherBox extends ConsumerStatefulWidget {
+  const MainWeatherBox({super.key});
+
+  @override
+  ConsumerState<MainWeatherBox> createState() => _MainWeatherBoxState();
+}
+
+class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
+  late Future<List<CityWeather>> weather = getCurrentLocationWeather();
+
+  Future<List<CityWeather>> getCurrentLocationWeather() async {
+    final result = await ref
+        .read(weatherControllerProvider.notifier)
+        .getCurrentLocationWeather(context);
+
+    return result;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    weather = getCurrentLocationWeather();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    return FutureBuilder(
+      future: weather,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
+            child: CircularProgressIndicator.adaptive(),
+          );
+        } else {}
+
+        final data = snapshot.data!;
+        final currentTime = data[0];
+
+        return Column(
           children: [
-            // main city weather
             SizedBox(
               height: 195,
               child: Card(
@@ -42,7 +75,7 @@ class WeatherHomeScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "City Name",
+                                "${currentTime.cityName} / ${(currentTime.temp - 273).toStringAsFixed(0)}⁰C",
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -66,7 +99,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                     Icons.cloud,
                                     size: 52.5,
                                   ),
-                                  Text("Cloudy"),
+                                  Text(currentTime.state),
                                 ],
                               ),
                               Column(
@@ -75,7 +108,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                     Icons.cloud,
                                     size: 52.5,
                                   ),
-                                  Text("Cloudy"),
+                                  Text(currentTime.humidity.toString()),
                                 ],
                               ),
                               Column(
@@ -84,7 +117,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                     Icons.cloud,
                                     size: 52.5,
                                   ),
-                                  Text("Cloudy"),
+                                  Text(currentTime.speed.toString()),
                                 ],
                               ),
                               Column(
@@ -93,7 +126,7 @@ class WeatherHomeScreen extends StatelessWidget {
                                     Icons.cloud,
                                     size: 52.5,
                                   ),
-                                  Text("Cloudy"),
+                                  Text(currentTime.pressure.toString()),
                                 ],
                               ),
                             ],
@@ -105,7 +138,6 @@ class WeatherHomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // hourly weather list
             Padding(
               padding: EdgeInsets.all(15),
               child: SizedBox(
@@ -123,58 +155,9 @@ class WeatherHomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Divider(),
-            // saved cities
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Saved Cities",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 275,
-                    child: ListView(
-                      children: [
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                        SavedCityWeatherBox(),
-                      ],
-                    ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Add new city",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 27.5,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }

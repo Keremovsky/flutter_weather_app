@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/weather_features/screens/weather_home_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/features/weather/screens/weather_home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
