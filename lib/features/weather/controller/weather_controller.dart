@@ -34,14 +34,12 @@ class WeatherController extends StateNotifier {
       },
       (right) {
         final dataList = right["list"];
+
         CityWeather cityName;
         for (int a = 0; a < 6; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
-          final numberFormat = NumberFormat.decimalPattern();
-          numberFormat.maximumFractionDigits = 1;
 
-          final temp = double.parse(
-              numberFormat.format(dataList[a]["main"]["temp"] - 273));
+          final temp = (dataList[a]["main"]["temp"].toInt() - 273) ?? 10;
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
@@ -49,7 +47,7 @@ class WeatherController extends StateNotifier {
           final hour = DateFormat.Hm().format(parseHour);
 
           cityName = CityWeather(
-            cityName: "Kırklareli",
+            cityName: right["city"],
             temp: temp,
             state: state,
             pressure: pressure,
@@ -70,7 +68,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
     BuildContext context, String content) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
       content: Text(content),
     ),
   );

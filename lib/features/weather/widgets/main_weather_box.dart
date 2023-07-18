@@ -39,9 +39,47 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
           return const Center(
             child: CircularProgressIndicator.adaptive(),
           );
-        } else {}
+        }
 
         final data = snapshot.data!;
+
+        if (data.isEmpty) {
+          return SizedBox(
+            height: 195,
+            width: double.infinity,
+            child: Card(
+              elevation: 10,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16),
+                ),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(
+                    sigmaX: 25,
+                    sigmaY: 25,
+                  ),
+                  child: const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Center(
+                      child: Text(
+                        "Where are you? I can't see you :(",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }
+
         final currentTime = data[0];
 
         return Column(
@@ -76,7 +114,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                             children: [
                               Text(
                                 "${currentTime.cityName} / ${(currentTime.temp)}⁰C",
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -95,7 +133,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                             children: [
                               Column(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.cloud,
                                     size: 52.5,
                                   ),
@@ -104,8 +142,8 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                               ),
                               Column(
                                 children: [
-                                  Icon(
-                                    Icons.cloud,
+                                  const Icon(
+                                    Icons.water_drop,
                                     size: 52.5,
                                   ),
                                   Text(currentTime.humidity.toString()),
@@ -113,8 +151,8 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                               ),
                               Column(
                                 children: [
-                                  Icon(
-                                    Icons.cloud,
+                                  const Icon(
+                                    Icons.air,
                                     size: 52.5,
                                   ),
                                   Text(currentTime.speed.toString()),
@@ -122,8 +160,8 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                               ),
                               Column(
                                 children: [
-                                  Icon(
-                                    Icons.cloud,
+                                  const Icon(
+                                    Icons.beach_access,
                                     size: 52.5,
                                   ),
                                   Text(currentTime.pressure.toString()),
@@ -139,7 +177,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
               child: SizedBox(
                 height: 112.5,
                 child: ListView.builder(

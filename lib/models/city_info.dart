@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class CityWeather {
   String cityName;
-  double temp;
+  int temp;
   String state;
   int pressure;
   int humidity;
@@ -22,7 +22,7 @@ class CityWeather {
 
   CityWeather copyWith({
     String? cityName,
-    double? temp,
+    int? temp,
     String? state,
     int? pressure,
     int? humidity,
@@ -55,7 +55,7 @@ class CityWeather {
   factory CityWeather.fromMap(Map<String, dynamic> map) {
     return CityWeather(
       cityName: map['cityName'] as String,
-      temp: map['temp'] as double,
+      temp: map['temp'] as int,
       state: map['state'] as String,
       pressure: map['pressure'] as int,
       humidity: map['humidity'] as int,
