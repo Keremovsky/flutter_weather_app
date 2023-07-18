@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/models/city_info.dart';
 
 class HourlyWeatherBox extends StatelessWidget {
-  const HourlyWeatherBox({super.key});
+  CityWeather cityWeather;
+
+  HourlyWeatherBox({required CityWeather cityWeather, super.key})
+      : this.cityWeather = cityWeather;
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +17,7 @@ class HourlyWeatherBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "Hour",
+              cityWeather.hour,
               style: TextStyle(fontSize: 15),
             ),
             Icon(
@@ -21,7 +25,7 @@ class HourlyWeatherBox extends StatelessWidget {
               size: 45,
             ),
             Text(
-              "Temp",
+              "${cityWeather.temp.toString()}⁰C",
               style: TextStyle(fontSize: 15),
             ),
           ],

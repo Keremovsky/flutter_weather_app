@@ -67,7 +67,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                       sigmaY: 25,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -75,7 +75,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "${currentTime.cityName} / ${(currentTime.temp - 273).toStringAsFixed(0)}⁰C",
+                                "${currentTime.cityName} / ${(currentTime.temp)}⁰C",
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                               ),
                               IconButton(
                                 onPressed: () {},
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.menu,
                                   size: 30,
                                 ),
@@ -142,16 +142,12 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
               padding: EdgeInsets.all(15),
               child: SizedBox(
                 height: 112.5,
-                child: ListView(
+                child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  children: [
-                    HourlyWeatherBox(),
-                    HourlyWeatherBox(),
-                    HourlyWeatherBox(),
-                    HourlyWeatherBox(),
-                    HourlyWeatherBox(),
-                    HourlyWeatherBox(),
-                  ],
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return HourlyWeatherBox(cityWeather: data[index + 1]);
+                  },
                 ),
               ),
             ),

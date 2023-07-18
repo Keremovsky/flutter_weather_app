@@ -8,6 +8,7 @@ class CityWeather {
   int pressure;
   int humidity;
   double speed;
+  String hour;
 
   CityWeather({
     required this.cityName,
@@ -16,6 +17,7 @@ class CityWeather {
     required this.pressure,
     required this.humidity,
     required this.speed,
+    required this.hour,
   });
 
   CityWeather copyWith({
@@ -25,6 +27,7 @@ class CityWeather {
     int? pressure,
     int? humidity,
     double? speed,
+    String? hour,
   }) {
     return CityWeather(
       cityName: cityName ?? this.cityName,
@@ -33,6 +36,7 @@ class CityWeather {
       pressure: pressure ?? this.pressure,
       humidity: humidity ?? this.humidity,
       speed: speed ?? this.speed,
+      hour: hour ?? this.hour,
     );
   }
 
@@ -44,6 +48,7 @@ class CityWeather {
       'pressure': pressure,
       'humidity': humidity,
       'speed': speed,
+      'hour': hour,
     };
   }
 
@@ -55,6 +60,7 @@ class CityWeather {
       pressure: map['pressure'] as int,
       humidity: map['humidity'] as int,
       speed: map['speed'] as double,
+      hour: map['hour'] as String,
     );
   }
 
@@ -65,7 +71,7 @@ class CityWeather {
 
   @override
   String toString() {
-    return 'CityWeather(cityName: $cityName, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed)';
+    return 'CityWeather(cityName: $cityName, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, hour: $hour)';
   }
 
   @override
@@ -77,7 +83,8 @@ class CityWeather {
         other.state == state &&
         other.pressure == pressure &&
         other.humidity == humidity &&
-        other.speed == speed;
+        other.speed == speed &&
+        other.hour == hour;
   }
 
   @override
@@ -87,6 +94,7 @@ class CityWeather {
         state.hashCode ^
         pressure.hashCode ^
         humidity.hashCode ^
-        speed.hashCode;
+        speed.hashCode ^
+        hour.hashCode;
   }
 }

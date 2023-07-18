@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/models/city_info.dart';
 import 'package:flutter_weather_app/features/weather/repository/weather_repository.dart';
+import 'package:intl/intl.dart';
 
 final weatherControllerProvider =
     StateNotifierProvider((ref) => WeatherController(
@@ -35,18 +36,27 @@ class WeatherController extends StateNotifier {
         final dataList = right["list"];
         CityWeather cityName;
         for (int a = 0; a < 6; a++) {
-          final temp = dataList[a]["main"]["temp"];
+          final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
+          final numberFormat = NumberFormat.decimalPattern();
+          numberFormat.maximumFractionDigits = 1;
+
+          final temp = double.parse(
+              numberFormat.format(dataList[a]["main"]["temp"] - 273));
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
           final speed = dataList[a]["wind"]["speed"];
+          final hour = DateFormat.Hm().format(parseHour);
+
           cityName = CityWeather(
-              cityName: "Kırklareli",
-              temp: temp,
-              state: state,
-              pressure: pressure,
-              humidity: humidity,
-              speed: speed);
+            cityName: "Kırklareli",
+            temp: temp,
+            state: state,
+            pressure: pressure,
+            humidity: humidity,
+            speed: speed,
+            hour: hour,
+          );
           data.add(cityName);
         }
       },
