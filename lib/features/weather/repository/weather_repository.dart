@@ -22,6 +22,11 @@ class WeatherRepository {
       getCurrentLocationWeather() async {
     try {
       final currentCity = await _locationController.getCurrentCity();
+
+      if (currentCity == "disabled" || currentCity == "disabled_forever") {
+        return Left(currentCity);
+      }
+
       final result = await http.get(
         Uri.parse(
             "https://api.openweathermap.org/data/2.5/forecast?q=$currentCity,&APPID=$_apiKey"),

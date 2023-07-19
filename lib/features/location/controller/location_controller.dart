@@ -16,15 +16,6 @@ class LocationController extends StateNotifier {
   Future<String> getCurrentCity() async {
     final result = await _locationRepository.getCurrentCity();
 
-    switch (result) {
-      case "disabled":
-        return "Location services disabled";
-      case "disabled_forever":
-        return "Location permission permanently denied.";
-      case "error":
-        return "Some error occurred.";
-      default:
-        return result;
-    }
+    return result;
   }
 }

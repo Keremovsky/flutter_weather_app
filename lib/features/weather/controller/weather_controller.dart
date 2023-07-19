@@ -25,11 +25,13 @@ class WeatherController extends StateNotifier {
     result.fold(
       (left) {
         if (left == "api_error") {
-          if (mounted) {
-            _giveFeedback(context, "There is a problem with OpenWeather.");
-          }
+          _giveFeedback(context, "There is a problem with OpenWeather.");
+        } else if (left == "disabled") {
+          _giveFeedback(context, "Please open your GPS.");
+        } else if (left == "disabled_forever") {
+          _giveFeedback(context, "Please give permission to access location.");
         } else {
-          _giveFeedback(context, left);
+          _giveFeedback(context, "Some unknown error occurred.");
         }
       },
       (right) {
@@ -68,7 +70,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
     BuildContext context, String content) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: 3),
       content: Text(content),
     ),
   );
