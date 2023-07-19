@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/common/loading_indicator.dart';
 import 'package:flutter_weather_app/features/weather/controller/weather_controller.dart';
 import 'package:flutter_weather_app/models/city_info.dart';
 
@@ -35,14 +36,61 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
     return FutureBuilder(
       future: weather,
       builder: (context, snapshot) {
+        // while fetching data
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(
-            child: CircularProgressIndicator.adaptive(),
+          return Column(
+            children: [
+              SizedBox(
+                height: 195,
+                width: double.infinity,
+                child: Card(
+                  elevation: 10,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(16),
+                      bottomRight: Radius.circular(16),
+                    ),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(
+                        sigmaX: 25,
+                        sigmaY: 25,
+                      ),
+                      child: const LoadingIndicator(),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: SizedBox(
+                  height: 112.5,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return const Card(
+                          child: SizedBox(
+                        height: 105,
+                        width: 105,
+                        child: LoadingIndicator(),
+                      ));
+                    },
+                  ),
+                ),
+              ),
+            ],
           );
         }
 
         final data = snapshot.data!;
 
+        // if there is no data
         if (data.isEmpty) {
           return SizedBox(
             height: 195,
@@ -86,6 +134,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
           children: [
             SizedBox(
               height: 195,
+              width: double.infinity,
               child: Card(
                 elevation: 10,
                 shape: const RoundedRectangleBorder(

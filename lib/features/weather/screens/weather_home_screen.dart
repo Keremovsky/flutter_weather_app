@@ -24,12 +24,11 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
         child: Column(
           children: [
             // main city weather
-            MainWeatherBox(),
-            // hourly weather list
+            const MainWeatherBox(),
             const Divider(),
-            // saved cities
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+            // saved cities title
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [

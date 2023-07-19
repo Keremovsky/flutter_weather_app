@@ -18,7 +18,7 @@ class HourlyWeatherBox extends StatelessWidget {
           children: [
             Text(
               cityWeather.hour,
-              style: TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 15),
             ),
             Icon(
               Icons.cloud,
