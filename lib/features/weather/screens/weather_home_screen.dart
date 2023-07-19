@@ -1,10 +1,12 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/features/weather/widgets/hourly_weather_box.dart';
+import 'package:flutter_weather_app/features/weather/screens/create_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/saved_city_weather_box.dart';
 
 class WeatherHomeScreen extends StatefulWidget {
+  static const routeName = "/weatherHomeScreen";
+
   const WeatherHomeScreen({super.key});
 
   @override

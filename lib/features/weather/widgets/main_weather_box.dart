@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/common/loading_indicator.dart';
+import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/features/weather/controller/weather_controller.dart';
 import 'package:flutter_weather_app/features/weather/widgets/error_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/wait_main_weather_box.dart';
@@ -104,8 +104,8 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                             children: [
                               Column(
                                 children: [
-                                  const Icon(
-                                    Icons.cloud,
+                                  Icon(
+                                    Constants().weatherIcons[currentTime.state],
                                     size: 52.5,
                                   ),
                                   Text(currentTime.state),
@@ -117,7 +117,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                                     Icons.water_drop,
                                     size: 52.5,
                                   ),
-                                  Text(currentTime.humidity.toString()),
+                                  Text("${currentTime.humidity}%"),
                                 ],
                               ),
                               Column(
@@ -126,7 +126,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                                     Icons.air,
                                     size: 52.5,
                                   ),
-                                  Text(currentTime.speed.toString()),
+                                  Text("${currentTime.speed} m/s"),
                                 ],
                               ),
                               Column(
@@ -135,7 +135,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                                     Icons.beach_access,
                                     size: 52.5,
                                   ),
-                                  Text(currentTime.pressure.toString()),
+                                  Text("${currentTime.pressure} hPa"),
                                 ],
                               ),
                             ],
