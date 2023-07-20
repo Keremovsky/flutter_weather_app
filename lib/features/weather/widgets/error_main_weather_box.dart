@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ErrorMainWeatherData extends StatelessWidget {
-  const ErrorMainWeatherData({super.key});
+  final Function refresh;
+
+  const ErrorMainWeatherData({required this.refresh, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,9 @@ class ErrorMainWeatherData extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            refresh();
+                          },
                           icon: const Icon(Icons.refresh),
                         ),
                         const Text(

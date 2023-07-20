@@ -10,8 +10,9 @@ import 'hourly_weather_box.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
   Future<List<CityWeather>> weather;
+  final Function refresh;
 
-  MainWeatherBox({required this.weather, super.key});
+  MainWeatherBox({required this.weather, required this.refresh, super.key});
 
   @override
   ConsumerState<MainWeatherBox> createState() => _MainWeatherBoxState();
@@ -32,7 +33,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
 
         // if there is no data
         if (data.isEmpty) {
-          return const ErrorMainWeatherData();
+          return ErrorMainWeatherData(refresh: widget.refresh);
         }
 
         final currentTime = data[0];

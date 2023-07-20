@@ -53,7 +53,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
         child: Column(
           children: [
             // main city weather
-            MainWeatherBox(weather: mainWeather),
+            MainWeatherBox(weather: mainWeather, refresh: _refresh),
             const Divider(),
             // saved cities title
             const Padding(
@@ -90,5 +90,10 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
         ),
       ),
     );
+  }
+
+  void _refresh() {
+    mainWeather = getCurrentLocationWeather();
+    setState(() {});
   }
 }
