@@ -3,7 +3,7 @@ import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final selectedCities = StateProvider((ref) => <String>[]);
+final savedCities = StateProvider((ref) => <String>[]);
 
 class UpdateSavedCityScreen extends ConsumerStatefulWidget {
   static const routeName = "/createSavedCityScreen";
@@ -23,7 +23,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final list = ref.read(selectedCities);
+    final list = ref.read(savedCities);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -76,7 +76,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 
   void _selectCity(WidgetRef ref, String city) {
-    final list = ref.read(selectedCities);
+    final list = ref.read(savedCities);
 
     if (list.contains(city)) {
       list.remove(city);
@@ -84,7 +84,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
       list.add(city);
     }
 
-    ref.read(selectedCities.notifier).update((state) => list);
+    ref.read(savedCities.notifier).update((state) => list);
     debugPrint("selectCity");
 
     setState(() {});

@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/constants/constants.dart';
-import 'package:flutter_weather_app/features/weather/controller/weather_controller.dart';
 import 'package:flutter_weather_app/features/weather/widgets/error_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/wait_main_weather_box.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
@@ -10,44 +9,30 @@ import 'package:flutter_weather_app/models/city_weather.dart';
 import 'hourly_weather_box.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
-  const MainWeatherBox({super.key});
+  Future<List<CityWeather>> weather;
+
+  MainWeatherBox({required this.weather, super.key});
 
   @override
   ConsumerState<MainWeatherBox> createState() => _MainWeatherBoxState();
 }
 
 class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
-  late Future<List<CityWeather>> weather = getCurrentLocationWeather();
-
-  Future<List<CityWeather>> getCurrentLocationWeather() async {
-    final result = await ref
-        .read(weatherControllerProvider.notifier)
-        .getCurrentLocationWeather(context);
-
-    return result;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    weather = getCurrentLocationWeather();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: weather,
+      future: widget.weather,
       builder: (context, snapshot) {
         // while fetching data
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return WaitMainWeatherBox();
+          return const WaitMainWeatherBox();
         }
 
         final data = snapshot.data!;
 
         // if there is no data
         if (data.isEmpty) {
-          return ErrorMainWeatherData();
+          return const ErrorMainWeatherData();
         }
 
         final currentTime = data[0];

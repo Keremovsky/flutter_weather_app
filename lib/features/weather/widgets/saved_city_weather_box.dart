@@ -1,30 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/constants/constants.dart';
+import '../../../models/city_weather.dart';
 
 class SavedCityWeatherBox extends StatelessWidget {
-  const SavedCityWeatherBox({super.key});
+  CityWeather cityWeather;
+
+  SavedCityWeatherBox({required this.cityWeather, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
       child: SizedBox(
         width: double.infinity,
         child: Card(
           child: Padding(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
                     Icon(
-                      Icons.cloud,
+                      Constants.weatherIcons[cityWeather.state],
                       size: 45,
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      "Saved City",
-                      style: TextStyle(
+                      cityWeather.cityName,
+                      style: const TextStyle(
                         fontSize: 22.5,
                         fontWeight: FontWeight.bold,
                       ),
@@ -32,8 +36,8 @@ class SavedCityWeatherBox extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  "Temp",
-                  style: TextStyle(
+                  "${cityWeather.temp}⁰C",
+                  style: const TextStyle(
                     fontSize: 15,
                   ),
                 ),

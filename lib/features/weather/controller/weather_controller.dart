@@ -65,9 +65,9 @@ class WeatherController extends StateNotifier {
     return data;
   }
 
-  Future<List<CityWeather>> getAddedCitiesWeather(
+  Future<List<CityWeather>> getSavedCitiesWeather(
       BuildContext context, List<String> cities) async {
-    final result = await _weatherRepository.getAddedCitiesWeather(cities);
+    final result = await _weatherRepository.getSavedCitiesWeather(cities);
 
     List<CityWeather> addedCitiesWeather = [];
     result.fold(

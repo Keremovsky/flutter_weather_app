@@ -36,7 +36,9 @@ class ErrorMainWeatherData extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                            onPressed: () {}, icon: const Icon(Icons.refresh)),
+                          onPressed: () {},
+                          icon: const Icon(Icons.refresh),
+                        ),
                         const Text(
                           "Press to refresh.",
                           style: TextStyle(fontSize: 20),

@@ -43,7 +43,7 @@ class WeatherRepository {
     }
   }
 
-  Future<Either<String, List<Map<String, dynamic>>>> getAddedCitiesWeather(
+  Future<Either<String, List<Map<String, dynamic>>>> getSavedCitiesWeather(
       List<String> cities) async {
     try {
       List<Map<String, dynamic>> datas = [];
