@@ -16,10 +16,14 @@ class UpdateSavedCityScreen extends ConsumerStatefulWidget {
 }
 
 class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
-  final cityNames = Constants.cities;
+  final cityList = Constants.cities;
+  List<String> cityListDisplay = Constants.cities;
+  String searchValue = "";
+  final TextEditingController citySearchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final list = ref.read(selectedCities);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -28,20 +32,30 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
           ),
           child: Column(
             children: [
-              const TextField(
-                decoration: InputDecoration(
-                  hintText: "Search",
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: TextField(
+                  controller: citySearchController,
+                  decoration: const InputDecoration(
+                    hintText: "Search",
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      searchValue = value;
+                      cityListDisplay =
+                          _applyFilter(cityListDisplay, cityList, searchValue);
+                    });
+                  },
                 ),
               ),
               Expanded(
                 child: ListView.builder(
-                  itemCount: cityNames.length,
+                  itemCount: cityListDisplay.length,
                   itemBuilder: (context, index) {
-                    final list = ref.read(selectedCities);
-                    bool isSelected = list.contains(cityNames[index]);
+                    bool isSelected = list.contains(cityListDisplay[index]);
 
                     return CityTile(
-                      city: cityNames[index],
+                      city: cityListDisplay[index],
                       selectCity: _selectCity,
                       isSelected: isSelected,
                     );
@@ -75,4 +89,14 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
 
     setState(() {});
   }
+}
+
+List<String> _applyFilter(
+    List<String> cityListDisplay, List<String> cityList, String searchValue) {
+  searchValue = searchValue.toLowerCase();
+
+  return cityListDisplay = cityList.where((value) {
+    value = value.toLowerCase();
+    return value.contains(searchValue);
+  }).toList();
 }
