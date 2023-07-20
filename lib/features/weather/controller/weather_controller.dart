@@ -64,6 +64,51 @@ class WeatherController extends StateNotifier {
 
     return data;
   }
+
+  Future<List<CityWeather>> getAddedCitiesWeather(
+      BuildContext context, List<String> cities) async {
+    final result = await _weatherRepository.getAddedCitiesWeather(cities);
+
+    List<CityWeather> addedCitiesWeather = [];
+    result.fold(
+      (left) {
+        if (left == "api_error") {
+          _giveFeedback(context, "There is a problem with OpenWeather.");
+        } else {
+          _giveFeedback(context, "Some unknown error occurred.");
+        }
+      },
+      (right) {
+        CityWeather cityWeather;
+        for (Map<String, dynamic> data in right) {
+          final dataList = data["list"];
+
+          final parseHour = DateTime.parse(dataList[0]["dt_txt"]);
+
+          final temp = (dataList[0]["main"]["temp"].toInt() - 273) ?? 10;
+          final state = dataList[0]["weather"][0]["main"];
+          final pressure = dataList[0]["main"]["pressure"];
+          final humidity = dataList[0]["main"]["humidity"];
+          final speed = dataList[0]["wind"]["speed"];
+          final hour = DateFormat.Hm().format(parseHour);
+
+          cityWeather = CityWeather(
+            cityName: data["city"],
+            temp: temp,
+            state: state,
+            pressure: pressure,
+            humidity: humidity,
+            speed: speed,
+            hour: hour,
+          );
+
+          addedCitiesWeather.add(cityWeather);
+        }
+      },
+    );
+
+    return addedCitiesWeather;
+  }
 }
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(

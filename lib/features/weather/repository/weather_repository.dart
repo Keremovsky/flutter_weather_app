@@ -42,4 +42,30 @@ class WeatherRepository {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, List<Map<String, dynamic>>>> getAddedCitiesWeather(
+      List<String> cities) async {
+    try {
+      List<Map<String, dynamic>> datas = [];
+
+      for (String city in cities) {
+        final result = await http.get(
+          Uri.parse(
+              "https://api.openweathermap.org/data/2.5/forecast?q=$city,&APPID=$_apiKey"),
+        );
+        final data = jsonDecode(result.body);
+        data["city"] = city;
+
+        datas.add(data);
+
+        if (data["cod"] != "200") {
+          return Left("api_error");
+        }
+      }
+
+      return Right(datas);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }
