@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Constants {
   // addable cities
-  final List<String> cities = [
+  static final List<String> cities = [
     "London",
     "İstanbul",
     "Ankara",
@@ -12,7 +12,7 @@ class Constants {
   ];
 
   // weather icon list
-  final Map<String, IconData> weatherIcons = {
+  static final Map<String, IconData> weatherIcons = {
     "Thunderstorm": Icons.thunderstorm,
     "Drizzle": Icons.cloudy_snowing,
     "Rain": Icons.snowing,

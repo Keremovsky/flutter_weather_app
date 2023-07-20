@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/models/city_info.dart';
+import 'package:flutter_weather_app/models/city_weather.dart';
 
 class HourlyWeatherBox extends StatelessWidget {
   CityWeather cityWeather;

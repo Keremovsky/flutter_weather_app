@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/features/weather/screens/create_saved_city_screen.dart';
+import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/saved_city_weather_box.dart';
 
@@ -59,8 +59,11 @@ class _WeatherHomeScreenState extends State<WeatherHomeScreen> {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
-              child: Text(
+              onPressed: () {
+                Navigator.of(context)
+                    .pushNamed(UpdateSavedCityScreen.routeName);
+              },
+              child: const Text(
                 "Add new city",
                 style: TextStyle(
                   fontSize: 25,

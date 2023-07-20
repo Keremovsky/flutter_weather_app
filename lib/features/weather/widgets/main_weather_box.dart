@@ -5,7 +5,7 @@ import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/features/weather/controller/weather_controller.dart';
 import 'package:flutter_weather_app/features/weather/widgets/error_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/wait_main_weather_box.dart';
-import 'package:flutter_weather_app/models/city_info.dart';
+import 'package:flutter_weather_app/models/city_weather.dart';
 
 import 'hourly_weather_box.dart';
 
@@ -105,7 +105,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                               Column(
                                 children: [
                                   Icon(
-                                    Constants().weatherIcons[currentTime.state],
+                                    Constants.weatherIcons[currentTime.state],
                                     size: 52.5,
                                   ),
                                   Text(currentTime.state),
