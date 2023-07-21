@@ -1,13 +1,17 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/api_keys.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
-final locationRepositoryProvider = Provider((ref) => LocationRepository());
+final locationRepositoryProvider =
+    Provider((ref) => LocationRepository(apiKey: openCageDataApiKey));
 
 class LocationRepository {
+  final String _apiKey;
+
+  LocationRepository({required apiKey}) : _apiKey = apiKey;
+
   Future<String> getCurrentCity() async {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -38,7 +42,7 @@ class LocationRepository {
 
         final result = await http.get(
           Uri.parse(
-              "https://api.opencagedata.com/geocode/v1/json?q=$lat+$lng&key=$openCageDataApiKey"),
+              "https://api.opencagedata.com/geocode/v1/json?q=$lat+$lng&key=$_apiKey"),
         );
 
         final data = jsonDecode(result.body);

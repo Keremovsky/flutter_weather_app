@@ -42,6 +42,36 @@ class WeatherRepository {
     }
   }
 
+  Future<Either<String, Map<String, dynamic>>> getWeatherWithLocation(
+      double lat, double lng) async {
+    try {
+      if (lat < -90 || lat > 90) {
+        return const Left("coordinate_error");
+      }
+      if (lng < -180 || lng > 180) {
+        return const Left("coordinate_error");
+      }
+
+      final latString = lat.toString();
+      final lngString = lng.toString();
+
+      final result = await http.get(
+        Uri.parse(
+            "https://api.openweathermap.org/data/2.5/weather?lat=$latString&lon=$lngString&appid=$_apiKey"),
+      );
+
+      var data = jsonDecode(result.body);
+
+      if (data["cod"] != "200") {
+        return const Left("api_error");
+      }
+
+      return Right(data);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
   Future<Either<String, List<Map<String, dynamic>>>> getSavedCitiesWeather(
       List<String> cities) async {
     try {

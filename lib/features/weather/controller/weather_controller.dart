@@ -4,6 +4,8 @@ import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:flutter_weather_app/features/weather/repository/weather_repository.dart';
 import 'package:intl/intl.dart';
 
+import '../../../models/weather.dart';
+
 final weatherControllerProvider =
     StateNotifierProvider((ref) => WeatherController(
           weatherRepository: ref.read(weatherRepositoryProvider),
@@ -20,7 +22,7 @@ class WeatherController extends StateNotifier {
       BuildContext context) async {
     final result = await _weatherRepository.getCurrentLocationWeather();
 
-    List<CityWeather> data = [];
+    List<CityWeather> cityWeather = [];
 
     result.fold(
       (left) {
@@ -45,7 +47,7 @@ class WeatherController extends StateNotifier {
         for (int a = 0; a < 7; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
 
-          final temp = (dataList[a]["main"]["temp"].toInt() - 273) ?? 10;
+          final temp = dataList[a]["main"]["temp"].toInt() - 273;
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
@@ -64,14 +66,59 @@ class WeatherController extends StateNotifier {
             speed: speed,
             hour: hour,
           );
-          data.add(cityName);
+          cityWeather.add(cityName);
         }
       },
     );
 
-    debugPrint(data.toString());
+    debugPrint(cityWeather.toString());
 
-    return data;
+    return cityWeather;
+  }
+
+  Future<Weather> getWeatherWithLocation(
+      BuildContext context, double lat, double lng) async {
+    final result = await _weatherRepository.getWeatherWithLocation(lat, lng);
+
+    late Weather weather;
+    result.fold(
+      (left) {
+        if (left == "api_error") {
+          _giveFeedback(context, "There is a problem with OpenWeather.");
+        } else if (left == "coordinate_error") {
+          _giveFeedback(context, "Please use proper latitude and longitude.");
+        } else {
+          _giveFeedback(context, "Some unknown error occurred.");
+        }
+
+        weather = Weather(
+          temp: 0,
+          state: "fail",
+          pressure: 0,
+          humidity: 0,
+          speed: 0,
+        );
+      },
+      (right) {
+        final temp = right["main"]["temp"].toInt() - 273;
+        final state = right["weather"]["main"];
+        final pressure = right["main"]["pressure"];
+        final humidity = right["main"]["humidity"];
+        var speed = right["wind"]["speed"];
+
+        if (speed.runtimeType != double) speed = double.parse(speed);
+
+        weather = Weather(
+          temp: temp,
+          state: state,
+          pressure: pressure,
+          humidity: humidity,
+          speed: speed,
+        );
+      },
+    );
+
+    return weather;
   }
 
   Future<List<CityWeather>> getSavedCitiesWeather(
@@ -97,7 +144,7 @@ class WeatherController extends StateNotifier {
           final city = data["city"]["name"];
           final country = data["city"]["country"];
 
-          final temp = (dataList[0]["main"]["temp"].toInt() - 273) ?? 10;
+          final temp = dataList[0]["main"]["temp"].toInt() - 273;
           final state = dataList[0]["weather"][0]["main"];
           final pressure = dataList[0]["main"]["pressure"];
           final humidity = dataList[0]["main"]["humidity"];
