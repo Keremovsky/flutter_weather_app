@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/features/weather/screens/get_location_weather_screen.dart';
+import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
 
 class EndDrawer extends StatefulWidget {
   const EndDrawer({super.key});

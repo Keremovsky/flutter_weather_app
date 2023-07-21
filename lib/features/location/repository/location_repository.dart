@@ -57,7 +57,12 @@ class LocationRepository {
           return city;
         }
 
-        city = data["results"][0]["components"]["province"];
+        if (data["results"][0]["components"].containsKey("province")) {
+          city = data["results"][0]["components"]["province"];
+          return city;
+        }
+
+        city = data["results"][0]["components"]["state"];
       }
 
       return city;
