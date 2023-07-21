@@ -5,9 +5,6 @@ import 'package:flutter_weather_app/features/weather/widgets/main_weather_box.da
 import 'package:flutter_weather_app/features/weather/widgets/saved_cities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../models/city_weather.dart';
-import '../controller/weather_controller.dart';
-
 class WeatherHomeScreen extends ConsumerStatefulWidget {
   static const routeName = "/weatherHomeScreen";
 
@@ -18,45 +15,17 @@ class WeatherHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
-  late Future<List<CityWeather>> mainWeather = getCurrentLocationWeather();
-  late Future<List<CityWeather>> savedWeather = getSavedCitiesWeather();
-
-  Future<List<CityWeather>> getSavedCitiesWeather() async {
-    final cities = ref.read(savedCities);
-
-    final result = await ref
-        .read(weatherControllerProvider.notifier)
-        .getSavedCitiesWeather(context, cities);
-
-    return result;
-  }
-
-  Future<List<CityWeather>> getCurrentLocationWeather() async {
-    final result = await ref
-        .read(weatherControllerProvider.notifier)
-        .getCurrentLocationWeather(context);
-
-    return result;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    mainWeather = getCurrentLocationWeather();
-    savedWeather = getSavedCitiesWeather();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             // main city weather
-            MainWeatherBox(weather: mainWeather, refresh: _refresh),
-            const Divider(),
+            MainWeatherBox(),
+            Divider(),
             // saved cities title
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -71,29 +40,11 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
                 ],
               ),
             ),
-            SavedCities(weather: savedWeather),
-            ElevatedButton(
-              onPressed: () async {
-                await Navigator.of(context)
-                    .pushNamed(UpdateSavedCityScreen.routeName);
-                savedWeather = getSavedCitiesWeather();
-                setState(() {});
-              },
-              child: const Text(
-                "Add new city",
-                style: TextStyle(
-                  fontSize: 25,
-                ),
-              ),
-            ),
+            // saved cities
+            SavedCities(),
           ],
         ),
       ),
     );
-  }
-
-  void _refresh() {
-    mainWeather = getCurrentLocationWeather();
-    setState(() {});
   }
 }

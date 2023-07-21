@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-final savedCities = StateProvider((ref) => <String>[]);
+final savedCitiesProvider = StateProvider((ref) => []);
 
 class UpdateSavedCityScreen extends ConsumerStatefulWidget {
   static const routeName = "/createSavedCityScreen";
@@ -16,14 +17,33 @@ class UpdateSavedCityScreen extends ConsumerStatefulWidget {
 }
 
 class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
   final cityList = Constants.cities;
   List<String> cityListDisplay = Constants.cities;
+  List<String> savedCitiesPref = [];
+
   String searchValue = "";
   final TextEditingController citySearchController = TextEditingController();
 
+  Future<void> getSavedCitiesPref() async {
+    prefs.then((value) {
+      savedCitiesPref = value.getStringList("savedCities")!;
+
+      setState(() {});
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    getSavedCitiesPref();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final list = ref.read(savedCities);
+    final list = savedCitiesPref;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -63,8 +83,11 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                 ),
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setStringList("savedCities", savedCitiesPref);
+
+                  if (mounted) Navigator.of(context).pop();
                 },
                 child: const Text("Update Selected Cities"),
               ),
@@ -76,16 +99,14 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 
   void _selectCity(WidgetRef ref, String city) {
-    final list = ref.read(savedCities);
-
-    if (list.contains(city)) {
-      list.remove(city);
+    if (savedCitiesPref.contains(city)) {
+      savedCitiesPref.remove(city);
     } else {
-      list.add(city);
+      savedCitiesPref.add(city);
     }
 
-    ref.read(savedCities.notifier).update((state) => list);
-    debugPrint("selectCity");
+    debugPrint("select $city");
+    debugPrint(savedCitiesPref.toString());
 
     setState(() {});
   }
