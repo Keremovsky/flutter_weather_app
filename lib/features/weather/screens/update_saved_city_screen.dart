@@ -19,8 +19,8 @@ class UpdateSavedCityScreen extends ConsumerStatefulWidget {
 class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
-  final cityList = Constants.cities;
-  List<String> cityListDisplay = Constants.cities;
+  final List<List<String>> cityList = Constants.cities;
+  List<List<String>> cityListDisplay = Constants.cities;
   List<String> savedCitiesPref = [];
 
   String searchValue = "";
@@ -60,11 +60,10 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                     hintText: "Search",
                   ),
                   onChanged: (value) {
-                    setState(() {
-                      searchValue = value;
-                      cityListDisplay =
-                          _applyFilter(cityListDisplay, cityList, searchValue);
-                    });
+                    searchValue = value;
+                    cityListDisplay =
+                        _applyFilter(cityListDisplay, cityList, searchValue);
+                    setState(() {});
                   },
                 ),
               ),
@@ -72,10 +71,11 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                 child: ListView.builder(
                   itemCount: cityListDisplay.length,
                   itemBuilder: (context, index) {
-                    bool isSelected = list.contains(cityListDisplay[index]);
+                    bool isSelected = list.contains(cityListDisplay[index][0]);
 
                     return CityTile(
-                      city: cityListDisplay[index],
+                      city: cityListDisplay[index][0],
+                      country: cityListDisplay[index][1],
                       selectCity: _selectCity,
                       isSelected: isSelected,
                     );
@@ -112,12 +112,13 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 }
 
-List<String> _applyFilter(
-    List<String> cityListDisplay, List<String> cityList, String searchValue) {
+List<List<String>> _applyFilter(List<List<String>> cityListDisplay,
+    List<List<String>> cityList, String searchValue) {
   searchValue = searchValue.toLowerCase();
 
+  String cityName;
   return cityListDisplay = cityList.where((value) {
-    value = value.toLowerCase();
-    return value.contains(searchValue);
+    cityName = value[0].toLowerCase();
+    return cityName.contains(searchValue);
   }).toList();
 }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class Constants {
   // addable cities
-  static final List<String> cities = [
-    "London",
-    "İstanbul",
-    "Ankara",
-    "Sofia",
-    "Madrid",
-    "New York",
+  static final List<List<String>> cities = [
+    ["London", "en"],
+    ["İstanbul", "tr"],
+    ["Ankara", "tr"],
+    ["Sofia", "bg"],
+    ["Madrid", "es"],
+    ["New York", "us"],
   ];
 
   // weather icon list
