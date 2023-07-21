@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/features/weather/screens/get_location_weather_screen.dart';
 
 class EndDrawer extends StatefulWidget {
   const EndDrawer({super.key});
@@ -44,7 +45,10 @@ class _EndDrawerState extends State<EndDrawer> {
                   SizedBox(
                     height: 40,
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(LocationWeatherScreen.routeName);
+                      },
                       borderRadius: BorderRadius.circular(10),
                       child: const Row(
                         children: [

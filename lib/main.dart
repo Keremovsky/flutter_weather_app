@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/features/weather/screens/get_location_weather_screen.dart';
 import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/screens/weather_home_screen.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         "/": (context) => const WeatherHomeScreen(),
         UpdateSavedCityScreen.routeName: (context) =>
             const UpdateSavedCityScreen(),
+        LocationWeatherScreen.routeName: (context) => LocationWeatherScreen(),
       },
     );
   }
