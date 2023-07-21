@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/common/loading_indicator.dart';
-import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_weather_app/features/weather/widgets/saved_city_weather_box.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../models/city_weather.dart';
@@ -68,7 +67,7 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
                     setState(() {});
                   },
                   child: const Text(
-                    "Add new city",
+                    "Update Saved Cities",
                     style: TextStyle(
                       fontSize: 25,
                     ),
@@ -102,7 +101,7 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
                   setState(() {});
                 },
                 child: const Text(
-                  "Add new city",
+                  "Update Saved Cities",
                   style: TextStyle(
                     fontSize: 25,
                   ),

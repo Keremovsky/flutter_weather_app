@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 
-class HourlyWeatherBox extends StatelessWidget {
-  CityWeather cityWeather;
+import '../../../constants/constants.dart';
 
-  HourlyWeatherBox({required CityWeather cityWeather, super.key})
-      : this.cityWeather = cityWeather;
+class HourlyWeatherBox extends StatelessWidget {
+  final CityWeather cityWeather;
+
+  const HourlyWeatherBox({required this.cityWeather, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +22,12 @@ class HourlyWeatherBox extends StatelessWidget {
               style: const TextStyle(fontSize: 15),
             ),
             Icon(
-              Icons.cloud,
+              Constants.weatherIcons[cityWeather.state],
               size: 45,
             ),
             Text(
               "${cityWeather.temp.toString()}⁰C",
-              style: TextStyle(fontSize: 15),
+              style: const TextStyle(fontSize: 15),
             ),
           ],
         ),

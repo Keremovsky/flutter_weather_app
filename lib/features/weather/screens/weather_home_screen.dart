@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/saved_cities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

@@ -152,7 +152,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                 height: 112.5,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 5,
+                  itemCount: 6,
                   itemBuilder: (context, index) {
                     return HourlyWeatherBox(cityWeather: data[index + 1]);
                   },

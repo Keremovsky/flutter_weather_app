@@ -24,12 +24,10 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   List<String> savedCitiesPref = [];
 
   String searchValue = "";
-  final TextEditingController citySearchController = TextEditingController();
 
   Future<void> getSavedCitiesPref() async {
     prefs.then((value) {
       savedCitiesPref = value.getStringList("savedCities")!;
-
       setState(() {});
     });
   }
@@ -55,7 +53,6 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: TextField(
-                  controller: citySearchController,
                   decoration: const InputDecoration(
                     hintText: "Search",
                   ),

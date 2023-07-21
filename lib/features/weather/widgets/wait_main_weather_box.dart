@@ -41,14 +41,15 @@ class WaitMainWeatherBox extends StatelessWidget {
             height: 112.5,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 5,
+              itemCount: 6,
               itemBuilder: (context, index) {
                 return const Card(
-                    child: SizedBox(
-                  height: 105,
-                  width: 105,
-                  child: LoadingIndicator(),
-                ));
+                  child: SizedBox(
+                    height: 105,
+                    width: 105,
+                    child: LoadingIndicator(),
+                  ),
+                );
               },
             ),
           ),

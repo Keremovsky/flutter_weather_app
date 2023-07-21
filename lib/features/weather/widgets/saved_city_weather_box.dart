@@ -3,9 +3,9 @@ import 'package:flutter_weather_app/constants/constants.dart';
 import '../../../models/city_weather.dart';
 
 class SavedCityWeatherBox extends StatelessWidget {
-  CityWeather cityWeather;
+  final CityWeather cityWeather;
 
-  SavedCityWeatherBox({required this.cityWeather, super.key});
+  const SavedCityWeatherBox({required this.cityWeather, super.key});
 
   @override
   Widget build(BuildContext context) {

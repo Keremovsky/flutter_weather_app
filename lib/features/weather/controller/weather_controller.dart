@@ -42,7 +42,7 @@ class WeatherController extends StateNotifier {
         final city = right["city"]["name"];
         final country = right["city"]["country"];
 
-        for (int a = 0; a < 6; a++) {
+        for (int a = 0; a < 7; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
 
           final temp = (dataList[a]["main"]["temp"].toInt() - 273) ?? 10;

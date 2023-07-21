@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/constants/constants.dart';
 
 class CityTile extends ConsumerWidget {
   final String city;
