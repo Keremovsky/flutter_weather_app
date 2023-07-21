@@ -38,6 +38,10 @@ class WeatherController extends StateNotifier {
         final dataList = right["list"];
 
         CityWeather cityName;
+
+        final city = right["city"]["name"];
+        final country = right["city"]["country"];
+
         for (int a = 0; a < 6; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
 
@@ -51,7 +55,8 @@ class WeatherController extends StateNotifier {
           if (speed.runtimeType != double) speed = double.parse(speed);
 
           cityName = CityWeather(
-            cityName: right["city"],
+            cityName: city,
+            country: country,
             temp: temp,
             state: state,
             pressure: pressure,
@@ -63,6 +68,8 @@ class WeatherController extends StateNotifier {
         }
       },
     );
+
+    debugPrint(data.toString());
 
     return data;
   }
@@ -87,6 +94,9 @@ class WeatherController extends StateNotifier {
 
           final parseHour = DateTime.parse(dataList[0]["dt_txt"]);
 
+          final city = data["city"]["name"];
+          final country = data["city"]["country"];
+
           final temp = (dataList[0]["main"]["temp"].toInt() - 273) ?? 10;
           final state = dataList[0]["weather"][0]["main"];
           final pressure = dataList[0]["main"]["pressure"];
@@ -95,7 +105,8 @@ class WeatherController extends StateNotifier {
           final hour = DateFormat.Hm().format(parseHour);
 
           cityWeather = CityWeather(
-            cityName: data["city"],
+            cityName: city,
+            country: country,
             temp: temp,
             state: state,
             pressure: pressure,
@@ -108,6 +119,8 @@ class WeatherController extends StateNotifier {
         }
       },
     );
+
+    debugPrint(addedCitiesWeather.toString());
 
     return addedCitiesWeather;
   }

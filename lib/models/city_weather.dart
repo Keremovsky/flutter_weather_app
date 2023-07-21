@@ -3,6 +3,7 @@ import 'dart:convert';
 
 class CityWeather {
   String cityName;
+  String country;
   int temp;
   String state;
   int pressure;
@@ -12,6 +13,7 @@ class CityWeather {
 
   CityWeather({
     required this.cityName,
+    required this.country,
     required this.temp,
     required this.state,
     required this.pressure,
@@ -22,6 +24,7 @@ class CityWeather {
 
   CityWeather copyWith({
     String? cityName,
+    String? country,
     int? temp,
     String? state,
     int? pressure,
@@ -31,6 +34,7 @@ class CityWeather {
   }) {
     return CityWeather(
       cityName: cityName ?? this.cityName,
+      country: country ?? this.country,
       temp: temp ?? this.temp,
       state: state ?? this.state,
       pressure: pressure ?? this.pressure,
@@ -43,6 +47,7 @@ class CityWeather {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'cityName': cityName,
+      'country': country,
       'temp': temp,
       'state': state,
       'pressure': pressure,
@@ -55,6 +60,7 @@ class CityWeather {
   factory CityWeather.fromMap(Map<String, dynamic> map) {
     return CityWeather(
       cityName: map['cityName'] as String,
+      country: map['country'] as String,
       temp: map['temp'] as int,
       state: map['state'] as String,
       pressure: map['pressure'] as int,
@@ -71,7 +77,7 @@ class CityWeather {
 
   @override
   String toString() {
-    return 'CityWeather(cityName: $cityName, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, hour: $hour)';
+    return 'CityWeather(cityName: $cityName, country: $country, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, hour: $hour)';
   }
 
   @override
@@ -79,6 +85,7 @@ class CityWeather {
     if (identical(this, other)) return true;
 
     return other.cityName == cityName &&
+        other.country == country &&
         other.temp == temp &&
         other.state == state &&
         other.pressure == pressure &&
@@ -90,6 +97,7 @@ class CityWeather {
   @override
   int get hashCode {
     return cityName.hashCode ^
+        country.hashCode ^
         temp.hashCode ^
         state.hashCode ^
         pressure.hashCode ^

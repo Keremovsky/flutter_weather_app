@@ -32,10 +32,9 @@ class WeatherRepository {
             "https://api.openweathermap.org/data/2.5/forecast?q=$currentCity,&APPID=$_apiKey"),
       );
       final data = jsonDecode(result.body);
-      data["city"] = currentCity;
 
       if (data["cod"] != "200") {
-        return Left("api_error");
+        return const Left("api_error");
       }
       return Right(data);
     } catch (e) {
@@ -54,12 +53,11 @@ class WeatherRepository {
               "https://api.openweathermap.org/data/2.5/forecast?q=$city,&APPID=$_apiKey"),
         );
         final data = jsonDecode(result.body);
-        data["city"] = city;
 
         datas.add(data);
 
         if (data["cod"] != "200") {
-          return Left("api_error");
+          return const Left("api_error");
         }
       }
 
