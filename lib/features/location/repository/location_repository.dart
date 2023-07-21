@@ -43,11 +43,17 @@ class LocationRepository {
 
         final data = jsonDecode(result.body);
 
-        final town = data["results"][0]["components"]["town"];
-        if (town != null) return town;
+        if (data["results"][0]["components"].containsKey("town")) {
+          city = data["results"][0]["components"]["town"];
+          return city;
+        }
+
+        if (data["results"][0]["components"].containsKey("city")) {
+          city = data["results"][0]["components"]["city"];
+          return city;
+        }
 
         city = data["results"][0]["components"]["province"];
-        debugPrint(city);
       }
 
       return city;

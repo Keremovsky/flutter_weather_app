@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/features/weather/widgets/end_drawer.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/saved_cities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,17 +15,21 @@ class WeatherHomeScreen extends ConsumerStatefulWidget {
 }
 
 class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldStateKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      key: scaffoldStateKey,
+      endDrawer: EndDrawer(),
       body: SafeArea(
         child: Column(
           children: [
             // main city weather
-            MainWeatherBox(),
-            Divider(),
+            MainWeatherBox(openEndDrawer: _openEndDrawer),
+            const Divider(),
             // saved cities title
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -40,10 +45,14 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
               ),
             ),
             // saved cities
-            SavedCities(),
+            const SavedCities(),
           ],
         ),
       ),
     );
+  }
+
+  void _openEndDrawer() {
+    scaffoldStateKey.currentState!.openEndDrawer();
   }
 }

@@ -9,7 +9,9 @@ import '../controller/weather_controller.dart';
 import 'hourly_weather_box.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
-  const MainWeatherBox({super.key});
+  final Function openEndDrawer;
+
+  const MainWeatherBox({required this.openEndDrawer, super.key});
 
   @override
   ConsumerState<MainWeatherBox> createState() => _MainWeatherBoxState();
@@ -46,7 +48,10 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
 
         // if there is no data
         if (data.isEmpty) {
-          return ErrorMainWeatherData(refresh: _refresh);
+          return ErrorMainWeatherData(
+            refresh: _refresh,
+            openEndDrawer: widget.openEndDrawer,
+          );
         }
 
         final currentTime = data[0];
@@ -90,7 +95,9 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
                                 ),
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  widget.openEndDrawer();
+                                },
                                 icon: const Icon(
                                   Icons.menu,
                                   size: 30,

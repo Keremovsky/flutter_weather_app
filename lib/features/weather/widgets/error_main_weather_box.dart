@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 
 class ErrorMainWeatherData extends StatelessWidget {
   final Function refresh;
+  final Function openEndDrawer;
 
-  const ErrorMainWeatherData({required this.refresh, super.key});
+  const ErrorMainWeatherData(
+      {required this.refresh, required this.openEndDrawer, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +35,39 @@ class ErrorMainWeatherData extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                refresh();
+                              },
+                              icon: const Icon(Icons.refresh),
+                            ),
+                            const Text(
+                              "Press to refresh.",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(
                           onPressed: () {
-                            refresh();
+                            openEndDrawer();
                           },
-                          icon: const Icon(Icons.refresh),
+                          icon: const Icon(
+                            Icons.menu,
+                            size: 30,
+                          ),
                         ),
-                        const Text(
-                          "Press to refresh.",
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                 ),
               ),
