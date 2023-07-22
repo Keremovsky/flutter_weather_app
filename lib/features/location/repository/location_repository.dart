@@ -52,13 +52,13 @@ class LocationRepository {
           return city;
         }
 
-        if (data["results"][0]["components"].containsKey("city")) {
-          city = data["results"][0]["components"]["city"];
+        if (data["results"][0]["components"].containsKey("province")) {
+          city = data["results"][0]["components"]["province"];
           return city;
         }
 
-        if (data["results"][0]["components"].containsKey("province")) {
-          city = data["results"][0]["components"]["province"];
+        if (data["results"][0]["components"].containsKey("city")) {
+          city = data["results"][0]["components"]["city"];
           return city;
         }
 

@@ -62,7 +62,7 @@ class WeatherRepository {
 
       var data = jsonDecode(result.body);
 
-      if (data["cod"] != "200") {
+      if (data["cod"] != 200) {
         return const Left("api_error");
       }
 

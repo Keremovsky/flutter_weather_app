@@ -51,10 +51,8 @@ class WeatherController extends StateNotifier {
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
-          var speed = dataList[a]["wind"]["speed"];
+          final speed = dataList[a]["wind"]["speed"];
           final hour = DateFormat.Hm().format(parseHour);
-
-          if (speed.runtimeType != double) speed = double.parse(speed);
 
           cityName = CityWeather(
             cityName: city,
@@ -97,16 +95,16 @@ class WeatherController extends StateNotifier {
           pressure: 0,
           humidity: 0,
           speed: 0,
+          lat: lat,
+          lng: lng,
         );
       },
       (right) {
         final temp = right["main"]["temp"].toInt() - 273;
-        final state = right["weather"]["main"];
+        final state = right["weather"][0]["main"];
         final pressure = right["main"]["pressure"];
         final humidity = right["main"]["humidity"];
-        var speed = right["wind"]["speed"];
-
-        if (speed.runtimeType != double) speed = double.parse(speed);
+        final speed = right["wind"]["speed"];
 
         weather = Weather(
           temp: temp,
@@ -114,6 +112,8 @@ class WeatherController extends StateNotifier {
           pressure: pressure,
           humidity: humidity,
           speed: speed,
+          lat: lat,
+          lng: lng,
         );
       },
     );

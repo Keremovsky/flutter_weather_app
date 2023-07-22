@@ -1,13 +1,10 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/data_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/error_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/wait_main_weather_box.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../controller/weather_controller.dart';
-import 'hourly_weather_box.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
   final Function openEndDrawer;

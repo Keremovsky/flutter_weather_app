@@ -8,7 +8,7 @@ class CityWeather {
   String state;
   int pressure;
   int humidity;
-  double speed;
+  num speed;
   String hour;
 
   CityWeather({
