@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/features/theme_notifier/theme_notifier.dart';
 import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final switchProvider = StateProvider((ref) => false);
 
