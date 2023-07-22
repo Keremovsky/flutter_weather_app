@@ -21,7 +21,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldStateKey,
-      endDrawer: EndDrawer(),
+      endDrawer: const EndDrawer(),
       body: SafeArea(
         child: Column(
           children: [

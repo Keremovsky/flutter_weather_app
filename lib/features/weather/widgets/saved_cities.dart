@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/weather_controller.dart';
 import '../screens/update_saved_city_screen.dart';
 
+final weatherChangeDetector = StateProvider((ref) => Future<List<CityWeather>>);
+
 class SavedCities extends ConsumerStatefulWidget {
   const SavedCities({super.key});
 
@@ -15,7 +17,6 @@ class SavedCities extends ConsumerStatefulWidget {
 }
 
 class _SavedCitiesState extends ConsumerState<SavedCities> {
-  List<String> savedCities = [];
   late Future<List<CityWeather>> weather = _getSavedCitiesWeather();
 
   Future<List<CityWeather>> _getSavedCitiesWeather() async {
@@ -60,11 +61,7 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
                     await Navigator.of(context)
                         .pushNamed(UpdateSavedCityScreen.routeName);
 
-                    final prefs = await SharedPreferences.getInstance();
-                    savedCities = prefs.getStringList("savedCities") ?? [];
-
-                    weather = _getSavedCitiesWeather();
-                    setState(() {});
+                    _updateSavedCities();
                   },
                   child: const Text(
                     "Update Saved Cities",
@@ -94,11 +91,7 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
                   await Navigator.of(context)
                       .pushNamed(UpdateSavedCityScreen.routeName);
 
-                  final prefs = await SharedPreferences.getInstance();
-                  savedCities = prefs.getStringList("savedCities") ?? [];
-
-                  weather = _getSavedCitiesWeather();
-                  setState(() {});
+                  _updateSavedCities();
                 },
                 child: const Text(
                   "Update Saved Cities",
@@ -112,5 +105,10 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
         );
       },
     );
+  }
+
+  void _updateSavedCities() {
+    weather = _getSavedCitiesWeather();
+    setState(() {});
   }
 }

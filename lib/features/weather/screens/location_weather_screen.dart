@@ -60,7 +60,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
                           if (value!.isEmpty) {
                             return "Fill text field!";
                           } else {
-                            final d = double.tryParse(value!);
+                            final d = double.tryParse(value);
                             if (d == null) {
                               return "Input must be double!";
                             }
@@ -87,7 +87,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
                           if (value!.isEmpty) {
                             return "Fill text field!";
                           } else {
-                            final d = double.tryParse(value!);
+                            final d = double.tryParse(value);
                             if (d == null) {
                               return "Input must be double!";
                             }

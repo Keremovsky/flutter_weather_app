@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
         "/": (context) => const WeatherHomeScreen(),
         UpdateSavedCityScreen.routeName: (context) =>
             const UpdateSavedCityScreen(),
-        LocationWeatherScreen.routeName: (context) => LocationWeatherScreen(),
+        LocationWeatherScreen.routeName: (context) =>
+            const LocationWeatherScreen(),
       },
     );
   }

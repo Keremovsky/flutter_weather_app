@@ -47,7 +47,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
         // if there is no data
         if (data.isEmpty) {
           return ErrorMainWeatherData(
-            refresh: _refresh,
+            refresh: _updateMainWeatherBox,
             openEndDrawer: widget.openEndDrawer,
           );
         }
@@ -58,7 +58,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
     );
   }
 
-  void _refresh() {
+  void _updateMainWeatherBox() {
     weather = getCurrentLocationWeather();
     setState(() {});
   }
