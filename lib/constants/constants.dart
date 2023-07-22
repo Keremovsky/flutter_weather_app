@@ -9,6 +9,23 @@ class Constants {
     ["Sofia", "bg"],
     ["Madrid", "es"],
     ["New York", "us"],
+    ["Baku", "az"],
+    ["Moscow", "ru"],
+    ["Paris", "fr"],
+    ["Tokyo", "jp"],
+    ["Berlin", "de"],
+    ["Saint Petersburg", "ru"],
+    ["Kyoto", "jp"],
+    ["Eskişehir", "tr"],
+    ["Hamburg", "de"],
+    ["Kırklareli", "tr"],
+    ["Manchester", "en"],
+    ["Barcelona", "es"],
+    ["Pleven", "bg"],
+    ["Nakhchivan", "az"],
+    ["California", "us"],
+    ["Toulon", "fr"],
+    ["Munich", "de"],
   ];
 
   // weather icon list

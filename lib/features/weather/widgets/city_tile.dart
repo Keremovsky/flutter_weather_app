@@ -19,7 +19,7 @@ class CityTile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyle = TextStyle(
       fontWeight: FontWeight.bold,
-      fontSize: 24,
+      fontSize: 20,
       color: Colors.deepPurple.shade300,
     );
 
@@ -36,7 +36,7 @@ class CityTile extends ConsumerWidget {
             style: isSelected
                 ? textStyle
                 : const TextStyle(
-                    fontSize: 24,
+                    fontSize: 20,
                   ),
           ),
         ],
