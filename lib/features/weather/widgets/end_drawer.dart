@@ -93,6 +93,11 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                             .read(themeNotifierProvider.notifier)
                             .setTheme(ThemeMode.light);
                       }
+
+                      ref
+                          .read(switchProvider.notifier)
+                          .update((state) => switchValue);
+
                       setState(() {});
                     },
                   ),
