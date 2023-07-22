@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../controller/weather_controller.dart';
 import '../screens/update_saved_city_screen.dart';
 
-final weatherChangeDetector = StateProvider((ref) => Future<List<CityWeather>>);
-
 class SavedCities extends ConsumerStatefulWidget {
   const SavedCities({super.key});
 
