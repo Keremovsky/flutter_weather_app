@@ -43,9 +43,19 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Get Weather",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Column(
           children: [
+            const Spacer(flex: 1),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Form(
@@ -108,6 +118,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
               ),
             ),
             LocationWeatherBox(weather: weather),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
                 if (formKey.currentState!.validate()) {
@@ -119,6 +130,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
               },
               child: const Text("Get Weather"),
             ),
+            const Spacer(flex: 2),
           ],
         ),
       ),
