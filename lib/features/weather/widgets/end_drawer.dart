@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/features/theme_notifier/theme_notifier.dart';
 import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class EndDrawer extends StatefulWidget {
+final switchProvider = StateProvider((ref) => false);
+
+class EndDrawer extends ConsumerStatefulWidget {
   const EndDrawer({super.key});
 
   @override
-  State<EndDrawer> createState() => _EndDrawerState();
+  ConsumerState<EndDrawer> createState() => _EndDrawerState();
 }
 
-class _EndDrawerState extends State<EndDrawer> {
-  bool switchValue = false;
+class _EndDrawerState extends ConsumerState<EndDrawer> {
+  late bool switchValue;
+
+  @override
+  void initState() {
+    super.initState();
+    switchValue = ref.read(switchProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +48,7 @@ class _EndDrawerState extends State<EndDrawer> {
                   ),
                 ),
               ),
-              const Spacer(
-                flex: 1,
-              ),
+              const Spacer(flex: 1),
               SizedBox(
                 height: 40,
                 child: GestureDetector(
@@ -61,9 +70,7 @@ class _EndDrawerState extends State<EndDrawer> {
                   ),
                 ),
               ),
-              const Spacer(
-                flex: 30,
-              ),
+              const Spacer(flex: 30),
               Row(
                 children: [
                   const Text(
@@ -72,11 +79,20 @@ class _EndDrawerState extends State<EndDrawer> {
                       fontSize: 24,
                     ),
                   ),
-                  const SizedBox(width: 10),
+                  const SizedBox(width: 15),
                   Switch(
                     value: switchValue,
                     onChanged: (value) {
                       switchValue = value;
+                      if (switchValue == false) {
+                        ref
+                            .read(themeNotifierProvider.notifier)
+                            .setTheme(ThemeMode.dark);
+                      } else {
+                        ref
+                            .read(themeNotifierProvider.notifier)
+                            .setTheme(ThemeMode.light);
+                      }
                       setState(() {});
                     },
                   ),

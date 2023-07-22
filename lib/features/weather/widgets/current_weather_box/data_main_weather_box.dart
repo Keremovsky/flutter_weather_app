@@ -5,6 +5,7 @@ import 'package:flutter_weather_app/constants/constants.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../../controller/weather_controller.dart';
 import '../hourly_weather_box.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DataMainWeatherBox extends ConsumerStatefulWidget {
   final Function openEndDrawer;
