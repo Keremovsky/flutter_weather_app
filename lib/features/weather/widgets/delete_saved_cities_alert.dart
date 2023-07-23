@@ -16,7 +16,10 @@ class DeleteAllSavedCitiesAlert extends ConsumerWidget {
             children: [
               const Text(
                 "Are you sure?",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const Text(
                 "This will delete all Saved Cities!",

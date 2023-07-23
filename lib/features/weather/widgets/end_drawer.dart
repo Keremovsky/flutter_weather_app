@@ -3,6 +3,7 @@ import 'package:flutter_weather_app/core/state_notifiers/theme_notifier.dart';
 import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
+import 'package:flutter_weather_app/features/weather/widgets/unit_settings.dart';
 
 final switchProvider = StateProvider((ref) => false);
 
@@ -87,6 +88,26 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                       SizedBox(width: 10),
                       Text(
                         "Update Saved Cities",
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Spacer(flex: 1),
+              SizedBox(
+                height: 40,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  onTap: () {},
+                  child: const Row(
+                    children: [
+                      Icon(Icons.settings, size: 26),
+                      SizedBox(width: 10),
+                      Text(
+                        "Unit Settings",
                         style: TextStyle(
                           fontSize: 22,
                         ),
