@@ -44,5 +44,5 @@ app.*.map.json
 /android/app/release
 
 # Added files
-/lib/api_keys.dart
+lib/core/constants/api_keys.dart
 .vscode

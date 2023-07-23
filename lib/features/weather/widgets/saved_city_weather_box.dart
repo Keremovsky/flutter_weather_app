@@ -10,7 +10,7 @@ class SavedCityWeatherBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 7.5, horizontal: 20),
       child: SizedBox(
         width: double.infinity,
         child: Card(

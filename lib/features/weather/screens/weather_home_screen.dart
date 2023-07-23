@@ -51,7 +51,7 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
               ],
             ),
             Positioned(
-              top: 19,
+              top: 20,
               right: 15,
               child: IconButton(
                 onPressed: () {

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/constants/constants.dart';
+import 'package:flutter_weather_app/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/features/weather/widgets/delete_saved_cities_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-final savedCitiesProvider = StateProvider((ref) => []);
 
 class UpdateSavedCityScreen extends ConsumerStatefulWidget {
   static const routeName = "/createSavedCityScreen";
@@ -22,22 +21,15 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
 
   final List<List<String>> cityList = Constants.cities;
   List<List<String>> cityListDisplay = Constants.cities;
-  List<String> savedCitiesPref = [];
+  late List<String> savedCitiesPref;
 
   String searchValue = "";
-
-  Future<void> getSavedCitiesPref() async {
-    prefs.then((value) {
-      savedCitiesPref = value.getStringList("savedCities")!;
-      setState(() {});
-    });
-  }
 
   @override
   void initState() {
     super.initState();
 
-    getSavedCitiesPref();
+    savedCitiesPref = ref.read(savedCitiesNotifierProvider);
   }
 
   @override
@@ -110,11 +102,13 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                     ),
                     FloatingActionButton(
                       heroTag: null,
-                      onPressed: () async {
-                        final prefs = await SharedPreferences.getInstance();
-                        prefs.setStringList("savedCities", savedCitiesPref);
+                      onPressed: () {
+                        debugPrint(savedCitiesPref.toString());
+                        ref
+                            .read(savedCitiesNotifierProvider.notifier)
+                            .setSavedCities(savedCitiesPref);
 
-                        if (mounted) Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                       child: const Icon(
                         Icons.check,

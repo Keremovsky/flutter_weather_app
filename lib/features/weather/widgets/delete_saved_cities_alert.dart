@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_weather_app/state_notifiers/saved_cities_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class DeleteAllSavedCitiesAlert extends StatelessWidget {
+class DeleteAllSavedCitiesAlert extends ConsumerWidget {
   const DeleteAllSavedCitiesAlert({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       content: SizedBox(
         height: 150,
@@ -25,9 +26,10 @@ class DeleteAllSavedCitiesAlert extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () async {
-                      final prefs = await SharedPreferences.getInstance();
-                      prefs.setStringList("savedCities", []);
+                    onPressed: () {
+                      ref
+                          .read(savedCitiesNotifierProvider.notifier)
+                          .setSavedCities([]);
 
                       Navigator.of(context).pop();
                     },

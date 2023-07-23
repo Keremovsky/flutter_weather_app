@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/features/theme_notifier/theme_notifier.dart';
+import 'package:flutter_weather_app/state_notifiers/theme_notifier.dart';
 import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 
 final switchProvider = StateProvider((ref) => false);
 
@@ -63,6 +64,29 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                       SizedBox(width: 10),
                       Text(
                         "Get Weather",
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const Spacer(flex: 1),
+              SizedBox(
+                height: 40,
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(UpdateSavedCityScreen.routeName);
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.location_city, size: 26),
+                      SizedBox(width: 10),
+                      Text(
+                        "Update Saved Cities",
                         style: TextStyle(
                           fontSize: 22,
                         ),
