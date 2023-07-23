@@ -46,5 +46,4 @@ app.*.map.json
 # Added files
 lib/core/constants/api_keys.dart
 lib/features/weather/widgets/selector_button.dart
-lib/features/weather/widgets/unit_settings.dart
 .vscode

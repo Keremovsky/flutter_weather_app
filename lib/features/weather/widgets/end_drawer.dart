@@ -101,7 +101,13 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                 height: 40,
                 child: InkWell(
                   splashColor: Colors.transparent,
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const UnitSettings();
+                        });
+                  },
                   child: const Row(
                     children: [
                       Icon(Icons.settings, size: 26),

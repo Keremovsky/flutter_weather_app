@@ -3,12 +3,13 @@ import 'package:flutter_weather_app/models/unit_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final unitSettingNotifierProvider =
-    StateNotifierProvider((ref) => UnitSettingNotifer());
+    StateNotifierProvider<UnitSettingNotifier, UnitSetting>(
+        (ref) => UnitSettingNotifier());
 
-class UnitSettingNotifer extends StateNotifier<UnitSetting> {
+class UnitSettingNotifier extends StateNotifier<UnitSetting> {
   late SharedPreferences prefs;
 
-  UnitSettingNotifer()
+  UnitSettingNotifier()
       : super(
           UnitSetting(
               tempUnit: "C",
