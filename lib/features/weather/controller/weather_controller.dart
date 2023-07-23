@@ -47,7 +47,7 @@ class WeatherController extends StateNotifier {
         for (int a = 0; a < 7; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
 
-          final temp = dataList[a]["main"]["temp"].toInt() - 273;
+          final temp = dataList[a]["main"]["temp"].toInt();
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
@@ -102,7 +102,7 @@ class WeatherController extends StateNotifier {
         );
       },
       (right) {
-        final temp = right["main"]["temp"].toInt() - 273;
+        final temp = right["main"]["temp"].toInt();
         final state = right["weather"][0]["main"];
         final pressure = right["main"]["pressure"];
         final humidity = right["main"]["humidity"];
@@ -148,7 +148,7 @@ class WeatherController extends StateNotifier {
           final city = data["city"]["name"];
           final country = data["city"]["country"];
 
-          final temp = dataList[0]["main"]["temp"].toInt() - 273;
+          final temp = dataList[0]["main"]["temp"].toInt();
           final state = dataList[0]["weather"][0]["main"];
           final pressure = dataList[0]["main"]["pressure"];
           final humidity = dataList[0]["main"]["humidity"];

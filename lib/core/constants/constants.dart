@@ -38,4 +38,9 @@ class Constants {
     "Clear": Icons.sunny,
     "Clouds": Icons.cloud,
   };
+
+  static final tempDropDownItems = [
+    const DropdownMenuItem(value: "C", child: Text("C")),
+    const DropdownMenuItem(value: "K", child: Text("K")),
+  ];
 }

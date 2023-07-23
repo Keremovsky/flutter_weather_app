@@ -31,7 +31,9 @@ class HourlyWeatherBox extends ConsumerWidget {
               size: 45,
             ),
             Text(
-              "${cityWeather.temp.toString()}⁰${unitSetting.tempUnit}",
+              unitSetting.tempUnit == "K"
+                  ? "${(cityWeather.temp)}⁰K"
+                  : "${(cityWeather.temp) - 273}⁰C",
               style: const TextStyle(fontSize: 15),
             ),
           ],

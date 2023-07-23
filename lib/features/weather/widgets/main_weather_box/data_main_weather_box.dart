@@ -71,7 +71,9 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                       Row(
                         children: [
                           Text(
-                            "${currentTime.cityName} / ${(currentTime.temp)}⁰${unitSetting.tempUnit}",
+                            unitSetting.tempUnit == "K"
+                                ? "${currentTime.cityName} / ${(currentTime.temp)}⁰K"
+                                : "${currentTime.cityName} / ${(currentTime.temp) - 273}⁰C",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,

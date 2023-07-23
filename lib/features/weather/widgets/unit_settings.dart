@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 
 class UnitSettings extends ConsumerWidget {
@@ -21,9 +22,22 @@ class UnitSettings extends ConsumerWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            "Temperature: ${unitSetting.tempUnit}",
-            style: const TextStyle(fontSize: 18),
+          Row(
+            children: [
+              const Text(
+                "Temperature: ",
+                style: TextStyle(fontSize: 18),
+              ),
+              DropdownButton(
+                value: unitSetting.tempUnit,
+                items: Constants.tempDropDownItems,
+                onChanged: (value) {
+                  ref
+                      .read(unitSettingNotifierProvider.notifier)
+                      .setUnitSetting(unitSetting.copyWith(tempUnit: value));
+                },
+              )
+            ],
           ),
           Text(
             "Wind Speed: ${unitSetting.windSpeedUnit}",

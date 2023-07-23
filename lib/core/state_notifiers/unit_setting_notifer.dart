@@ -16,7 +16,9 @@ class UnitSettingNotifier extends StateNotifier<UnitSetting> {
               pressureUnit: "hPa",
               windSpeedUnit: "m/s",
               timeFormatUnit: "24"),
-        );
+        ) {
+    init();
+  }
 
   void init() async {
     prefs = await SharedPreferences.getInstance();
@@ -34,7 +36,7 @@ class UnitSettingNotifier extends StateNotifier<UnitSetting> {
   }
 
   void setUnitSetting(UnitSetting newUnitSetting) {
-    List<String> unitSettingValues = [
+    final List<String> unitSettingValues = [
       newUnitSetting.tempUnit,
       newUnitSetting.pressureUnit,
       newUnitSetting.windSpeedUnit,
