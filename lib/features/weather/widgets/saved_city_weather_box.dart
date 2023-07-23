@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/constants/constants.dart';
+import 'package:flutter_weather_app/core/constants/constants.dart';
 import '../../../models/city_weather.dart';
 
 class SavedCityWeatherBox extends StatelessWidget {

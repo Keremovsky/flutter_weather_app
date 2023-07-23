@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../../common/loading_indicator.dart';
+import '../../../../core/common/loading_indicator.dart';
 
 class WaitMainWeatherBox extends StatelessWidget {
   const WaitMainWeatherBox({super.key});

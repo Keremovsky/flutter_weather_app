@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../../constants/constants.dart';
+import '../../../core/constants/constants.dart';
 import '../../../models/weather.dart';
 
 class LocationWeatherBox extends StatelessWidget {

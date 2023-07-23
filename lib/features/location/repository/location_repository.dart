@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/api_keys.dart';
+import 'package:flutter_weather_app/core/constants/api_keys.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 

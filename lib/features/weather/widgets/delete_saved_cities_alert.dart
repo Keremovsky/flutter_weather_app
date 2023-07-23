@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/state_notifiers/saved_cities_notifier.dart';
+import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DeleteAllSavedCitiesAlert extends ConsumerWidget {
