@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../../../../core/constants/constants.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HourlyWeatherBox extends StatelessWidget {
+class HourlyWeatherBox extends ConsumerWidget {
   final CityWeather cityWeather;
 
   const HourlyWeatherBox({required this.cityWeather, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final unitSetting = ref.watch(unitSettingNotifierProvider);
+    int hour =
+        int.parse(cityWeather.hour) % int.parse(unitSetting.timeFormatUnit);
+
     return Card(
       child: SizedBox(
         height: 105,
@@ -17,7 +23,7 @@ class HourlyWeatherBox extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              cityWeather.hour,
+              "$hour:00",
               style: const TextStyle(fontSize: 15),
             ),
             Icon(
@@ -25,7 +31,7 @@ class HourlyWeatherBox extends StatelessWidget {
               size: 45,
             ),
             Text(
-              "${cityWeather.temp.toString()}⁰C",
+              "${cityWeather.temp.toString()}⁰${unitSetting.tempUnit}",
               style: const TextStyle(fontSize: 15),
             ),
           ],

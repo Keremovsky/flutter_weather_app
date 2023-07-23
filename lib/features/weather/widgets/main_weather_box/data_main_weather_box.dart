@@ -2,7 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
+import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
+import 'package:flutter_weather_app/models/unit_setting.dart';
 import '../../controller/weather_controller.dart';
 import 'hourly_weather_box.dart';
 
@@ -17,6 +19,7 @@ class DataMainWeatherBox extends ConsumerStatefulWidget {
 
 class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
   late Future<List<CityWeather>> weather = getCurrentLocationWeather();
+  late UnitSetting unitSetting;
 
   Future<List<CityWeather>> getCurrentLocationWeather() async {
     final result = await ref
@@ -34,6 +37,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
 
   @override
   Widget build(BuildContext context) {
+    unitSetting = ref.watch(unitSettingNotifierProvider);
     final data = widget.cityData;
     final currentTime = data[0];
     return Column(
@@ -67,7 +71,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                       Row(
                         children: [
                           Text(
-                            "${currentTime.cityName} / ${(currentTime.temp)}⁰C",
+                            "${currentTime.cityName} / ${(currentTime.temp)}⁰${unitSetting.tempUnit}",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -102,7 +106,8 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 Icons.air,
                                 size: 52.5,
                               ),
-                              Text("${currentTime.speed} m/s"),
+                              Text(
+                                  "${currentTime.speed} ${unitSetting.windSpeedUnit}"),
                             ],
                           ),
                           Column(
@@ -111,7 +116,8 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 Icons.beach_access,
                                 size: 52.5,
                               ),
-                              Text("${currentTime.pressure} hPa"),
+                              Text(
+                                  "${currentTime.pressure} ${unitSetting.pressureUnit}"),
                             ],
                           ),
                         ],

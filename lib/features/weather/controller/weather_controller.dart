@@ -52,7 +52,7 @@ class WeatherController extends StateNotifier {
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
           final speed = dataList[a]["wind"]["speed"];
-          final hour = DateFormat.Hm().format(parseHour);
+          final hour = DateFormat.H().format(parseHour);
 
           cityName = CityWeather(
             cityName: city,
