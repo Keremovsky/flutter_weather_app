@@ -4,7 +4,7 @@ import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/da
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/error_main_weather_box.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/wait_main_weather_box.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
-import '../controller/weather_controller.dart';
+import '../../controller/weather_controller.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
   const MainWeatherBox({super.key});

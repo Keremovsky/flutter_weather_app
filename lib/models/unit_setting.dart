@@ -5,7 +5,7 @@ class UnitSetting {
   final String tempUnit;
   final String pressureUnit;
   final String windSpeedUnit;
-  final int timeFormatUnit;
+  final String timeFormatUnit;
 
   UnitSetting({
     required this.tempUnit,
@@ -18,7 +18,7 @@ class UnitSetting {
     String? tempUnit,
     String? pressureUnit,
     String? windSpeedUnit,
-    int? timeFormatUnit,
+    String? timeFormatUnit,
   }) {
     return UnitSetting(
       tempUnit: tempUnit ?? this.tempUnit,
@@ -42,7 +42,7 @@ class UnitSetting {
       tempUnit: map['tempUnit'] as String,
       pressureUnit: map['pressureUnit'] as String,
       windSpeedUnit: map['windSpeedUnit'] as String,
-      timeFormatUnit: map['timeFormatUnit'] as int,
+      timeFormatUnit: map['timeFormatUnit'] as String,
     );
   }
 
