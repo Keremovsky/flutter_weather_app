@@ -29,9 +29,7 @@ class WeatherController extends StateNotifier {
         if (left == "api_error") {
           _giveFeedback(context, "There is a problem with OpenWeather.");
         } else if (left == "disabled") {
-          _giveFeedback(context, "Please open your GPS.");
-        } else if (left == "disabled_forever") {
-          _giveFeedback(context, "Please give permission to access location.");
+          _giveFeedback(context, "Location services are not enabled.");
         } else {
           _giveFeedback(context, "Some unknown error occurred.");
         }

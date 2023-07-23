@@ -23,7 +23,7 @@ class WeatherRepository {
     try {
       final currentCity = await _locationController.getCurrentCity();
 
-      if (currentCity == "disabled" || currentCity == "disabled_forever") {
+      if (currentCity == "disabled" || currentCity == "error") {
         return Left(currentCity);
       }
 
