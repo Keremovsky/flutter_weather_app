@@ -30,6 +30,8 @@ class WeatherController extends StateNotifier {
           _giveFeedback(context, "There is a problem with OpenWeather.");
         } else if (left == "disabled") {
           _giveFeedback(context, "Location services are not enabled.");
+        } else if (left == "no_internet") {
+          _giveFeedback(context, "No internet connection :(");
         } else {
           _giveFeedback(context, "Some unknown error occurred.");
         }
@@ -83,6 +85,8 @@ class WeatherController extends StateNotifier {
           _giveFeedback(context, "There is a problem with OpenWeather.");
         } else if (left == "coordinate_error") {
           _giveFeedback(context, "Please use proper latitude and longitude.");
+        } else if (left == "no_internet") {
+          _giveFeedback(context, "No internet connection :(");
         } else {
           _giveFeedback(context, "Some unknown error occurred.");
         }
@@ -128,6 +132,8 @@ class WeatherController extends StateNotifier {
       (left) {
         if (left == "api_error") {
           _giveFeedback(context, "There is a problem with OpenWeather.");
+        } else if (left == "no_internet") {
+          _giveFeedback(context, "No internet connection :(");
         } else {
           _giveFeedback(context, "Some unknown error occurred.");
         }
@@ -175,7 +181,7 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
     BuildContext context, String content) {
   return ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      duration: const Duration(seconds: 3),
+      duration: const Duration(seconds: 2),
       content: Text(content),
     ),
   );

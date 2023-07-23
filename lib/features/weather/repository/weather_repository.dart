@@ -3,6 +3,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter_weather_app/core/constants/api_keys.dart';
 import 'package:flutter_weather_app/features/location/controller/location_controller.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:http/http.dart' as http;
 
 final weatherRepositoryProvider = Provider((ref) => WeatherRepository(
@@ -21,6 +22,9 @@ class WeatherRepository {
   Future<Either<String, Map<String, dynamic>>>
       getCurrentLocationWeather() async {
     try {
+      final connection = await _controlConnection();
+      if (!connection) return Left("no_internet");
+
       final currentCity = await _locationController.getCurrentCity();
 
       if (currentCity == "disabled" || currentCity == "error") {
@@ -45,6 +49,9 @@ class WeatherRepository {
   Future<Either<String, Map<String, dynamic>>> getWeatherWithLocation(
       double lat, double lng) async {
     try {
+      final connection = await _controlConnection();
+      if (!connection) return Left("no_internet");
+
       if (lat < -90 || lat > 90) {
         return const Left("coordinate_error");
       }
@@ -75,6 +82,9 @@ class WeatherRepository {
   Future<Either<String, List<Map<String, dynamic>>>> getSavedCitiesWeather(
       List<String> cities) async {
     try {
+      final connection = await _controlConnection();
+      if (!connection) return Left("no_internet");
+
       List<Map<String, dynamic>> datas = [];
 
       for (String city in cities) {
@@ -96,4 +106,8 @@ class WeatherRepository {
       return Left(e.toString());
     }
   }
+}
+
+Future<bool> _controlConnection() async {
+  return await InternetConnectionChecker().hasConnection;
 }
