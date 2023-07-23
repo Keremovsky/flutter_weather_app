@@ -23,36 +23,49 @@ class _WeatherHomeScreenState extends ConsumerState<WeatherHomeScreen> {
       key: scaffoldStateKey,
       endDrawer: const EndDrawer(),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            // main city weather
-            MainWeatherBox(openEndDrawer: _openEndDrawer),
-            const Divider(),
-            // saved cities title
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Saved Cities",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
+            const Column(
+              children: [
+                // main city weather
+                MainWeatherBox(),
+                Divider(),
+                // saved cities title
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Saved Cities",
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
+                // saved cities
+                SavedCities(),
+              ],
+            ),
+            Positioned(
+              top: 19,
+              right: 15,
+              child: IconButton(
+                onPressed: () {
+                  scaffoldStateKey.currentState!.openEndDrawer();
+                },
+                icon: const Icon(
+                  Icons.menu,
+                  size: 30,
+                ),
               ),
             ),
-            // saved cities
-            const SavedCities(),
           ],
         ),
       ),
     );
-  }
-
-  void _openEndDrawer() {
-    scaffoldStateKey.currentState!.openEndDrawer();
   }
 }

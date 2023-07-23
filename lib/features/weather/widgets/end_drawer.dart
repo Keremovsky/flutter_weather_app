@@ -31,7 +31,8 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
             children: [
               SizedBox(
                 height: 40,
-                child: GestureDetector(
+                child: InkWell(
+                  splashColor: Colors.transparent,
                   onTap: () {},
                   child: const Row(
                     children: [
@@ -50,7 +51,8 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
               const Spacer(flex: 1),
               SizedBox(
                 height: 40,
-                child: GestureDetector(
+                child: InkWell(
+                  splashColor: Colors.transparent,
                   onTap: () {
                     Navigator.of(context)
                         .pushNamed(LocationWeatherScreen.routeName);

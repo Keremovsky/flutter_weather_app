@@ -7,11 +7,9 @@ import '../../controller/weather_controller.dart';
 import '../hourly_weather_box.dart';
 
 class DataMainWeatherBox extends ConsumerStatefulWidget {
-  final Function openEndDrawer;
   final List<CityWeather> cityData;
 
-  const DataMainWeatherBox(
-      {required this.openEndDrawer, required this.cityData, super.key});
+  const DataMainWeatherBox({required this.cityData, super.key});
 
   @override
   ConsumerState<DataMainWeatherBox> createState() => _MainWeatherBoxState();
@@ -67,22 +65,12 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "${currentTime.cityName} / ${(currentTime.temp)}⁰C",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              widget.openEndDrawer();
-                            },
-                            icon: const Icon(
-                              Icons.menu,
-                              size: 30,
                             ),
                           ),
                         ],

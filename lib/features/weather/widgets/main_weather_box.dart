@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/data_main_weather_box.dart';
-import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/error_main_weather_box.dart';
-import 'package:flutter_weather_app/features/weather/widgets/current_weather_box/wait_main_weather_box.dart';
+import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/data_main_weather_box.dart';
+import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/error_main_weather_box.dart';
+import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/wait_main_weather_box.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../controller/weather_controller.dart';
 
 class MainWeatherBox extends ConsumerStatefulWidget {
-  final Function openEndDrawer;
-
-  const MainWeatherBox({required this.openEndDrawer, super.key});
+  const MainWeatherBox({super.key});
 
   @override
   ConsumerState<MainWeatherBox> createState() => _MainWeatherBoxState();
@@ -48,12 +46,10 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
         if (data.isEmpty) {
           return ErrorMainWeatherData(
             refresh: _updateMainWeatherBox,
-            openEndDrawer: widget.openEndDrawer,
           );
         }
 
-        return DataMainWeatherBox(
-            openEndDrawer: widget.openEndDrawer, cityData: data);
+        return DataMainWeatherBox(cityData: data);
       },
     );
   }

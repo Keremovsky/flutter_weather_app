@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 
 class ErrorMainWeatherData extends StatelessWidget {
   final Function refresh;
-  final Function openEndDrawer;
 
-  const ErrorMainWeatherData(
-      {required this.refresh, required this.openEndDrawer, super.key});
+  const ErrorMainWeatherData({required this.refresh, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,18 +53,6 @@ class ErrorMainWeatherData extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.topRight,
-                        child: IconButton(
-                          onPressed: () {
-                            openEndDrawer();
-                          },
-                          icon: const Icon(
-                            Icons.menu,
-                            size: 30,
-                          ),
-                        ),
-                      )
                     ],
                   ),
                 ),
