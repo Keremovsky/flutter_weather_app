@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+// help to store weather data of a city (for getting weather based on saved cities and current city)
 class CityWeather {
   String cityName;
   String country;

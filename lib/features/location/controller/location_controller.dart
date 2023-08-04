@@ -13,6 +13,7 @@ class LocationController extends StateNotifier {
       : _locationRepository = locationRepository,
         super(false);
 
+  // getting name of current city name
   Future<String> getCurrentCity() async {
     final result = await _locationRepository.getCurrentCity();
 

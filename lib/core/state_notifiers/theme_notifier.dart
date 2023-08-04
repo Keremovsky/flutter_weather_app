@@ -14,6 +14,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
     init();
   }
 
+  // get theme from phone when initialize state notifier
   void init() async {
     prefs = await SharedPreferences.getInstance();
     int theme = await prefs?.getInt("theme") ?? state.index;
@@ -23,6 +24,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
     state = ThemeMode.values[theme];
   }
 
+  // change theme
   void setTheme(ThemeMode mode) {
     state = mode;
     prefs!.setInt("theme", state.index);

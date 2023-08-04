@@ -18,24 +18,26 @@ class WeatherController extends StateNotifier {
       : _weatherRepository = weatherRepository,
         super(false);
 
+  // get weather data of current city
   Future<List<CityWeather>> getCurrentLocationWeather(
       BuildContext context) async {
+    // get weather data of current city
     final result = await _weatherRepository.getCurrentLocationWeather();
 
     List<CityWeather> cityWeather = [];
 
     result.fold(
+      // if there is some error occurred
       (left) {
         if (left == "api_error") {
           _giveFeedback(context, "There is a problem with OpenWeather.");
-        } else if (left == "disabled") {
-          _giveFeedback(context, "Location services are not enabled.");
         } else if (left == "no_internet") {
           _giveFeedback(context, "No internet connection :(");
         } else {
           _giveFeedback(context, "Some unknown error occurred.");
         }
       },
+      // if getting data process is successful
       (right) {
         final dataList = right["list"];
 
@@ -44,6 +46,7 @@ class WeatherController extends StateNotifier {
         final city = right["city"]["name"];
         final country = right["city"]["country"];
 
+        // get first seven weather data
         for (int a = 0; a < 7; a++) {
           final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
 
@@ -69,17 +72,18 @@ class WeatherController extends StateNotifier {
       },
     );
 
-    debugPrint(cityWeather.toString());
-
     return cityWeather;
   }
 
+  // get weather data of given coordinates
   Future<Weather> getWeatherWithLocation(
       BuildContext context, double lat, double lng) async {
+    // get weather data of given coordinates
     final result = await _weatherRepository.getWeatherWithLocation(lat, lng);
 
     late Weather weather;
     result.fold(
+      // if there is some error occurred
       (left) {
         if (left == "api_error") {
           _giveFeedback(context, "There is a problem with OpenWeather.");
@@ -101,6 +105,7 @@ class WeatherController extends StateNotifier {
           lng: lng,
         );
       },
+      // if getting data process is successful
       (right) {
         final temp = right["main"]["temp"].toInt();
         final state = right["weather"][0]["main"];
@@ -123,12 +128,15 @@ class WeatherController extends StateNotifier {
     return weather;
   }
 
+  // get weather data of saved cities
   Future<List<CityWeather>> getSavedCitiesWeather(
       BuildContext context, List<String> cities) async {
+    // get weather data of saved cities
     final result = await _weatherRepository.getSavedCitiesWeather(cities);
 
-    List<CityWeather> addedCitiesWeather = [];
+    List<CityWeather> savedCitiesWeather = [];
     result.fold(
+      // if there is some error occurred
       (left) {
         if (left == "api_error") {
           _giveFeedback(context, "There is a problem with OpenWeather.");
@@ -138,8 +146,10 @@ class WeatherController extends StateNotifier {
           _giveFeedback(context, "Some unknown error occurred.");
         }
       },
+      // if getting data process is successful
       (right) {
         CityWeather cityWeather;
+        // get all weather data of saved cities one by one
         for (Map<String, dynamic> data in right) {
           final dataList = data["list"];
 
@@ -166,17 +176,16 @@ class WeatherController extends StateNotifier {
             hour: hour,
           );
 
-          addedCitiesWeather.add(cityWeather);
+          savedCitiesWeather.add(cityWeather);
         }
       },
     );
 
-    debugPrint(addedCitiesWeather.toString());
-
-    return addedCitiesWeather;
+    return savedCitiesWeather;
   }
 }
 
+// giving proper feedbacks
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> _giveFeedback(
     BuildContext context, String content) {
   return ScaffoldMessenger.of(context).showSnackBar(

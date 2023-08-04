@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+// help to store unit setting
 class UnitSetting {
   final String tempUnit;
   final String pressureUnit;

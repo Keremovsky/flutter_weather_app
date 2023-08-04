@@ -19,18 +19,23 @@ class WeatherRepository {
       : _locationController = locationController,
         _apiKey = apiKey;
 
+  // get weather data of current city
   Future<Either<String, Map<String, dynamic>>>
       getCurrentLocationWeather() async {
     try {
+      // control if phone has internet connection
       final connection = await _controlConnection();
-      if (!connection) return Left("no_internet");
+      if (!connection) return const Left("no_internet");
 
+      // if it has internet connection, get current city's name
       final currentCity = await _locationController.getCurrentCity();
 
-      if (currentCity == "disabled" || currentCity == "error") {
+      // if there is a problem with getting city name
+      if (currentCity == "error") {
         return Left(currentCity);
       }
 
+      // get weather data based on city name
       final result = await http.get(
         Uri.parse(
             "https://api.openweathermap.org/data/2.5/forecast?q=$currentCity,&APPID=$_apiKey"),
@@ -46,12 +51,15 @@ class WeatherRepository {
     }
   }
 
+  // get weather data of given coordinates
   Future<Either<String, Map<String, dynamic>>> getWeatherWithLocation(
       double lat, double lng) async {
     try {
+      // control if phone has internet connection
       final connection = await _controlConnection();
-      if (!connection) return Left("no_internet");
+      if (!connection) return const Left("no_internet");
 
+      // control if coordinates are appropriate
       if (lat < -90 || lat > 90) {
         return const Left("coordinate_error");
       }
@@ -59,14 +67,14 @@ class WeatherRepository {
         return const Left("coordinate_error");
       }
 
-      final latString = lat.toString();
-      final lngString = lng.toString();
+      final latStr = lat.toString();
+      final lngStr = lng.toString();
 
+      // get weather data based on coordinates
       final result = await http.get(
         Uri.parse(
-            "https://api.openweathermap.org/data/2.5/weather?lat=$latString&lon=$lngString&appid=$_apiKey"),
+            "https://api.openweathermap.org/data/2.5/weather?lat=$latStr&lon=$lngStr&appid=$_apiKey"),
       );
-
       var data = jsonDecode(result.body);
 
       if (data["cod"] != 200) {
@@ -79,14 +87,16 @@ class WeatherRepository {
     }
   }
 
+  // get weather data of saved cities
   Future<Either<String, List<Map<String, dynamic>>>> getSavedCitiesWeather(
       List<String> cities) async {
     try {
+      // control if phone has internet connection
       final connection = await _controlConnection();
-      if (!connection) return Left("no_internet");
+      if (!connection) return const Left("no_internet");
 
+      // get weather data based on saved cities
       List<Map<String, dynamic>> datas = [];
-
       for (String city in cities) {
         final result = await http.get(
           Uri.parse(
@@ -108,6 +118,7 @@ class WeatherRepository {
   }
 }
 
+// return true if phone has internet connection
 Future<bool> _controlConnection() async {
   return await InternetConnectionChecker().hasConnection;
 }

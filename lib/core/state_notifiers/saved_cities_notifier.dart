@@ -12,6 +12,7 @@ class SavedCitiesNotifier extends StateNotifier<List<String>> {
     init();
   }
 
+  // get saved cities from phone when initialize state notifier
   void init() async {
     prefs = await SharedPreferences.getInstance();
     final savedCities = prefs.getStringList("savedCities") ?? [];
@@ -19,6 +20,7 @@ class SavedCitiesNotifier extends StateNotifier<List<String>> {
     state = savedCities;
   }
 
+  // change saved cities
   void setSavedCities(List<String> newCities) {
     prefs.setStringList("savedCities", newCities);
     final savedCities = prefs.getStringList("savedCities") ?? [];

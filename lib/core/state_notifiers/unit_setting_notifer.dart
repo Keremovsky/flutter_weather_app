@@ -20,6 +20,7 @@ class UnitSettingNotifier extends StateNotifier<UnitSetting> {
     init();
   }
 
+  // get unit settings from phone when initialize state notifier
   void init() async {
     prefs = await SharedPreferences.getInstance();
     final List<String> unitSettingValues =
@@ -35,6 +36,7 @@ class UnitSettingNotifier extends StateNotifier<UnitSetting> {
     state = unitSetting.copyWith();
   }
 
+  // change unit settings
   void setUnitSetting(UnitSetting newUnitSetting) {
     final List<String> unitSettingValues = [
       newUnitSetting.tempUnit,

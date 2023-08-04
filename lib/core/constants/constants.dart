@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  // addable cities
+  // saveable cities
   static final List<List<String>> cities = [
     ["London", "en"],
     ["İstanbul", "tr"],
@@ -39,6 +39,7 @@ class Constants {
     "Clouds": Icons.cloud,
   };
 
+  // temperature drop down items
   static final tempDropDownItems = [
     const DropdownMenuItem(value: "C", child: Text("C")),
     const DropdownMenuItem(value: "K", child: Text("K")),
