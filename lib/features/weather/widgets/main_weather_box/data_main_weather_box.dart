@@ -108,8 +108,8 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 Icons.air,
                                 size: 52.5,
                               ),
-                              Text(
-                                  "${currentTime.speed} ${unitSetting.windSpeedUnit}"),
+                              Text(getWindSpeed(unitSetting.windSpeedUnit,
+                                  currentTime.speed)),
                             ],
                           ),
                           Column(
@@ -119,7 +119,9 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 size: 52.5,
                               ),
                               Text(
-                                  "${currentTime.pressure} ${unitSetting.pressureUnit}"),
+                                getPressure(unitSetting.pressureUnit,
+                                    currentTime.pressure),
+                              ),
                             ],
                           ),
                         ],
@@ -146,5 +148,33 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
         ),
       ],
     );
+  }
+}
+
+// get pressure based on unit setting
+String getPressure(String pressureUnit, int pressure) {
+  if (pressureUnit == "mmHg") {
+    double newPressure = pressure / 0.751;
+    return "${newPressure.toStringAsFixed(0)} $pressureUnit";
+  } else if (pressureUnit == "bar") {
+    return "${(pressure / 1000).toStringAsFixed(2)} $pressureUnit";
+  } else {
+    return "$pressure $pressureUnit";
+  }
+}
+
+// get wind speed based on unit setting
+String getWindSpeed(String windSpeedUnit, num windSpeed) {
+  if (windSpeedUnit == "m/s") {
+    return "$windSpeed $windSpeedUnit";
+  } else if (windSpeedUnit == "km/h") {
+    windSpeed = windSpeed * (10 / 36);
+    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
+  } else if (windSpeedUnit == "knots") {
+    windSpeed = windSpeed * 1.943;
+    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
+  } else {
+    windSpeed = windSpeed * 2.236;
+    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
   }
 }

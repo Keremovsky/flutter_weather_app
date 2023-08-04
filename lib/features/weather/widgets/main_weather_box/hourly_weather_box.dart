@@ -21,7 +21,7 @@ class HourlyWeatherBox extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              cityWeather.hour,
+              getHour(unitSetting.timeFormatUnit, cityWeather.hour),
               style: const TextStyle(fontSize: 15),
             ),
             Icon(
@@ -39,4 +39,26 @@ class HourlyWeatherBox extends ConsumerWidget {
       ),
     );
   }
+}
+
+String getHour(String timeUnit, String time) {
+  if (timeUnit == "24") {
+    return time;
+  }
+
+  int hour = int.parse(time.substring(0, 2));
+  late String mer;
+  if (hour < 12) {
+    mer = "AM";
+  } else {
+    mer = "PM";
+  }
+
+  if (hour == 0) {
+    time = "12:00 $mer";
+  } else {
+    time = "0$hour:00 $mer";
+  }
+
+  return time;
 }

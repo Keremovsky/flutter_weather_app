@@ -56,6 +56,8 @@ class Constants {
   static final windDropDownItems = [
     const DropdownMenuItem(value: "m/s", child: Text("m/s")),
     const DropdownMenuItem(value: "km/h", child: Text("km/h")),
+    const DropdownMenuItem(value: "mph", child: Text("mph")),
+    const DropdownMenuItem(value: "knots", child: Text("knots")),
   ];
 
   // time format drop down items
