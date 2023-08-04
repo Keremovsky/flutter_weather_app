@@ -16,7 +16,10 @@ class LocationRepository {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
-        return "disabled";
+        final result = await http.get(Uri.parse("http://ip-api.com/json"));
+        final data = jsonDecode(result.body);
+
+        return data["regionName"];
       }
 
       LocationPermission permission = await Geolocator.checkPermission();
@@ -28,7 +31,7 @@ class LocationRepository {
         final result = await http.get(Uri.parse("http://ip-api.com/json"));
         final data = jsonDecode(result.body);
 
-        return data["city"];
+        return data["regionName"];
       }
 
       late String city;

@@ -21,7 +21,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
 
   final List<List<String>> cityList = Constants.cities;
   List<List<String>> cityListDisplay = Constants.cities;
-  late List<String> savedCitiesPref;
+  late List<String> savedCitiesDisplay;
 
   String searchValue = "";
 
@@ -29,12 +29,12 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   void initState() {
     super.initState();
 
-    savedCitiesPref = ref.read(savedCitiesNotifierProvider);
+    savedCitiesDisplay = ref.read(savedCitiesNotifierProvider);
   }
 
   @override
   Widget build(BuildContext context) {
-    final list = savedCitiesPref;
+    final list = savedCitiesDisplay;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -103,10 +103,9 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                     FloatingActionButton(
                       heroTag: null,
                       onPressed: () {
-                        debugPrint(savedCitiesPref.toString());
                         ref
                             .read(savedCitiesNotifierProvider.notifier)
-                            .setSavedCities(savedCitiesPref);
+                            .setSavedCities(savedCitiesDisplay);
 
                         Navigator.of(context).pop();
                       },
@@ -125,14 +124,11 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 
   void _selectCity(WidgetRef ref, String city) {
-    if (savedCitiesPref.contains(city)) {
-      savedCitiesPref.remove(city);
+    if (savedCitiesDisplay.contains(city)) {
+      savedCitiesDisplay.remove(city);
     } else {
-      savedCitiesPref.add(city);
+      savedCitiesDisplay.add(city);
     }
-
-    debugPrint("select $city");
-    debugPrint(savedCitiesPref.toString());
 
     setState(() {});
   }
