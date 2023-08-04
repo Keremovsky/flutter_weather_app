@@ -43,13 +43,6 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-# Unused apps
-windows/
-macos/
-web/
-linux/
-ios/
-
 # Added files
 lib/core/constants/api_keys.dart
 .vscode
