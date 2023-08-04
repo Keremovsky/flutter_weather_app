@@ -44,4 +44,23 @@ class Constants {
     const DropdownMenuItem(value: "C", child: Text("C")),
     const DropdownMenuItem(value: "K", child: Text("K")),
   ];
+
+  // pressure drop down items
+  static final pressureDropDownItems = [
+    const DropdownMenuItem(value: "hPa", child: Text("hPa")),
+    const DropdownMenuItem(value: "bar", child: Text("bar")),
+    const DropdownMenuItem(value: "mmHg", child: Text("mmHg")),
+  ];
+
+  // wind speed drop down items
+  static final windDropDownItems = [
+    const DropdownMenuItem(value: "m/s", child: Text("m/s")),
+    const DropdownMenuItem(value: "km/h", child: Text("km/h")),
+  ];
+
+  // time format drop down items
+  static final timeDropDownItems = [
+    const DropdownMenuItem(value: "12", child: Text("12")),
+    const DropdownMenuItem(value: "24", child: Text("24")),
+  ];
 }

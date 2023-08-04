@@ -12,8 +12,6 @@ class HourlyWeatherBox extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final unitSetting = ref.watch(unitSettingNotifierProvider);
-    int hour =
-        int.parse(cityWeather.hour) % int.parse(unitSetting.timeFormatUnit);
 
     return Card(
       child: SizedBox(
@@ -23,7 +21,7 @@ class HourlyWeatherBox extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Text(
-              "$hour:00",
+              cityWeather.hour,
               style: const TextStyle(fontSize: 15),
             ),
             Icon(

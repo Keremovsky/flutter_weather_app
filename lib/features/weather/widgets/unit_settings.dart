@@ -2,56 +2,157 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
+import '../../../models/unit_setting.dart';
 
-class UnitSettings extends ConsumerWidget {
-  final double radius = 10;
-
+class UnitSettings extends ConsumerStatefulWidget {
   const UnitSettings({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final unitSetting = ref.watch(unitSettingNotifierProvider);
+  ConsumerState<ConsumerStatefulWidget> createState() => _UnitSettingsState();
+}
+
+class _UnitSettingsState extends ConsumerState<UnitSettings> {
+  late UnitSetting unitSetting;
+
+  late String tempUnit;
+  late String pressureUnit;
+  late String windSpeedUnit;
+  late String timeFormatUnit;
+
+  @override
+  void initState() {
+    super.initState();
+
+    UnitSetting initUnitSetting = ref.read(unitSettingNotifierProvider);
+
+    tempUnit = initUnitSetting.tempUnit;
+    pressureUnit = initUnitSetting.pressureUnit;
+    windSpeedUnit = initUnitSetting.windSpeedUnit;
+    timeFormatUnit = initUnitSetting.timeFormatUnit;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    unitSetting = ref.watch(unitSettingNotifierProvider);
 
     return AlertDialog(
-      content: Column(
-        children: [
-          const Text(
-            "Unit Settings",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Row(
-            children: [
-              const Text(
-                "Temperature: ",
-                style: TextStyle(fontSize: 18),
+      content: SizedBox(
+        height: 320,
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            const Text(
+              "Unit Settings",
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
-              DropdownButton(
-                value: unitSetting.tempUnit,
-                items: Constants.tempDropDownItems,
-                onChanged: (value) {
-                  ref
-                      .read(unitSettingNotifierProvider.notifier)
-                      .setUnitSetting(unitSetting.copyWith(tempUnit: value));
-                },
-              )
-            ],
-          ),
-          Text(
-            "Wind Speed: ${unitSetting.windSpeedUnit}",
-            style: const TextStyle(fontSize: 18),
-          ),
-          Text(
-            "Pressure: ${unitSetting.pressureUnit}",
-            style: const TextStyle(fontSize: 18),
-          ),
-          Text(
-            "Time Format: ${unitSetting.timeFormatUnit}",
-            style: const TextStyle(fontSize: 18),
-          ),
-        ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Temperature",
+                  style: TextStyle(fontSize: 18),
+                ),
+                DropdownButton(
+                  items: Constants.tempDropDownItems,
+                  value: tempUnit,
+                  onChanged: (value) {
+                    setState(() {
+                      tempUnit = value!;
+                    });
+                  },
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Pressure",
+                  style: TextStyle(fontSize: 18),
+                ),
+                DropdownButton(
+                  items: Constants.pressureDropDownItems,
+                  value: pressureUnit,
+                  onChanged: (value) {
+                    setState(() {
+                      pressureUnit = value!;
+                    });
+                  },
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Wind Speed",
+                  style: TextStyle(fontSize: 18),
+                ),
+                DropdownButton(
+                  items: Constants.windDropDownItems,
+                  value: windSpeedUnit,
+                  onChanged: (value) {
+                    setState(() {
+                      windSpeedUnit = value!;
+                    });
+                  },
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text(
+                  "Time Format",
+                  style: TextStyle(fontSize: 18),
+                ),
+                DropdownButton(
+                  items: Constants.timeDropDownItems,
+                  value: timeFormatUnit,
+                  onChanged: (value) {
+                    setState(() {
+                      timeFormatUnit = value!;
+                    });
+                  },
+                )
+              ],
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    ref
+                        .read(unitSettingNotifierProvider.notifier)
+                        .setUnitSetting(
+                          unitSetting.copyWith(
+                            tempUnit: tempUnit,
+                            pressureUnit: pressureUnit,
+                            windSpeedUnit: windSpeedUnit,
+                            timeFormatUnit: timeFormatUnit,
+                          ),
+                        );
+
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Update"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text("Cancel"),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
