@@ -24,7 +24,7 @@ class WeatherRepository {
       getCurrentLocationWeather() async {
     try {
       // control if phone has internet connection
-      final connection = await _controlConnection();
+      final connection = await InternetConnectionChecker().hasConnection;
       if (!connection) return const Left("no_internet");
 
       // if it has internet connection, get current city's name
@@ -56,7 +56,7 @@ class WeatherRepository {
       double lat, double lng) async {
     try {
       // control if phone has internet connection
-      final connection = await _controlConnection();
+      final connection = await InternetConnectionChecker().hasConnection;
       if (!connection) return const Left("no_internet");
 
       // control if coordinates are appropriate
@@ -92,7 +92,7 @@ class WeatherRepository {
       List<String> cities) async {
     try {
       // control if phone has internet connection
-      final connection = await _controlConnection();
+      final connection = await InternetConnectionChecker().hasConnection;
       if (!connection) return const Left("no_internet");
 
       // get weather data based on saved cities
@@ -116,9 +116,4 @@ class WeatherRepository {
       return Left(e.toString());
     }
   }
-}
-
-// return true if phone has internet connection
-Future<bool> _controlConnection() async {
-  return await InternetConnectionChecker().hasConnection;
 }

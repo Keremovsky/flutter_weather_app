@@ -41,7 +41,7 @@ class WeatherController extends StateNotifier {
       (right) {
         final dataList = right["list"];
 
-        CityWeather cityName;
+        CityWeather cityWeatherHour;
 
         final city = right["city"]["name"];
         final country = right["city"]["country"];
@@ -57,7 +57,7 @@ class WeatherController extends StateNotifier {
           final speed = dataList[a]["wind"]["speed"];
           final hour = DateFormat.Hm().format(parseHour);
 
-          cityName = CityWeather(
+          cityWeatherHour = CityWeather(
             cityName: city,
             country: country,
             temp: temp,
@@ -67,7 +67,7 @@ class WeatherController extends StateNotifier {
             speed: speed,
             hour: hour,
           );
-          cityWeather.add(cityName);
+          cityWeather.add(cityWeatherHour);
         }
       },
     );
@@ -182,6 +182,54 @@ class WeatherController extends StateNotifier {
     );
 
     return savedCitiesWeather;
+  }
+
+  // DEMO --------------------
+  Future<List<CityWeather>> getCurrentLocationWeatherContext() async {
+    // get weather data of current city
+    final result = await _weatherRepository.getCurrentLocationWeather();
+
+    List<CityWeather> cityWeather = [];
+
+    result.fold(
+      // if there is some error occurred
+      (left) {},
+      // if getting data process is successful
+      (right) {
+        final dataList = right["list"];
+
+        CityWeather cityName;
+
+        final city = right["city"]["name"];
+        final country = right["city"]["country"];
+
+        // get first seven weather data
+        for (int a = 0; a < 7; a++) {
+          final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
+
+          final temp = dataList[a]["main"]["temp"].toInt();
+          final state = dataList[a]["weather"][0]["main"];
+          final pressure = dataList[a]["main"]["pressure"];
+          final humidity = dataList[a]["main"]["humidity"];
+          final speed = dataList[a]["wind"]["speed"];
+          final hour = DateFormat.Hm().format(parseHour);
+
+          cityName = CityWeather(
+            cityName: city,
+            country: country,
+            temp: temp,
+            state: state,
+            pressure: pressure,
+            humidity: humidity,
+            speed: speed,
+            hour: hour,
+          );
+          cityWeather.add(cityName);
+        }
+      },
+    );
+
+    return cityWeather;
   }
 }
 
