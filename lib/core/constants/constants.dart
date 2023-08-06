@@ -39,30 +39,36 @@ class Constants {
     "Clouds": Icons.cloud,
   };
 
+  // notification schedule time drop down items
+  static const notScheduleDropDownItems = [
+    DropdownMenuItem(value: "day", child: Text("Daily")),
+    DropdownMenuItem(value: "hour", child: Text("Hourly")),
+  ];
+
   // temperature drop down items
-  static final tempDropDownItems = [
-    const DropdownMenuItem(value: "C", child: Text("C")),
-    const DropdownMenuItem(value: "K", child: Text("K")),
+  static const tempDropDownItems = [
+    DropdownMenuItem(value: "C", child: Text("C")),
+    DropdownMenuItem(value: "K", child: Text("K")),
   ];
 
   // pressure drop down items
-  static final pressureDropDownItems = [
-    const DropdownMenuItem(value: "hPa", child: Text("hPa")),
-    const DropdownMenuItem(value: "bar", child: Text("bar")),
-    const DropdownMenuItem(value: "mmHg", child: Text("mmHg")),
+  static const pressureDropDownItems = [
+    DropdownMenuItem(value: "hPa", child: Text("hPa")),
+    DropdownMenuItem(value: "bar", child: Text("bar")),
+    DropdownMenuItem(value: "mmHg", child: Text("mmHg")),
   ];
 
   // wind speed drop down items
-  static final windDropDownItems = [
-    const DropdownMenuItem(value: "m/s", child: Text("m/s")),
-    const DropdownMenuItem(value: "km/h", child: Text("km/h")),
-    const DropdownMenuItem(value: "mph", child: Text("mph")),
-    const DropdownMenuItem(value: "knots", child: Text("knots")),
+  static const windDropDownItems = [
+    DropdownMenuItem(value: "m/s", child: Text("m/s")),
+    DropdownMenuItem(value: "km/h", child: Text("km/h")),
+    DropdownMenuItem(value: "mph", child: Text("mph")),
+    DropdownMenuItem(value: "knots", child: Text("knots")),
   ];
 
   // time format drop down items
-  static final timeDropDownItems = [
-    const DropdownMenuItem(value: "12", child: Text("12")),
-    const DropdownMenuItem(value: "24", child: Text("24")),
+  static const timeDropDownItems = [
+    DropdownMenuItem(value: "12", child: Text("12")),
+    DropdownMenuItem(value: "24", child: Text("24")),
   ];
 }

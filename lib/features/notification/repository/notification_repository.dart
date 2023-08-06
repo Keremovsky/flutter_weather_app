@@ -98,7 +98,6 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
   if (connection) {
     // if city is current city
     if (cityName == "Current City") {
-      // if it is not get city name with ip
       final result = await http.get(Uri.parse("http://ip-api.com/json"));
       final data = jsonDecode(result.body);
 
@@ -117,6 +116,7 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       return;
     }
 
+    // get together data for city weather
     final dataList = data["list"];
 
     final country = data["city"]["country"];
@@ -154,6 +154,7 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       android: androidNotificationDetails,
     );
 
+    // send notification
     await FlutterLocalNotificationsPlugin().show(
       alarmId,
       cityName,

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/features/notification/repository/notification_repository.dart';
@@ -19,8 +18,6 @@ class NotificationController extends StateNotifier {
       BuildContext context, String cityName, Duration repeat, int hour) async {
     final result = await _notificationRepository.setScheduleNotification(
         cityName, repeat, hour);
-
-    debugPrint(result);
 
     if (result == "success") {
       if (mounted) {
