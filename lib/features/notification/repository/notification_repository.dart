@@ -7,6 +7,7 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_weather_app/core/constants/api_keys.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:http/http.dart' as http;
+import 'package:geolocator/geolocator.dart';
 
 final notificationRepositoryProvider =
     Provider((ref) => NotificationRepository());
@@ -89,12 +90,21 @@ class NotificationRepository {
 
 @pragma('vm:entry-point')
 void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
-  final cityName = argument["cityName"];
+  String cityName = argument["cityName"];
   final apiKey = argument["apiKey"];
 
   // control if phone has internet connection
   final connection = await InternetConnectionChecker().hasConnection;
   if (connection) {
+    // if city is current city
+    if (cityName == "Current City") {
+      // if it is not get city name with ip
+      final result = await http.get(Uri.parse("http://ip-api.com/json"));
+      final data = jsonDecode(result.body);
+
+      cityName = data["regionName"];
+    }
+
     // get weather data from open weather
     final result = await http.get(
       Uri.parse(

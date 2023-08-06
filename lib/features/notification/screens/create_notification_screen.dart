@@ -3,17 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
 
-class NotificationsScreen extends ConsumerStatefulWidget {
+class CreateNotificationScreen extends ConsumerStatefulWidget {
   static final routeName = "/notificationsScreen";
 
-  const NotificationsScreen({super.key});
+  const CreateNotificationScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
       _NotificationsScreenState();
 }
 
-class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
+class _NotificationsScreenState
+    extends ConsumerState<CreateNotificationScreen> {
   late FixedExtentScrollController controller;
   List<String> notCities = ["Current City"];
   late List<String> savedCities;
@@ -80,6 +81,7 @@ class _NotificationsScreenState extends ConsumerState<NotificationsScreen> {
               ElevatedButton(
                 onPressed: () {
                   final selectedCity = notCities[controller.selectedItem];
+
                   ref
                       .read(notificationControllerProvider.notifier)
                       .setScheduleNotification(
