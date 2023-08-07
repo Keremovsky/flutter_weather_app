@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
+import 'package:flutter_weather_app/features/notification/widgets/city_displayer_card.dart';
 import 'package:flutter_weather_app/features/notification/widgets/delete_notification_cities_alert.dart';
 
 class RemoveNotificationsScreen extends ConsumerStatefulWidget {
@@ -40,32 +41,29 @@ class _RemoveNotificationsScreenState
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: ListWheelScrollView.useDelegate(
-                  controller: controller,
-                  itemExtent: 120,
-                  physics: const FixedExtentScrollPhysics(),
-                  childDelegate: ListWheelChildBuilderDelegate(
-                    childCount: notificationCities.length,
-                    builder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Card(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                notificationCities[index],
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ],
+                child: notificationCities.isEmpty
+                    ? const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "No Notification City",
+                            style: TextStyle(fontSize: 28),
                           ),
+                        ],
+                      )
+                    : ListWheelScrollView.useDelegate(
+                        controller: controller,
+                        itemExtent: 120,
+                        physics: const FixedExtentScrollPhysics(),
+                        childDelegate: ListWheelChildBuilderDelegate(
+                          childCount: notificationCities.length,
+                          builder: (context, index) {
+                            return CityDisplayCard(
+                              notificationCity: notificationCities[index],
+                            );
+                          },
                         ),
-                      );
-                    },
-                  ),
-                ),
+                      ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

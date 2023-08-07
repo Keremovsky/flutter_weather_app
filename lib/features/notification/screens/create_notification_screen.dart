@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
 
+import '../widgets/city_displayer_card.dart';
+
 class CreateNotificationScreen extends ConsumerStatefulWidget {
   static final routeName = "/createNotificationsScreen";
 
@@ -18,7 +20,7 @@ class _NotificationsScreenState
     extends ConsumerState<CreateNotificationScreen> {
   late FixedExtentScrollController controller;
 
-  List<String> notCities = ["Current City"];
+  List<String> notificationCities = ["Current City"];
   List<String> allCities = [];
   late String selectedSchedule;
   TimeOfDay? selectedTime;
@@ -31,7 +33,7 @@ class _NotificationsScreenState
     for (final city in Constants.cities) {
       allCities.add(city[0]);
     }
-    notCities.addAll(allCities);
+    notificationCities.addAll(allCities);
 
     selectedSchedule = "day";
   }
@@ -61,23 +63,10 @@ class _NotificationsScreenState
                   itemExtent: 120,
                   physics: const FixedExtentScrollPhysics(),
                   childDelegate: ListWheelChildBuilderDelegate(
-                    childCount: notCities.length,
+                    childCount: notificationCities.length,
                     builder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Card(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                notCities[index],
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      return CityDisplayCard(
+                        notificationCity: notificationCities[index],
                       );
                     },
                   ),
@@ -118,7 +107,8 @@ class _NotificationsScreenState
                 children: [
                   FloatingActionButton(
                     onPressed: () {
-                      final selectedCity = notCities[controller.selectedItem];
+                      final selectedCity =
+                          notificationCities[controller.selectedItem];
 
                       if (selectedSchedule == "day") {
                         if (selectedTime == null) {
