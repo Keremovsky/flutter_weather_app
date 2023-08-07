@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/state_notifiers/theme_notifier.dart';
+import 'package:flutter_weather_app/features/notification/screens/notifications_screen.dart';
 import 'package:flutter_weather_app/features/weather/screens/location_weather_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/features/notification/screens/create_notification_screen.dart';
 import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/widgets/unit_settings.dart';
 
@@ -38,7 +38,7 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                   splashColor: Colors.transparent,
                   onTap: () {
                     Navigator.of(context)
-                        .pushNamed(CreateNotificationScreen.routeName);
+                        .pushNamed(NotificationsScreen.routeName);
                   },
                   child: const Row(
                     children: [

@@ -28,6 +28,10 @@ class NotificationController extends StateNotifier {
         _giveFeedback(
             context, "Couldn't get permission for sending notification.");
       }
+    } else if (result == "already_has_city") {
+      if (mounted) {
+        _giveFeedback(context, "$cityName already has notification.");
+      }
     } else if (result == "android_alarm_false") {
       if (mounted) {
         _giveFeedback(context, "Got an error while creating notification.");
@@ -47,13 +51,9 @@ class NotificationController extends StateNotifier {
       if (mounted) {
         _giveFeedback(context, "Notification removed.");
       }
-    } else if (result == "already_has_city") {
-      if (mounted) {
-        _giveFeedback(context, "$cityName already has notification.");
-      }
     } else if (result == "android_alarm_false") {
       if (mounted) {
-        _giveFeedback(context, "Got an error while creating notification.");
+        _giveFeedback(context, "Got an error while removing notification.");
       }
     } else {
       if (mounted) {

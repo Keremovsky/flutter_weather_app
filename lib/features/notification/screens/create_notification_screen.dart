@@ -5,7 +5,7 @@ import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
 
 class CreateNotificationScreen extends ConsumerStatefulWidget {
-  static final routeName = "/notificationsScreen";
+  static final routeName = "/createNotificationsScreen";
 
   const CreateNotificationScreen({super.key});
 
