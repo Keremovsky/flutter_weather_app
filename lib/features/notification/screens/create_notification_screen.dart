@@ -17,6 +17,7 @@ class CreateNotificationScreen extends ConsumerStatefulWidget {
 class _NotificationsScreenState
     extends ConsumerState<CreateNotificationScreen> {
   late FixedExtentScrollController controller;
+
   List<String> notCities = ["Current City"];
   List<String> allCities = [];
   late String selectedSchedule;
@@ -117,17 +118,16 @@ class _NotificationsScreenState
                 children: [
                   FloatingActionButton(
                     onPressed: () {
-                      if (selectedTime == null) {
-                        const snackBar = SnackBar(
-                          content: Text("First select a time."),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        return;
-                      }
-
                       final selectedCity = notCities[controller.selectedItem];
 
                       if (selectedSchedule == "day") {
+                        if (selectedTime == null) {
+                          const snackBar = SnackBar(
+                            content: Text("First select a time."),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          return;
+                        }
                         ref
                             .read(notificationControllerProvider.notifier)
                             .setScheduleNotification(
