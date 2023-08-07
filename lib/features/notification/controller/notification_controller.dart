@@ -43,9 +43,10 @@ class NotificationController extends StateNotifier {
     }
   }
 
-  void removeScheduleNotification(BuildContext context, String cityName) async {
+  void removeScheduleNotification(
+      BuildContext context, List<String> cities) async {
     final result =
-        await _notificationRepository.removeScheduleNotification(cityName);
+        await _notificationRepository.removeScheduleNotification(cities);
 
     if (result == "success") {
       if (mounted) {

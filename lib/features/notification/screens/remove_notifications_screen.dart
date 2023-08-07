@@ -75,8 +75,8 @@ class _RemoveNotificationsScreenState
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return const DeleteNotificationCitiesAlert(
-                            notificationCities: [],
+                          return DeleteNotificationCitiesAlert(
+                            notificationCities: notificationCities,
                           );
                         },
                       );
@@ -92,12 +92,11 @@ class _RemoveNotificationsScreenState
                       showDialog(
                         context: context,
                         builder: (context) {
-                          List<String> selectedCities = notificationCities;
-                          selectedCities.remove(
-                              notificationCities[controller.selectedItem]);
+                          final selectedCities =
+                              notificationCities[controller.selectedItem];
 
                           return DeleteNotificationCitiesAlert(
-                            notificationCities: selectedCities,
+                            notificationCities: [selectedCities],
                           );
                         },
                       );

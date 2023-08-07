@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
 
 class DeleteNotificationCitiesAlert extends ConsumerWidget {
   final List<String> notificationCities;
@@ -26,13 +26,13 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              notificationCities == []
+              notificationCities.length == 1
                   ? const Text(
-                      "This will delete all Notification Cities!",
+                      "This will delete selected city!",
                       style: TextStyle(fontSize: 16),
                     )
                   : const Text(
-                      "This will delete selected city!",
+                      "This will delete all Notification Cities!",
                       style: TextStyle(fontSize: 16),
                     ),
               Row(
@@ -41,8 +41,11 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
                   ElevatedButton(
                     onPressed: () {
                       ref
-                          .read(notificationStateNotifierProvider.notifier)
-                          .setNotificationCity(notificationCities);
+                          .read(notificationControllerProvider.notifier)
+                          .removeScheduleNotification(
+                            context,
+                            notificationCities,
+                          );
 
                       Navigator.of(context).pop();
                     },

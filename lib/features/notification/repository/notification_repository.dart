@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
+import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -103,14 +104,25 @@ class NotificationRepository {
     }
   }
 
-  Future<String> removeScheduleNotification(String cityName) async {
+  Future<String> removeScheduleNotification(List<String> cities) async {
     try {
-      final id = cityName.hashCode;
-
-      final result = await AndroidAlarmManager.cancel(id);
-      if (!result) {
-        return "android_alarm_false";
+      for (final city in cities) {
+        final id = city.hashCode;
+        await AndroidAlarmManager.cancel(id);
       }
+
+      List<String> holdCities = [];
+      final notificationCities = _ref.read(notificationStateNotifierProvider);
+      for (final city in notificationCities) {
+        if (!cities.contains(city)) {
+          holdCities.add(city);
+        }
+      }
+
+      _ref
+          .read(notificationStateNotifierProvider.notifier)
+          .setNotificationCity(holdCities);
+
       return "success";
     } catch (e) {
       return e.toString();
