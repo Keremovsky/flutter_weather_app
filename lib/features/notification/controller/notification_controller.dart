@@ -39,12 +39,17 @@ class NotificationController extends StateNotifier {
     }
   }
 
-  void removeScheduleNotification(BuildContext context, int id) async {
-    final result = await _notificationRepository.removeScheduleNotification(id);
+  void removeScheduleNotification(BuildContext context, String cityName) async {
+    final result =
+        await _notificationRepository.removeScheduleNotification(cityName);
 
     if (result == "success") {
       if (mounted) {
         _giveFeedback(context, "Notification removed.");
+      }
+    } else if (result == "already_has_city") {
+      if (mounted) {
+        _giveFeedback(context, "$cityName already has notification.");
       }
     } else if (result == "android_alarm_false") {
       if (mounted) {

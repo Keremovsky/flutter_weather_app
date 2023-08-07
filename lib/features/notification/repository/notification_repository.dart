@@ -6,44 +6,69 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_weather_app/core/constants/api_keys.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:geolocator/geolocator.dart';
 
 final notificationRepositoryProvider =
     Provider((ref) => NotificationRepository());
 
 class NotificationRepository {
   final _plugin = FlutterLocalNotificationsPlugin();
+  late SharedPreferences _prefs;
 
   NotificationRepository() {
     init();
   }
 
   Future init() async {
+    // initialize local notifications
     const androidSettings = AndroidInitializationSettings("mipmap/ic_launcher");
-    const initializationSettings =
-        InitializationSettings(android: androidSettings);
+    const initializationSettings = InitializationSettings(
+      android: androidSettings,
+    );
     await _plugin.initialize(initializationSettings);
 
+    // initialize android alarm manager
     await AndroidAlarmManager.initialize();
+
+    // initialize shared preferences
+    _prefs = await SharedPreferences.getInstance();
   }
 
   Future<String> setScheduleNotification(
       String cityName, Duration repeat, int hour) async {
     try {
-      // get permission from user to
+      // get permission from user to send notifications
       final permission = await _plugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.requestPermission();
 
-      if (permission!) {
+      if (permission ?? false) {
+        // if there is a notification for given city, return without creating notification
+        List<String> notificationCities =
+            _prefs.getStringList("notificationCities") ?? [];
+        for (final city in notificationCities) {
+          if (city == cityName) {
+            return "already_has_city";
+          }
+        }
+
+        // get unique id for android alarm manager and notification
+        final id = cityName.hashCode;
         final dateNow = DateTime.now();
+
         final result = await AndroidAlarmManager.periodic(
           repeat,
-          0,
+          id,
           _backgroundTask,
-          startAt: DateTime(dateNow.year, dateNow.month, dateNow.day, hour),
+          startAt: DateTime(
+            dateNow.year,
+            dateNow.month,
+            dateNow.day,
+            hour,
+          ),
+          exact: true,
           rescheduleOnReboot: true,
           params: {
             "cityName": cityName,
@@ -54,6 +79,10 @@ class NotificationRepository {
         if (!result) {
           return "android_alarm_false";
         }
+
+        // save city name
+        notificationCities.add(cityName);
+        _prefs.setStringList("notificationCities", notificationCities);
 
         return "success";
 
@@ -75,8 +104,10 @@ class NotificationRepository {
     }
   }
 
-  Future<String> removeScheduleNotification(int id) async {
+  Future<String> removeScheduleNotification(String cityName) async {
     try {
+      final id = cityName.hashCode;
+
       final result = await AndroidAlarmManager.cancel(id);
       if (!result) {
         return "android_alarm_false";

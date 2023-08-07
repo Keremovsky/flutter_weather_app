@@ -126,14 +126,26 @@ class _NotificationsScreenState
                       }
 
                       final selectedCity = notCities[controller.selectedItem];
-                      ref
-                          .read(notificationControllerProvider.notifier)
-                          .setScheduleNotification(
-                            context,
-                            selectedCity,
-                            const Duration(seconds: 10),
-                            10,
-                          );
+
+                      if (selectedSchedule == "day") {
+                        ref
+                            .read(notificationControllerProvider.notifier)
+                            .setScheduleNotification(
+                              context,
+                              selectedCity,
+                              const Duration(days: 1),
+                              selectedTime!.hour,
+                            );
+                      } else {
+                        ref
+                            .read(notificationControllerProvider.notifier)
+                            .setScheduleNotification(
+                              context,
+                              selectedCity,
+                              const Duration(hours: 1),
+                              TimeOfDay.now().hour,
+                            );
+                      }
                     },
                     child: const Icon(Icons.check),
                   ),
