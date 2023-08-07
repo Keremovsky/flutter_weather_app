@@ -93,8 +93,6 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                             return const DeleteAllSavedCitiesAlert();
                           },
                         );
-
-                        if (mounted) Navigator.of(context).pop();
                       },
                       child: const Icon(
                         Icons.delete_forever,
