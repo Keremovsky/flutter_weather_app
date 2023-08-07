@@ -44,12 +44,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Get Weather",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        title: const Text("Get Weather"),
         centerTitle: true,
       ),
       body: SafeArea(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
-import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
