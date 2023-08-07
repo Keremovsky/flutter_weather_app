@@ -21,7 +21,7 @@ class NotificationCitiesNotifier extends StateNotifier<List<String>> {
   }
 
   // change notification cities
-  void setNotificatinCity(List<String> newCities) {
+  void setNotificationCity(List<String> newCities) {
     prefs.setStringList("notificationCities", newCities);
     final notificationCities = prefs.getStringList("notificationCities") ?? [];
 

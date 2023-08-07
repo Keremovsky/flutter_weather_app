@@ -128,6 +128,7 @@ class _NotificationsScreenState
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                           return;
                         }
+
                         ref
                             .read(notificationControllerProvider.notifier)
                             .setScheduleNotification(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,17 +7,16 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter_weather_app/core/constants/api_keys.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 final notificationRepositoryProvider =
-    Provider((ref) => NotificationRepository());
+    Provider((ref) => NotificationRepository(ref: ref));
 
 class NotificationRepository {
   final _plugin = FlutterLocalNotificationsPlugin();
-  late SharedPreferences _prefs;
+  final Ref _ref;
 
-  NotificationRepository() {
+  NotificationRepository({required Ref ref}) : _ref = ref {
     init();
   }
 
@@ -30,9 +30,6 @@ class NotificationRepository {
 
     // initialize android alarm manager
     await AndroidAlarmManager.initialize();
-
-    // initialize shared preferences
-    _prefs = await SharedPreferences.getInstance();
   }
 
   Future<String> setScheduleNotification(
@@ -47,7 +44,7 @@ class NotificationRepository {
       if (permission ?? false) {
         // if there is a notification for given city, return without creating notification
         List<String> notificationCities =
-            _prefs.getStringList("notificationCities") ?? [];
+            _ref.read(notificationStateNotifierProvider);
         for (final city in notificationCities) {
           if (city == cityName) {
             return "already_has_city";
@@ -82,7 +79,9 @@ class NotificationRepository {
 
         // save city name
         notificationCities.add(cityName);
-        _prefs.setStringList("notificationCities", notificationCities);
+        _ref
+            .read(notificationStateNotifierProvider.notifier)
+            .setNotificationCity(notificationCities);
 
         return "success";
 
