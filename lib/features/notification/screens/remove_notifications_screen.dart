@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
+import 'package:flutter_weather_app/features/notification/widgets/delete_notification_cities_alert.dart';
 
 class RemoveNotificationsScreen extends ConsumerStatefulWidget {
   static const routeName = "removeNotificationsScreen";
@@ -17,6 +18,7 @@ class _RemoveNotificationsScreenState
   late FixedExtentScrollController controller;
   late List<String> notificationCities;
 
+  @override
   void initState() {
     super.initState();
     controller = FixedExtentScrollController();
@@ -35,6 +37,7 @@ class _RemoveNotificationsScreenState
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: ListWheelScrollView.useDelegate(
@@ -45,7 +48,7 @@ class _RemoveNotificationsScreenState
                     childCount: notificationCities.length,
                     builder: (context, index) {
                       return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Card(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -68,12 +71,37 @@ class _RemoveNotificationsScreenState
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const DeleteNotificationCitiesAlert(
+                            notificationCities: [],
+                          );
+                        },
+                      );
+                    },
                     heroTag: null,
                     child: const Icon(Icons.delete_forever),
                   ),
                   FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (notificationCities.isEmpty) {
+                        return;
+                      }
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          List<String> selectedCities = notificationCities;
+                          selectedCities.remove(
+                              notificationCities[controller.selectedItem]);
+
+                          return DeleteNotificationCitiesAlert(
+                            notificationCities: selectedCities,
+                          );
+                        },
+                      );
+                    },
                     heroTag: null,
                     child: const Icon(Icons.check),
                   ),

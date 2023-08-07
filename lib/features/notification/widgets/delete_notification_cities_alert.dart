@@ -31,9 +31,9 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
                       "This will delete all Notification Cities!",
                       style: TextStyle(fontSize: 16),
                     )
-                  : Text(
-                      "This will delete ${notificationCities[0]}'s notification!",
-                      style: const TextStyle(fontSize: 16),
+                  : const Text(
+                      "This will delete selected city!",
+                      style: TextStyle(fontSize: 16),
                     ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

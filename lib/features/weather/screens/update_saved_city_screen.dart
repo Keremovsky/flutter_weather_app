@@ -86,8 +86,8 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                   children: [
                     FloatingActionButton(
                       heroTag: null,
-                      onPressed: () async {
-                        await showDialog(
+                      onPressed: () {
+                        showDialog(
                           context: context,
                           builder: (context) {
                             return const DeleteAllSavedCitiesAlert();
