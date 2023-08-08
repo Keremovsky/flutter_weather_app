@@ -18,28 +18,38 @@ class CreateNotificationScreen extends ConsumerStatefulWidget {
 
 class _NotificationsScreenState
     extends ConsumerState<CreateNotificationScreen> {
+  // controller for ListWheelScrollView
   late FixedExtentScrollController controller;
 
+  // list of cities
   List<String> notificationCities = ["Current City"];
   List<String> allCities = [];
+
+  // for selection
   late String selectedSchedule;
   TimeOfDay? selectedTime;
 
   @override
   void initState() {
     super.initState();
+
+    // initialize controller
     controller = FixedExtentScrollController();
 
+    // get all saved cities
     for (final city in Constants.cities) {
       allCities.add(city[0]);
     }
+    // get all cities together
     notificationCities.addAll(allCities);
 
+    // give selectedSchedule a predefined value
     selectedSchedule = "day";
   }
 
   @override
   void dispose() {
+    // dispose controller
     controller.dispose();
     super.dispose();
   }

@@ -7,8 +7,8 @@ final themeNotifierProvider = StateNotifierProvider<ThemeNotifier, ThemeMode>(
     (ref) => ThemeNotifier(ref));
 
 class ThemeNotifier extends StateNotifier<ThemeMode> {
-  SharedPreferences? prefs;
-  Ref ref;
+  late SharedPreferences? prefs;
+  final Ref ref;
 
   ThemeNotifier(this.ref) : super(ThemeMode.dark) {
     init();
@@ -17,7 +17,7 @@ class ThemeNotifier extends StateNotifier<ThemeMode> {
   // get theme from phone when initialize state notifier
   void init() async {
     prefs = await SharedPreferences.getInstance();
-    int theme = await prefs?.getInt("theme") ?? state.index;
+    final theme = prefs!.getInt("theme") ?? state.index;
 
     if (theme == 1) ref.read(switchProvider.notifier).update((state) => true);
 

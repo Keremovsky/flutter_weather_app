@@ -16,12 +16,17 @@ class RemoveNotificationsScreen extends ConsumerStatefulWidget {
 
 class _RemoveNotificationsScreenState
     extends ConsumerState<RemoveNotificationsScreen> {
+  // controller for ListWheelScrollView
   late FixedExtentScrollController controller;
+
+  // list of string for cities with notification
   late List<String> notificationCities;
 
   @override
   void initState() {
     super.initState();
+
+    // initialize controller
     controller = FixedExtentScrollController();
   }
 

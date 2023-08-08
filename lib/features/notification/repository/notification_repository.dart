@@ -55,6 +55,7 @@ class NotificationRepository {
         final id = cityName.hashCode;
         final dateNow = DateTime.now();
 
+        // create background task for notifications
         final result = await AndroidAlarmManager.periodic(
           repeat,
           id,
@@ -73,6 +74,7 @@ class NotificationRepository {
           },
         );
 
+        // if result is false, return android_alarm_false error
         if (!result) {
           return "android_alarm_false";
         }
@@ -85,6 +87,7 @@ class NotificationRepository {
 
         return "success";
 
+        // code for scheduled notifications
         // await _plugin.zonedSchedule(
         //   0,
         //   "title",
@@ -96,6 +99,7 @@ class NotificationRepository {
         //       UILocalNotificationDateInterpretation.absoluteTime,
         // );
       } else {
+        // if user didn't give permission for notifications
         return "no_permission";
       }
     } catch (e) {
@@ -105,11 +109,13 @@ class NotificationRepository {
 
   Future<String> removeScheduleNotification(List<String> cities) async {
     try {
+      // cancel all notifications for given cities
       for (final city in cities) {
         final id = city.hashCode;
         await AndroidAlarmManager.cancel(id);
       }
 
+      // get remaining cities after given cities canceled
       List<String> holdCities = [];
       final notificationCities = _ref.read(notificationStateNotifierProvider);
       for (final city in notificationCities) {
@@ -118,6 +124,7 @@ class NotificationRepository {
         }
       }
 
+      // overwrite cities
       _ref
           .read(notificationStateNotifierProvider.notifier)
           .setNotificationCity(holdCities);
@@ -131,6 +138,7 @@ class NotificationRepository {
 
 @pragma('vm:entry-point')
 void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
+  // get city name and api key
   String cityName = argument["cityName"];
   final apiKey = argument["apiKey"];
 
@@ -157,7 +165,7 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       return;
     }
 
-    // get together data for city weather
+    // get data together for city weather
     final dataList = data["list"];
 
     final country = data["city"]["country"];
