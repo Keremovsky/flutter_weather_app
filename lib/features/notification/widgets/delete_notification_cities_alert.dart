@@ -40,6 +40,7 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      // remove selected notification
                       ref
                           .read(notificationControllerProvider.notifier)
                           .removeScheduleNotification(
@@ -53,6 +54,7 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      // don't remove
                       Navigator.of(context).pop();
                     },
                     child: const Text("No"),

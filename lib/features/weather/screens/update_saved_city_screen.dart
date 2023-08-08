@@ -52,9 +52,13 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                         hintText: "Search",
                       ),
                       onChanged: (value) {
+                        // apply filters
                         searchValue = value;
                         cityListDisplay = _applyFilter(
-                            cityListDisplay, cityList, searchValue);
+                          cityListDisplay,
+                          cityList,
+                          searchValue,
+                        );
                         setState(() {});
                       },
                     ),
@@ -87,6 +91,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                     FloatingActionButton(
                       heroTag: null,
                       onPressed: () {
+                        // be sure about removing all saved cities
                         showDialog(
                           context: context,
                           builder: (context) {
@@ -101,6 +106,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                     FloatingActionButton(
                       heroTag: null,
                       onPressed: () {
+                        // update saved cities
                         ref
                             .read(savedCitiesNotifierProvider.notifier)
                             .setSavedCities(savedCitiesDisplay);
@@ -121,6 +127,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
     );
   }
 
+  // select city or unselect it
   void _selectCity(WidgetRef ref, String city) {
     if (savedCitiesDisplay.contains(city)) {
       savedCitiesDisplay.remove(city);
@@ -132,6 +139,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 }
 
+// apply filters based in searchValue
 List<List<String>> _applyFilter(List<List<String>> cityListDisplay,
     List<List<String>> cityList, String searchValue) {
   searchValue = searchValue.toLowerCase();

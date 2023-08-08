@@ -41,6 +41,7 @@ class HourlyWeatherBox extends ConsumerWidget {
   }
 }
 
+// set hour according to unit setting
 String getHour(String timeUnit, String time) {
   if (timeUnit == "24") {
     return time;
@@ -57,7 +58,7 @@ String getHour(String timeUnit, String time) {
   if (hour == 0) {
     time = "12:00 $mer";
   } else {
-    time = "0$hour:00 $mer";
+    time = "0${hour % 12}:00 $mer";
   }
 
   return time;

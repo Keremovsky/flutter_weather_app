@@ -27,6 +27,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
   @override
   void initState() {
     super.initState();
+    // get weather data
     weather = getCurrentLocationWeather();
   }
 
@@ -49,6 +50,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
           );
         }
 
+        // if data received
         return DataMainWeatherBox(cityData: data);
       },
     );

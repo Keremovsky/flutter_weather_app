@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -120,6 +118,7 @@ class _NotificationsScreenState
                     value: selectedSchedule,
                     items: Constants.notScheduleDropDownItems,
                     onChanged: (value) {
+                      // update selectedSchedule
                       setState(() {
                         selectedSchedule = value!;
                       });
@@ -136,7 +135,9 @@ class _NotificationsScreenState
                       final selectedCity =
                           notificationCities[controller.selectedItem];
 
+                      // if schedule time is daily
                       if (selectedSchedule == "day") {
+                        // if user didn't select time
                         if (selectedTime == null) {
                           const snackBar = SnackBar(
                             content: Text("First select a time."),
@@ -145,6 +146,7 @@ class _NotificationsScreenState
                           return;
                         }
 
+                        // create daily notification
                         ref
                             .read(notificationControllerProvider.notifier)
                             .setScheduleNotification(
@@ -155,6 +157,7 @@ class _NotificationsScreenState
                               selectedTime!.minute,
                             );
                       } else {
+                        // create hourly notification
                         ref
                             .read(notificationControllerProvider.notifier)
                             .setScheduleNotification(

@@ -76,6 +76,7 @@ class _RemoveNotificationsScreenState
                   FloatingActionButton(
                     onPressed: () {
                       showDialog(
+                        // be sure that user want to remove selected notification
                         context: context,
                         builder: (context) {
                           return DeleteNotificationCitiesAlert(
@@ -89,9 +90,11 @@ class _RemoveNotificationsScreenState
                   ),
                   FloatingActionButton(
                     onPressed: () {
+                      // if there are no created notification
                       if (notificationCities.isEmpty) {
                         return;
                       }
+                      // be sure that user want to remove selected notification
                       showDialog(
                         context: context,
                         builder: (context) {
