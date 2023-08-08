@@ -136,6 +136,7 @@ class _NotificationsScreenState
                               selectedCity,
                               const Duration(days: 1),
                               selectedTime!.hour,
+                              selectedTime!.minute,
                             );
                       } else {
                         ref
@@ -145,6 +146,7 @@ class _NotificationsScreenState
                               selectedCity,
                               const Duration(hours: 1),
                               TimeOfDay.now().hour,
+                              0,
                             );
                       }
                     },

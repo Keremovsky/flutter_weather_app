@@ -33,7 +33,7 @@ class NotificationRepository {
   }
 
   Future<String> setScheduleNotification(
-      String cityName, Duration repeat, int hour) async {
+      String cityName, Duration repeat, int hour, int minutes) async {
     try {
       // get permission from user to send notifications
       final permission = await _plugin
@@ -60,12 +60,8 @@ class NotificationRepository {
           repeat,
           id,
           _backgroundTask,
-          startAt: DateTime(
-            dateNow.year,
-            dateNow.month,
-            dateNow.day,
-            hour,
-          ),
+          startAt:
+              DateTime(dateNow.year, dateNow.month, dateNow.day, hour, minutes),
           exact: true,
           rescheduleOnReboot: true,
           params: {

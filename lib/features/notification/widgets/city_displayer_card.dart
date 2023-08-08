@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class CityDisplayCard extends StatelessWidget {
@@ -10,6 +11,10 @@ class CityDisplayCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Card(
+        elevation: 4,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(16)),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

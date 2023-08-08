@@ -14,10 +14,14 @@ class NotificationController extends StateNotifier {
       : _notificationRepository = notificationRepository,
         super(false);
 
-  void setScheduleNotification(
-      BuildContext context, String cityName, Duration repeat, int hour) async {
+  void setScheduleNotification(BuildContext context, String cityName,
+      Duration repeat, int hour, int minutes) async {
     final result = await _notificationRepository.setScheduleNotification(
-        cityName, repeat, hour);
+      cityName,
+      repeat,
+      hour,
+      minutes,
+    );
 
     if (result == "success") {
       if (mounted) {
