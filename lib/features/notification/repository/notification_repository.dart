@@ -81,7 +81,9 @@ class NotificationRepository {
         }
 
         // save city name
-        notificationCities.add(cityName);
+        if (!notificationCities.contains(cityName)) {
+          notificationCities.add(cityName);
+        }
         _ref
             .read(notificationStateNotifierProvider.notifier)
             .setNotificationCity(notificationCities);
