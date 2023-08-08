@@ -17,23 +17,37 @@ class UpdateSavedCityScreen extends ConsumerStatefulWidget {
 }
 
 class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
+  // initialize SharedPreferences
   final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
+  // scroll controller
+  final ScrollController scrollController = ScrollController();
+
+  // for city filtering
   final List<List<String>> cityList = Constants.cities;
   List<List<String>> cityListDisplay = Constants.cities;
   late List<String> savedCitiesDisplay;
 
-  List<List<String>> countryListDisplay = [
-    ["a", "b"]
-  ];
-
+  // search strings
   String searchCityName = "";
   String searchCountry = "";
+
+  // change to bottom distance of ListView.builder
+  int bottomDistance = 0;
 
   @override
   void initState() {
     super.initState();
 
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        bottomDistance = 20;
+        setState(() {});
+      }
+    });
+
+    // get saved cities
     savedCitiesDisplay = ref.read(savedCitiesNotifierProvider);
   }
 
@@ -126,8 +140,13 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                   ),
                   Expanded(
                     child: ListView.builder(
-                      itemCount: cityListDisplay.length,
+                      controller: scrollController,
+                      itemCount: cityListDisplay.length + 1,
                       itemBuilder: (context, index) {
+                        if (index == cityListDisplay.length) {
+                          return const SizedBox(height: 90);
+                        }
+
                         bool isSelected =
                             list.contains(cityListDisplay[index][0]);
 
