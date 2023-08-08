@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/features/notification/screens/create_notification_screen.dart';
-import 'package:flutter_weather_app/features/notification/screens/remove_notifications_screen.dart';
+import 'package:flutter_weather_app/features/notification/screens/remove_notification_screen.dart';
 
 class NotificationsScreen extends StatelessWidget {
   static const routeName = "/notificationsScreen";
@@ -31,7 +31,7 @@ class NotificationsScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushNamed(RemoveNotificationsScreen.routeName);
+                        .pushNamed(RemoveNotificationScreen.routeName);
                   },
                   child: const Text("Remove Notification"),
                 ),

@@ -60,8 +60,13 @@ class NotificationRepository {
           repeat,
           id,
           _backgroundTask,
-          startAt:
-              DateTime(dateNow.year, dateNow.month, dateNow.day, hour, minutes),
+          startAt: DateTime(
+            dateNow.year,
+            dateNow.month,
+            dateNow.day,
+            hour,
+            minutes,
+          ),
           exact: true,
           rescheduleOnReboot: true,
           params: {

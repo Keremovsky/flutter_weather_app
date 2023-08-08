@@ -4,10 +4,10 @@ import 'package:flutter_weather_app/core/state_notifiers/notification_cities_not
 import 'package:flutter_weather_app/features/notification/widgets/city_displayer_card.dart';
 import 'package:flutter_weather_app/features/notification/widgets/delete_notification_cities_alert.dart';
 
-class RemoveNotificationsScreen extends ConsumerStatefulWidget {
+class RemoveNotificationScreen extends ConsumerStatefulWidget {
   static const routeName = "removeNotificationsScreen";
 
-  const RemoveNotificationsScreen({super.key});
+  const RemoveNotificationScreen({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -15,7 +15,7 @@ class RemoveNotificationsScreen extends ConsumerStatefulWidget {
 }
 
 class _RemoveNotificationsScreenState
-    extends ConsumerState<RemoveNotificationsScreen> {
+    extends ConsumerState<RemoveNotificationScreen> {
   // controller for ListWheelScrollView
   late FixedExtentScrollController controller;
 

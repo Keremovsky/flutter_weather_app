@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
+import 'package:flutter_weather_app/features/notification/widgets/info_create_notification_alert.dart';
 
 import '../widgets/city_displayer_card.dart';
 
@@ -60,6 +63,19 @@ class _NotificationsScreenState
       appBar: AppBar(
         title: const Text("Create Notification"),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const InfoCreateNotificationAlert();
+                },
+              );
+            },
+            icon: const Icon(Icons.question_mark),
+          ),
+        ],
       ),
       body: SafeArea(
         child: Padding(
