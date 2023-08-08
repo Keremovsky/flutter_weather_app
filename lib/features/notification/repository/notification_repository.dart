@@ -42,14 +42,9 @@ class NotificationRepository {
           ?.requestPermission();
 
       if (permission ?? false) {
-        // if there is a notification for given city, return without creating notification
+        // get created notification cities
         List<String> notificationCities =
             _ref.read(notificationStateNotifierProvider);
-        for (final city in notificationCities) {
-          if (city == cityName) {
-            return "already_has_city";
-          }
-        }
 
         // get unique id for android alarm manager and notification
         final id = cityName.hashCode;
