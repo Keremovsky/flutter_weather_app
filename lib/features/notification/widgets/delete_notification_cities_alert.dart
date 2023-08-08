@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
+import '../../../core/common/alert_dialog_title.dart';
 
 class DeleteNotificationCitiesAlert extends ConsumerWidget {
   final List<String> notificationCities;
@@ -19,13 +20,7 @@ class DeleteNotificationCitiesAlert extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Are you sure?",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const AlertDialogTitle(text: "Are you sure?"),
               notificationCities.length == 1
                   ? const Text(
                       "This will delete selected city!",

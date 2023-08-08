@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../core/common/alert_dialog_title.dart';
 
 class DeleteAllSavedCitiesAlert extends ConsumerWidget {
   const DeleteAllSavedCitiesAlert({super.key});
@@ -14,13 +15,7 @@ class DeleteAllSavedCitiesAlert extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                "Are you sure?",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const AlertDialogTitle(text: "Are you sure?"),
               const Text(
                 "This will delete all Saved Cities!",
                 style: TextStyle(fontSize: 16),
