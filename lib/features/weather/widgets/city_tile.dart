@@ -24,7 +24,7 @@ class CityTile extends ConsumerWidget {
     );
 
     return ListTile(
-      onTap: () => selectCity(ref, city),
+      onTap: () => selectCity(city),
       title: Row(
         children: [
           SizedBox(

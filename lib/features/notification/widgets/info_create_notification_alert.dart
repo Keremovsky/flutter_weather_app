@@ -9,7 +9,7 @@ class InfoCreateNotificationAlert extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: SizedBox(
-        height: 320,
+        height: 370,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -25,7 +25,11 @@ class InfoCreateNotificationAlert extends StatelessWidget {
               style: textStyle,
             ),
             Text(
-              "- If you create new notification for a city that already has notification, it will overwrite that notification with new one.",
+              "- If you create new notification for a city with notification, it will overwrite it with new one.",
+              style: textStyle,
+            ),
+            Text(
+              "- Notifications are creating based on unit settings.",
               style: textStyle,
             ),
           ],

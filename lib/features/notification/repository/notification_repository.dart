@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_weather_app/core/state_notifiers/notification_cities_notifier.dart';
+import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -50,6 +51,9 @@ class NotificationRepository {
         final id = cityName.hashCode;
         final dateNow = DateTime.now();
 
+        // get unit settings
+        final unitSetting = _ref.read(unitSettingNotifierProvider);
+
         // create background task for notifications
         final result = await AndroidAlarmManager.periodic(
           repeat,
@@ -66,6 +70,7 @@ class NotificationRepository {
           rescheduleOnReboot: true,
           params: {
             "cityName": cityName,
+            "tempUnit": unitSetting.tempUnit,
             "apiKey": openWeatherApiKey,
           },
         );
@@ -134,9 +139,10 @@ class NotificationRepository {
 
 @pragma('vm:entry-point')
 void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
-  // get city name and api key
+  // get city name, api key and temp unit
   String cityName = argument["cityName"];
   final apiKey = argument["apiKey"];
+  final tempUnit = argument["tempUnit"];
 
   // control if phone has internet connection
   final connection = await InternetConnectionChecker().hasConnection;
@@ -199,11 +205,15 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       android: androidNotificationDetails,
     );
 
+    // modify weather data based on unit setting
+    final cityTemp =
+        tempUnit == "C" ? (cityWeather.temp - 273) : cityWeather.temp;
+
     // send notification
     await FlutterLocalNotificationsPlugin().show(
       alarmId,
       cityName,
-      "${cityWeather.temp}⁰K",
+      "$cityTemp⁰$tempUnit",
       notificationDetails,
     );
   }
