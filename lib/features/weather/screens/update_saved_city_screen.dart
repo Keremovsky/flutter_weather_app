@@ -35,7 +35,12 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   @override
   Widget build(BuildContext context) {
     final list = savedCitiesDisplay;
+
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Update Saved Cities"),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
