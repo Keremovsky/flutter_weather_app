@@ -39,6 +39,20 @@ class Constants {
     "Clouds": Icons.cloud,
   };
 
+  // countries drop down items
+  static const countriesDropDownItems = [
+    DropdownMenuItem(value: "", child: Text("No Country")),
+    DropdownMenuItem(value: "tr", child: Text("Turkey")),
+    DropdownMenuItem(value: "en", child: Text("England")),
+    DropdownMenuItem(value: "bg", child: Text("Bulgaria")),
+    DropdownMenuItem(value: "es", child: Text("Spain")),
+    DropdownMenuItem(value: "az", child: Text("Azerbaijan")),
+    DropdownMenuItem(value: "jp", child: Text("Japan")),
+    DropdownMenuItem(value: "de", child: Text("Germany")),
+    DropdownMenuItem(value: "us", child: Text("USA")),
+    DropdownMenuItem(value: "fr", child: Text("France")),
+  ];
+
   // notification schedule time drop down items
   static const notScheduleDropDownItems = [
     DropdownMenuItem(value: "day", child: Text("Daily")),

@@ -23,7 +23,12 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   List<List<String>> cityListDisplay = Constants.cities;
   late List<String> savedCitiesDisplay;
 
-  String searchValue = "";
+  List<List<String>> countryListDisplay = [
+    ["a", "b"]
+  ];
+
+  String searchCityName = "";
+  String searchCountry = "";
 
   @override
   void initState() {
@@ -52,20 +57,71 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: TextField(
-                      decoration: const InputDecoration(
-                        hintText: "Search",
-                      ),
-                      onChanged: (value) {
-                        // apply filters
-                        searchValue = value;
-                        cityListDisplay = _applyFilter(
-                          cityListDisplay,
-                          cityList,
-                          searchValue,
-                        );
-                        setState(() {});
-                      },
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              prefixIcon: Icon(Icons.search),
+                              hintText: "Search",
+                            ),
+                            onChanged: (value) {
+                              // apply filters
+                              searchCityName = value;
+                              cityListDisplay = _applyFilter(
+                                cityListDisplay,
+                                cityList,
+                                searchCityName,
+                                searchCountry,
+                              );
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  content: DropdownButton(
+                                    items: Constants.countriesDropDownItems,
+                                    value: searchCountry,
+                                    onChanged: (value) {
+                                      searchCountry = value!;
+
+                                      cityListDisplay = _applyFilter(
+                                        cityListDisplay,
+                                        cityList,
+                                        searchCityName,
+                                        searchCountry,
+                                      );
+                                      setState(() {});
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                          icon: const Icon(Icons.flag),
+                        )
+                        //   DropdownButton(
+                        //     items: Constants.countriesDropDownItems,
+                        //     value: searchCountry,
+                        //     onChanged: (value) {
+                        //       searchCountry = value!;
+
+                        //       cityListDisplay = _applyFilter(
+                        //         cityListDisplay,
+                        //         cityList,
+                        //         searchCityName,
+                        //         searchCountry,
+                        //       );
+                        //       setState(() {});
+                        //     },
+                        //   ),
+                      ],
                     ),
                   ),
                   Expanded(
@@ -133,7 +189,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
   }
 
   // select city or unselect it
-  void _selectCity(WidgetRef ref, String city) {
+  void _selectCity(String city) {
     if (savedCitiesDisplay.contains(city)) {
       savedCitiesDisplay.remove(city);
     } else {
@@ -146,12 +202,15 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
 
 // apply filters based in searchValue
 List<List<String>> _applyFilter(List<List<String>> cityListDisplay,
-    List<List<String>> cityList, String searchValue) {
-  searchValue = searchValue.toLowerCase();
+    List<List<String>> cityList, String searchCityName, String searchCountry) {
+  searchCityName = searchCityName.toLowerCase();
 
   String cityName;
+  String countryName;
   return cityListDisplay = cityList.where((value) {
     cityName = value[0].toLowerCase();
-    return cityName.contains(searchValue);
+    countryName = value[1].toLowerCase();
+    return cityName.contains(searchCityName) &&
+        countryName.contains(searchCountry);
   }).toList();
 }
