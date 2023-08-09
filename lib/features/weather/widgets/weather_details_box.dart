@@ -30,7 +30,7 @@ class WeatherDetailsBox extends StatelessWidget {
                   Text(
                     cityWeather.cityName,
                     style: const TextStyle(
-                      fontSize: 38,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

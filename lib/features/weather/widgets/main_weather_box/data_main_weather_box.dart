@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
+import 'package:flutter_weather_app/features/weather/screens/weather_calendar_screen.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
 import '../../../../core/utils.dart';
@@ -40,8 +41,8 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
   Widget build(BuildContext context) {
     unitSetting = ref.watch(unitSettingNotifierProvider);
 
-    final data = widget.cityData;
-    final currentCityWeather = data[0];
+    final cityWeather = widget.cityData;
+    final currentCityWeather = cityWeather[0];
 
     return Column(
       children: [
@@ -147,9 +148,33 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
             height: 112.5,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 6,
+              itemCount: cityWeather.length,
               itemBuilder: (context, index) {
-                return HourlyWeatherBox(cityWeather: data[index + 1]);
+                if (index == cityWeather.length - 1) {
+                  return Card(
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                WeatherCalendarScreen(cityWeather: cityWeather),
+                          ),
+                        );
+                      },
+                      child: const SizedBox(
+                        height: 105,
+                        width: 105,
+                        child: Center(
+                          child: Icon(
+                            Icons.more_horiz,
+                            size: 65,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return HourlyWeatherBox(cityWeather: cityWeather[index + 1]);
               },
             ),
           ),

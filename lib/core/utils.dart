@@ -35,7 +35,7 @@ String getWindSpeed(String windSpeedUnit, num windSpeed) {
   }
 }
 
-// set hour according to unit setting
+// get hour according to unit setting
 String getHour(String timeUnit, String time) {
   if (timeUnit == "24") {
     return time;
