@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:flutter_weather_app/features/weather/repository/weather_repository.dart';
 import 'package:intl/intl.dart';
-
 import '../../../models/weather.dart';
 
 final weatherControllerProvider =

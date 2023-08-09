@@ -14,27 +14,32 @@ class HourlyWeatherBox extends ConsumerWidget {
     final unitSetting = ref.watch(unitSettingNotifierProvider);
 
     return Card(
-      child: SizedBox(
-        height: 105,
-        width: 105,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              getHour(unitSetting.timeFormatUnit, cityWeather.hour),
-              style: const TextStyle(fontSize: 15),
-            ),
-            Icon(
-              Constants.weatherIcons[cityWeather.state],
-              size: 45,
-            ),
-            Text(
-              unitSetting.tempUnit == "K"
-                  ? "${(cityWeather.temp)}⁰K"
-                  : "${(cityWeather.temp) - 273}⁰C",
-              style: const TextStyle(fontSize: 15),
-            ),
-          ],
+      child: InkWell(
+        onTap: () {
+          debugPrint("hourly weather box pressed");
+        },
+        child: SizedBox(
+          height: 105,
+          width: 105,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                getHour(unitSetting.timeFormatUnit, cityWeather.hour),
+                style: const TextStyle(fontSize: 15),
+              ),
+              Icon(
+                Constants.weatherIcons[cityWeather.state],
+                size: 45,
+              ),
+              Text(
+                unitSetting.tempUnit == "K"
+                    ? "${(cityWeather.temp)}⁰K"
+                    : "${(cityWeather.temp) - 273}⁰C",
+                style: const TextStyle(fontSize: 15),
+              ),
+            ],
+          ),
         ),
       ),
     );

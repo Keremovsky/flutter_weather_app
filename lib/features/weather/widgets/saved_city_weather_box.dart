@@ -19,36 +19,41 @@ class SavedCityWeatherBox extends ConsumerWidget {
       child: SizedBox(
         width: double.infinity,
         child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Constants.weatherIcons[cityWeather.state],
-                      size: 45,
-                    ),
-                    const SizedBox(width: 15),
-                    Text(
-                      cityWeather.cityName,
-                      style: const TextStyle(
-                        fontSize: 22.5,
-                        fontWeight: FontWeight.bold,
+          child: InkWell(
+            onTap: () {
+              debugPrint("saved city weather box pressed");
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Constants.weatherIcons[cityWeather.state],
+                        size: 45,
                       ),
-                    ),
-                  ],
-                ),
-                Text(
-                  unitSetting.tempUnit == "K"
-                      ? "${(cityWeather.temp)}⁰K"
-                      : "${(cityWeather.temp) - 273}⁰C",
-                  style: const TextStyle(
-                    fontSize: 15,
+                      const SizedBox(width: 15),
+                      Text(
+                        cityWeather.cityName,
+                        style: const TextStyle(
+                          fontSize: 22.5,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  Text(
+                    unitSetting.tempUnit == "K"
+                        ? "${(cityWeather.temp)}⁰K"
+                        : "${(cityWeather.temp) - 273}⁰C",
+                    style: const TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

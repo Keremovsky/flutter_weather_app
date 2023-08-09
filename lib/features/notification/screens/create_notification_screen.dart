@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/features/notification/controller/notification_controller.dart';
 import 'package:flutter_weather_app/features/notification/widgets/info_create_notification_alert.dart';
-
 import '../widgets/city_displayer_card.dart';
 
 class CreateNotificationScreen extends ConsumerStatefulWidget {
@@ -96,6 +95,7 @@ class _NotificationsScreenState
                   ),
                 ),
               ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -126,7 +126,7 @@ class _NotificationsScreenState
                   ),
                 ],
               ),
-              const SizedBox(height: 70),
+              const SizedBox(height: 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
