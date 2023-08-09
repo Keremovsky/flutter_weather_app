@@ -3,6 +3,7 @@ import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.da
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../../../../core/constants/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/utils.dart';
 
 class HourlyWeatherBox extends ConsumerWidget {
   final CityWeather cityWeather;
@@ -15,9 +16,7 @@ class HourlyWeatherBox extends ConsumerWidget {
 
     return Card(
       child: InkWell(
-        onTap: () {
-          debugPrint("hourly weather box pressed");
-        },
+        onTap: () {},
         child: SizedBox(
           height: 105,
           width: 105,
@@ -33,9 +32,7 @@ class HourlyWeatherBox extends ConsumerWidget {
                 size: 45,
               ),
               Text(
-                unitSetting.tempUnit == "K"
-                    ? "${(cityWeather.temp)}⁰K"
-                    : "${(cityWeather.temp) - 273}⁰C",
+                getTemperature(unitSetting.tempUnit, cityWeather.temp),
                 style: const TextStyle(fontSize: 15),
               ),
             ],
@@ -44,27 +41,4 @@ class HourlyWeatherBox extends ConsumerWidget {
       ),
     );
   }
-}
-
-// set hour according to unit setting
-String getHour(String timeUnit, String time) {
-  if (timeUnit == "24") {
-    return time;
-  }
-
-  int hour = int.parse(time.substring(0, 2));
-  late String mer;
-  if (hour < 12) {
-    mer = "AM";
-  } else {
-    mer = "PM";
-  }
-
-  if (hour == 0) {
-    time = "12:00 $mer";
-  } else {
-    time = "0${hour % 12}:00 $mer";
-  }
-
-  return time;
 }

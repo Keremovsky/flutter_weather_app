@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
+import 'package:flutter_weather_app/core/utils.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
 import '../../../models/city_weather.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,9 +21,7 @@ class SavedCityWeatherBox extends ConsumerWidget {
         width: double.infinity,
         child: Card(
           child: InkWell(
-            onTap: () {
-              debugPrint("saved city weather box pressed");
-            },
+            onTap: () {},
             child: Padding(
               padding: const EdgeInsets.all(15),
               child: Row(
@@ -45,9 +44,7 @@ class SavedCityWeatherBox extends ConsumerWidget {
                     ],
                   ),
                   Text(
-                    unitSetting.tempUnit == "K"
-                        ? "${(cityWeather.temp)}⁰K"
-                        : "${(cityWeather.temp) - 273}⁰C",
+                    getTemperature(unitSetting.tempUnit, cityWeather.temp),
                     style: const TextStyle(
                       fontSize: 15,
                     ),

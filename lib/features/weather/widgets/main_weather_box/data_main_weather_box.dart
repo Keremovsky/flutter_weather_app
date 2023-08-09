@@ -5,6 +5,7 @@ import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
+import '../../../../core/utils.dart';
 import '../../controller/weather_controller.dart';
 import 'hourly_weather_box.dart';
 
@@ -38,8 +39,10 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
   @override
   Widget build(BuildContext context) {
     unitSetting = ref.watch(unitSettingNotifierProvider);
+
     final data = widget.cityData;
-    final currentTime = data[0];
+    final currentCityWeather = data[0];
+
     return Column(
       children: [
         SizedBox(
@@ -71,9 +74,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                       Row(
                         children: [
                           Text(
-                            unitSetting.tempUnit == "K"
-                                ? "${currentTime.cityName} / ${(currentTime.temp)}⁰K"
-                                : "${currentTime.cityName} / ${(currentTime.temp) - 273}⁰C",
+                            "${currentCityWeather.cityName} / ${getTemperature(unitSetting.tempUnit, currentCityWeather.temp)}",
                             style: const TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
@@ -87,10 +88,11 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                           Column(
                             children: [
                               Icon(
-                                Constants.weatherIcons[currentTime.state],
+                                Constants
+                                    .weatherIcons[currentCityWeather.state],
                                 size: 52.5,
                               ),
-                              Text(currentTime.state),
+                              Text(currentCityWeather.state),
                             ],
                           ),
                           Column(
@@ -99,7 +101,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 Icons.water_drop,
                                 size: 52.5,
                               ),
-                              Text("${currentTime.humidity}%"),
+                              Text("${currentCityWeather.humidity}%"),
                             ],
                           ),
                           Column(
@@ -108,8 +110,12 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 Icons.air,
                                 size: 52.5,
                               ),
-                              Text(getWindSpeed(unitSetting.windSpeedUnit,
-                                  currentTime.speed)),
+                              Text(
+                                getWindSpeed(
+                                  unitSetting.windSpeedUnit,
+                                  currentCityWeather.speed,
+                                ),
+                              ),
                             ],
                           ),
                           Column(
@@ -119,8 +125,10 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                                 size: 52.5,
                               ),
                               Text(
-                                getPressure(unitSetting.pressureUnit,
-                                    currentTime.pressure),
+                                getPressure(
+                                  unitSetting.pressureUnit,
+                                  currentCityWeather.pressure,
+                                ),
                               ),
                             ],
                           ),
@@ -148,33 +156,5 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
         ),
       ],
     );
-  }
-}
-
-// get pressure based on unit setting
-String getPressure(String pressureUnit, int pressure) {
-  if (pressureUnit == "mmHg") {
-    double newPressure = pressure / 0.751;
-    return "${newPressure.toStringAsFixed(0)} $pressureUnit";
-  } else if (pressureUnit == "bar") {
-    return "${(pressure / 1000).toStringAsFixed(2)} $pressureUnit";
-  } else {
-    return "$pressure $pressureUnit";
-  }
-}
-
-// get wind speed based on unit setting
-String getWindSpeed(String windSpeedUnit, num windSpeed) {
-  if (windSpeedUnit == "m/s") {
-    return "$windSpeed $windSpeedUnit";
-  } else if (windSpeedUnit == "km/h") {
-    windSpeed = windSpeed * (10 / 36);
-    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
-  } else if (windSpeedUnit == "knots") {
-    windSpeed = windSpeed * 1.943;
-    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
-  } else {
-    windSpeed = windSpeed * 2.236;
-    return "${windSpeed.toStringAsFixed(2)} $windSpeedUnit";
   }
 }
