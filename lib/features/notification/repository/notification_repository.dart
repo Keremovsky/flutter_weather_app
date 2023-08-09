@@ -174,14 +174,15 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
 
     final country = data["city"]["country"];
 
-    final parseHour = DateTime.parse(dataList[0]["dt_txt"]);
+    final parseTime = DateTime.parse(dataList[0]["dt_txt"]);
 
     final temp = dataList[0]["main"]["temp"].toInt();
     final state = dataList[0]["weather"][0]["main"];
     final pressure = dataList[0]["main"]["pressure"];
     final humidity = dataList[0]["main"]["humidity"];
     final speed = dataList[0]["wind"]["speed"];
-    final hour = DateFormat.Hm().format(parseHour);
+    final hour = DateFormat.Hm().format(parseTime);
+    final date = DateFormat.yMd().format(parseTime);
 
     CityWeather cityWeather = CityWeather(
       cityName: cityName,
@@ -192,6 +193,7 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       humidity: humidity,
       windSpeed: speed,
       hour: hour,
+      date: date,
     );
 
     // set notification details

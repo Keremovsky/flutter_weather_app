@@ -11,6 +11,7 @@ class CityWeather {
   int humidity;
   num windSpeed;
   String hour;
+  String date;
 
   CityWeather({
     required this.cityName,
@@ -21,6 +22,7 @@ class CityWeather {
     required this.humidity,
     required this.windSpeed,
     required this.hour,
+    required this.date,
   });
 
   CityWeather copyWith({
@@ -30,8 +32,9 @@ class CityWeather {
     String? state,
     int? pressure,
     int? humidity,
-    double? speed,
+    num? windSpeed,
     String? hour,
+    String? date,
   }) {
     return CityWeather(
       cityName: cityName ?? this.cityName,
@@ -40,8 +43,9 @@ class CityWeather {
       state: state ?? this.state,
       pressure: pressure ?? this.pressure,
       humidity: humidity ?? this.humidity,
-      windSpeed: speed ?? this.windSpeed,
+      windSpeed: windSpeed ?? this.windSpeed,
       hour: hour ?? this.hour,
+      date: date ?? this.date,
     );
   }
 
@@ -53,8 +57,9 @@ class CityWeather {
       'state': state,
       'pressure': pressure,
       'humidity': humidity,
-      'speed': windSpeed,
+      'windSpeed': windSpeed,
       'hour': hour,
+      'date': date,
     };
   }
 
@@ -66,8 +71,9 @@ class CityWeather {
       state: map['state'] as String,
       pressure: map['pressure'] as int,
       humidity: map['humidity'] as int,
-      windSpeed: map['speed'] as double,
+      windSpeed: map['windSpeed'] as num,
       hour: map['hour'] as String,
+      date: map['date'] as String,
     );
   }
 
@@ -78,7 +84,7 @@ class CityWeather {
 
   @override
   String toString() {
-    return 'CityWeather(cityName: $cityName, country: $country, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $windSpeed, hour: $hour)';
+    return 'CityWeather(cityName: $cityName, country: $country, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, windSpeed: $windSpeed, hour: $hour, date: $date)';
   }
 
   @override
@@ -92,7 +98,8 @@ class CityWeather {
         other.pressure == pressure &&
         other.humidity == humidity &&
         other.windSpeed == windSpeed &&
-        other.hour == hour;
+        other.hour == hour &&
+        other.date == date;
   }
 
   @override
@@ -104,6 +111,7 @@ class CityWeather {
         pressure.hashCode ^
         humidity.hashCode ^
         windSpeed.hashCode ^
-        hour.hashCode;
+        hour.hashCode ^
+        date.hashCode;
   }
 }

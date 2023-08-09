@@ -47,14 +47,15 @@ class WeatherController extends StateNotifier {
 
         // get first seven weather data
         for (int a = 0; a < 7; a++) {
-          final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
+          final parseTime = DateTime.parse(dataList[a]["dt_txt"]);
 
           final temp = dataList[a]["main"]["temp"].toInt();
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
           final speed = dataList[a]["wind"]["speed"];
-          final hour = DateFormat.Hm().format(parseHour);
+          final hour = DateFormat.Hm().format(parseTime);
+          final date = DateFormat.yMd().format(parseTime);
 
           cityWeatherHour = CityWeather(
             cityName: city,
@@ -65,6 +66,7 @@ class WeatherController extends StateNotifier {
             humidity: humidity,
             windSpeed: speed,
             hour: hour,
+            date: date,
           );
           cityWeather.add(cityWeatherHour);
         }
@@ -152,7 +154,7 @@ class WeatherController extends StateNotifier {
         for (Map<String, dynamic> data in right) {
           final dataList = data["list"];
 
-          final parseHour = DateTime.parse(dataList[0]["dt_txt"]);
+          final parseTime = DateTime.parse(dataList[0]["dt_txt"]);
 
           final city = data["city"]["name"];
           final country = data["city"]["country"];
@@ -162,7 +164,8 @@ class WeatherController extends StateNotifier {
           final pressure = dataList[0]["main"]["pressure"];
           final humidity = dataList[0]["main"]["humidity"];
           final speed = dataList[0]["wind"]["speed"];
-          final hour = DateFormat.Hm().format(parseHour);
+          final hour = DateFormat.Hm().format(parseTime);
+          final date = DateFormat.yMd().format(parseTime);
 
           cityWeather = CityWeather(
             cityName: city,
@@ -173,6 +176,7 @@ class WeatherController extends StateNotifier {
             humidity: humidity,
             windSpeed: speed,
             hour: hour,
+            date: date,
           );
 
           savedCitiesWeather.add(cityWeather);
@@ -204,14 +208,15 @@ class WeatherController extends StateNotifier {
 
         // get first seven weather data
         for (int a = 0; a < 7; a++) {
-          final parseHour = DateTime.parse(dataList[a]["dt_txt"]);
+          final parseTime = DateTime.parse(dataList[a]["dt_txt"]);
 
           final temp = dataList[a]["main"]["temp"].toInt();
           final state = dataList[a]["weather"][0]["main"];
           final pressure = dataList[a]["main"]["pressure"];
           final humidity = dataList[a]["main"]["humidity"];
           final speed = dataList[a]["wind"]["speed"];
-          final hour = DateFormat.Hm().format(parseHour);
+          final hour = DateFormat.Hm().format(parseTime);
+          final date = DateFormat.yMd().format(parseTime);
 
           cityName = CityWeather(
             cityName: city,
@@ -222,6 +227,7 @@ class WeatherController extends StateNotifier {
             humidity: humidity,
             windSpeed: speed,
             hour: hour,
+            date: date,
           );
           cityWeather.add(cityName);
         }
