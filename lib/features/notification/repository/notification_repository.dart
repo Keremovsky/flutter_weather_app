@@ -190,7 +190,7 @@ void _backgroundTask(int alarmId, Map<String, dynamic> argument) async {
       state: state,
       pressure: pressure,
       humidity: humidity,
-      speed: speed,
+      windSpeed: speed,
       hour: hour,
     );
 

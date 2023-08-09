@@ -63,7 +63,7 @@ class WeatherController extends StateNotifier {
             state: state,
             pressure: pressure,
             humidity: humidity,
-            speed: speed,
+            windSpeed: speed,
             hour: hour,
           );
           cityWeather.add(cityWeatherHour);
@@ -171,7 +171,7 @@ class WeatherController extends StateNotifier {
             state: state,
             pressure: pressure,
             humidity: humidity,
-            speed: speed,
+            windSpeed: speed,
             hour: hour,
           );
 
@@ -220,7 +220,7 @@ class WeatherController extends StateNotifier {
             state: state,
             pressure: pressure,
             humidity: humidity,
-            speed: speed,
+            windSpeed: speed,
             hour: hour,
           );
           cityWeather.add(cityName);

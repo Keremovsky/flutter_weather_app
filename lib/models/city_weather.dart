@@ -9,7 +9,7 @@ class CityWeather {
   String state;
   int pressure;
   int humidity;
-  num speed;
+  num windSpeed;
   String hour;
 
   CityWeather({
@@ -19,7 +19,7 @@ class CityWeather {
     required this.state,
     required this.pressure,
     required this.humidity,
-    required this.speed,
+    required this.windSpeed,
     required this.hour,
   });
 
@@ -40,7 +40,7 @@ class CityWeather {
       state: state ?? this.state,
       pressure: pressure ?? this.pressure,
       humidity: humidity ?? this.humidity,
-      speed: speed ?? this.speed,
+      windSpeed: speed ?? this.windSpeed,
       hour: hour ?? this.hour,
     );
   }
@@ -53,7 +53,7 @@ class CityWeather {
       'state': state,
       'pressure': pressure,
       'humidity': humidity,
-      'speed': speed,
+      'speed': windSpeed,
       'hour': hour,
     };
   }
@@ -66,7 +66,7 @@ class CityWeather {
       state: map['state'] as String,
       pressure: map['pressure'] as int,
       humidity: map['humidity'] as int,
-      speed: map['speed'] as double,
+      windSpeed: map['speed'] as double,
       hour: map['hour'] as String,
     );
   }
@@ -78,7 +78,7 @@ class CityWeather {
 
   @override
   String toString() {
-    return 'CityWeather(cityName: $cityName, country: $country, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, hour: $hour)';
+    return 'CityWeather(cityName: $cityName, country: $country, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $windSpeed, hour: $hour)';
   }
 
   @override
@@ -91,7 +91,7 @@ class CityWeather {
         other.state == state &&
         other.pressure == pressure &&
         other.humidity == humidity &&
-        other.speed == speed &&
+        other.windSpeed == windSpeed &&
         other.hour == hour;
   }
 
@@ -103,7 +103,7 @@ class CityWeather {
         state.hashCode ^
         pressure.hashCode ^
         humidity.hashCode ^
-        speed.hashCode ^
+        windSpeed.hashCode ^
         hour.hashCode;
   }
 }

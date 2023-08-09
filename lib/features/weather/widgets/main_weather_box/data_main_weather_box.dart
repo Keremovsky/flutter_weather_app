@@ -113,7 +113,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                               Text(
                                 getWindSpeed(
                                   unitSetting.windSpeedUnit,
-                                  currentCityWeather.speed,
+                                  currentCityWeather.windSpeed,
                                 ),
                               ),
                             ],

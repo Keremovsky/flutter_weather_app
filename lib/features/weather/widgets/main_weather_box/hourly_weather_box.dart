@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
+import 'package:flutter_weather_app/features/weather/widgets/weather_details_box.dart';
 import 'package:flutter_weather_app/models/city_weather.dart';
 import '../../../../core/constants/constants.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +17,19 @@ class HourlyWeatherBox extends ConsumerWidget {
 
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          showModalBottomSheet(
+            context: context,
+            useSafeArea: true,
+            showDragHandle: true,
+            builder: (context) {
+              return WeatherDetailsBox(
+                cityWeather: cityWeather,
+                unitSetting: unitSetting,
+              );
+            },
+          );
+        },
         child: SizedBox(
           height: 105,
           width: 105,
