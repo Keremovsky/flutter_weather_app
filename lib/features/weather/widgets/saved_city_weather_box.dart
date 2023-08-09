@@ -25,6 +25,9 @@ class SavedCityWeatherBox extends ConsumerWidget {
             onTap: () {
               showModalBottomSheet(
                 context: context,
+                useSafeArea: true,
+                showDragHandle: true,
+                isScrollControlled: true,
                 builder: (context) {
                   return WeatherDetailsBox(
                     cityWeather: cityWeather,
