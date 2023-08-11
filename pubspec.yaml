@@ -55,6 +55,7 @@ dev_dependencies:
   internet_connection_checker: ^1.0.0+1
   flutter_local_notifications: ^15.1.0+1
   android_alarm_manager_plus: ^3.0.2
+  custom_refresh_indicator: ^2.2.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

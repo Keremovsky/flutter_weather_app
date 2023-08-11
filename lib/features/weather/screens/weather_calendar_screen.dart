@@ -11,8 +11,6 @@ class WeatherCalendarScreen extends StatefulWidget {
 }
 
 class _WeatherCalendarScreenState extends State<WeatherCalendarScreen> {
-  double offSetX = 0;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
