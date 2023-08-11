@@ -17,7 +17,7 @@ class WeatherDetailsBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 190,
+      height: 180,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SizedBox(
