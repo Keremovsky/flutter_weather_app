@@ -153,7 +153,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
             width: double.infinity,
             child: CustomRefreshIndicator(
               trigger: IndicatorTrigger.trailingEdge,
-              indicatorCancelDuration: Duration(seconds: 1),
+              indicatorCancelDuration: const Duration(seconds: 1),
               onRefresh: () async {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -175,7 +175,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
                           opacity: controller.value / 2,
                           child: const Icon(
                             Icons.arrow_forward_ios,
-                            size: 30,
+                            size: 35,
                           ),
                         ),
                       ),
@@ -189,7 +189,7 @@ class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: cityWeather.length - 1,
+                itemCount: 6,
                 itemBuilder: (context, index) {
                   return HourlyWeatherBox(cityWeather: cityWeather[index + 1]);
                 },
