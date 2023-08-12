@@ -20,6 +20,7 @@ class WeatherCalendarBox extends ConsumerWidget {
       child: Card(
         child: InkWell(
           onTap: () {
+            // get city weather details
             showModalBottomSheet(
               context: context,
               useSafeArea: true,

@@ -7,14 +7,18 @@ class LocationWeatherMap extends StatefulWidget {
   final Weather weather;
   final MapController mapController;
 
-  LocationWeatherMap(
-      {required this.weather, required this.mapController, super.key});
+  const LocationWeatherMap({
+    required this.weather,
+    required this.mapController,
+    super.key,
+  });
 
   @override
   State<LocationWeatherMap> createState() => _LocationWeatherMapState();
 }
 
 class _LocationWeatherMapState extends State<LocationWeatherMap> {
+  // variable to hold zoom value for map
   double mapZoom = 12;
 
   @override
@@ -36,11 +40,14 @@ class _LocationWeatherMapState extends State<LocationWeatherMap> {
                   children: [
                     IconButton(
                       onPressed: () {
+                        // increase zoom
                         if (mapZoom > 0) {
                           mapZoom = mapZoom - 1;
                         }
-                        widget.mapController
-                            .move(widget.mapController.center, mapZoom);
+                        widget.mapController.move(
+                          widget.mapController.center,
+                          mapZoom,
+                        );
                       },
                       icon: const Icon(
                         Icons.remove,
@@ -49,11 +56,14 @@ class _LocationWeatherMapState extends State<LocationWeatherMap> {
                     ),
                     IconButton(
                       onPressed: () {
+                        // decrease zoom
                         if (mapZoom < 18) {
                           mapZoom = mapZoom + 1;
                         }
-                        widget.mapController
-                            .move(widget.mapController.center, mapZoom);
+                        widget.mapController.move(
+                          widget.mapController.center,
+                          mapZoom,
+                        );
                       },
                       icon: const Icon(
                         Icons.add,

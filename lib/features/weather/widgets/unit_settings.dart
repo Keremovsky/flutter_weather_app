@@ -13,8 +13,10 @@ class UnitSettings extends ConsumerStatefulWidget {
 }
 
 class _UnitSettingsState extends ConsumerState<UnitSettings> {
+  // variable to hold unit setting
   late UnitSetting unitSetting;
 
+  // unit values
   late String tempUnit;
   late String pressureUnit;
   late String windSpeedUnit;
@@ -24,8 +26,10 @@ class _UnitSettingsState extends ConsumerState<UnitSettings> {
   void initState() {
     super.initState();
 
+    // get unit setting
     UnitSetting initUnitSetting = ref.read(unitSettingNotifierProvider);
 
+    // give initial values to unit values
     tempUnit = initUnitSetting.tempUnit;
     pressureUnit = initUnitSetting.pressureUnit;
     windSpeedUnit = initUnitSetting.windSpeedUnit;
@@ -123,6 +127,7 @@ class _UnitSettingsState extends ConsumerState<UnitSettings> {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    // update unit settings
                     ref
                         .read(unitSettingNotifierProvider.notifier)
                         .setUnitSetting(

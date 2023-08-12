@@ -12,6 +12,7 @@ class WeatherCalendarDay extends StatefulWidget {
 }
 
 class _WeatherCalendarDayState extends State<WeatherCalendarDay> {
+  // variables to split city weather data to two
   List<CityWeather> cityWeathers0 = [];
   List<CityWeather> cityWeathers1 = [];
 
@@ -19,6 +20,7 @@ class _WeatherCalendarDayState extends State<WeatherCalendarDay> {
   void initState() {
     super.initState();
 
+    // split weather data to two
     for (int i = 0; i < widget.cityWeather.length; i++) {
       i < 4
           ? cityWeathers0.add(widget.cityWeather[i])
@@ -56,7 +58,8 @@ class _WeatherCalendarDayState extends State<WeatherCalendarDay> {
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return WeatherCalendarBox(
-                          cityWeather: cityWeathers1[index]);
+                        cityWeather: cityWeathers1[index],
+                      );
                     },
                   ),
                 )

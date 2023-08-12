@@ -4,8 +4,6 @@ import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.da
 import 'package:flutter_weather_app/core/utils.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import '../../../core/constants/constants.dart';
 import '../../../models/weather.dart';
 

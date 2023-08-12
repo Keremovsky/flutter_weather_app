@@ -18,6 +18,7 @@ class HourlyWeatherBox extends ConsumerWidget {
     return Card(
       child: InkWell(
         onTap: () {
+          // get city weather details
           showModalBottomSheet(
             context: context,
             useSafeArea: true,

@@ -23,6 +23,7 @@ class SavedCityWeatherBox extends ConsumerWidget {
         child: Card(
           child: InkWell(
             onTap: () {
+              // get city weather details
               showModalBottomSheet(
                 context: context,
                 useSafeArea: true,
@@ -59,9 +60,7 @@ class SavedCityWeatherBox extends ConsumerWidget {
                   ),
                   Text(
                     getTemperature(unitSetting.tempUnit, cityWeather.temp),
-                    style: const TextStyle(
-                      fontSize: 15,
-                    ),
+                    style: const TextStyle(fontSize: 15),
                   ),
                 ],
               ),

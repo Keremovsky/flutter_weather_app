@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/features/weather/screens/update_saved_city_screen.dart';
 import 'package:flutter_weather_app/features/weather/widgets/unit_settings.dart';
 
+// state provider to get switch value based on theme mode
 final switchProvider = StateProvider((ref) => false);
 
 class EndDrawer extends ConsumerStatefulWidget {
@@ -16,11 +17,14 @@ class EndDrawer extends ConsumerStatefulWidget {
 }
 
 class _EndDrawerState extends ConsumerState<EndDrawer> {
+  // variable to get switch value
   late bool switchValue;
 
   @override
   void initState() {
     super.initState();
+
+    // get switch value
     switchValue = ref.read(switchProvider);
   }
 
@@ -139,6 +143,7 @@ class _EndDrawerState extends ConsumerState<EndDrawer> {
                   Switch(
                     value: switchValue,
                     onChanged: (value) {
+                      // update theme and switch
                       switchValue = value;
                       if (switchValue == false) {
                         ref

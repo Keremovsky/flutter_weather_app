@@ -8,44 +8,30 @@ import 'package:flutter_weather_app/features/weather/screens/weather_calendar_sc
 import 'package:flutter_weather_app/models/city_weather.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
 import '../../../../core/utils.dart';
-import '../../controller/weather_controller.dart';
 import 'hourly_weather_box.dart';
 import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 
 class DataMainWeatherBox extends ConsumerStatefulWidget {
-  final List<CityWeather> cityData;
+  final List<CityWeather> cityWeathers;
 
-  const DataMainWeatherBox({required this.cityData, super.key});
+  const DataMainWeatherBox({required this.cityWeathers, super.key});
 
   @override
   ConsumerState<DataMainWeatherBox> createState() => _MainWeatherBoxState();
 }
 
 class _MainWeatherBoxState extends ConsumerState<DataMainWeatherBox> {
-  late Future<List<CityWeather>> weather = getCurrentLocationWeather();
+  // unit setting
   late UnitSetting unitSetting;
 
-  Future<List<CityWeather>> getCurrentLocationWeather() async {
-    final result = await ref
-        .read(weatherControllerProvider.notifier)
-        .getCurrentLocationWeather(context);
-
-    return result;
-  }
-
-  double opacity = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    weather = getCurrentLocationWeather();
-  }
+  // variable to animate opacity of custom refresh indicator's icon
+  double iconOpacity = 0;
 
   @override
   Widget build(BuildContext context) {
     unitSetting = ref.watch(unitSettingNotifierProvider);
 
-    final cityWeather = widget.cityData;
+    final cityWeather = widget.cityWeathers;
     final currentCityWeather = cityWeather[0];
 
     return Column(

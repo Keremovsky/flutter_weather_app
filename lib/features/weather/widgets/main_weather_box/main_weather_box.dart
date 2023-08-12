@@ -14,8 +14,10 @@ class MainWeatherBox extends ConsumerStatefulWidget {
 }
 
 class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
-  late Future<List<CityWeather>> weather = getCurrentLocationWeather();
+  // variable to hold city's weather data
+  late Future<List<CityWeather>> weather;
 
+  // get weather data based on current location
   Future<List<CityWeather>> getCurrentLocationWeather() async {
     final result = await ref
         .read(weatherControllerProvider.notifier)
@@ -27,6 +29,7 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
   @override
   void initState() {
     super.initState();
+
     // get weather data
     weather = getCurrentLocationWeather();
   }
@@ -51,11 +54,12 @@ class _MainWeatherBoxState extends ConsumerState<MainWeatherBox> {
         }
 
         // if data received
-        return DataMainWeatherBox(cityData: data);
+        return DataMainWeatherBox(cityWeathers: data);
       },
     );
   }
 
+  // update weather
   void _updateMainWeatherBox() {
     weather = getCurrentLocationWeather();
     setState(() {});

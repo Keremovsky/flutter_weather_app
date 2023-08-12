@@ -23,15 +23,17 @@ class NotificationsScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(CreateNotificationScreen.routeName);
+                    Navigator.of(context).pushNamed(
+                      CreateNotificationScreen.routeName,
+                    );
                   },
                   child: const Text("Create Notification"),
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(RemoveNotificationScreen.routeName);
+                    Navigator.of(context).pushNamed(
+                      RemoveNotificationScreen.routeName,
+                    );
                   },
                   child: const Text("Remove Notification"),
                 ),

@@ -25,6 +25,7 @@ class DeleteAllSavedCitiesAlert extends ConsumerWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      // delete all saved cities
                       ref
                           .read(savedCitiesNotifierProvider.notifier)
                           .setSavedCities([]);

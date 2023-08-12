@@ -51,6 +51,7 @@ class _NotificationsScreenState
   void dispose() {
     // dispose controller
     controller.dispose();
+
     super.dispose();
   }
 
@@ -104,6 +105,7 @@ class _NotificationsScreenState
                     height: selectedSchedule == "day" ? 40 : 0,
                     child: ElevatedButton(
                       onPressed: () async {
+                        // select time
                         selectedTime = await showTimePicker(
                               context: context,
                               initialTime: selectedTime ?? TimeOfDay.now(),

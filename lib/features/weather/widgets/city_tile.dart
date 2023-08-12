@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CityTile extends ConsumerWidget {
+  // city name
   final String city;
+  // country code
   final String country;
+  // function to select city
   final Function selectCity;
+  // control if city is selected
   final bool isSelected;
 
   const CityTile({
@@ -28,8 +32,9 @@ class CityTile extends ConsumerWidget {
       title: Row(
         children: [
           SizedBox(
-              height: 44,
-              child: Image.asset("assets/icons/flags/$country.png")),
+            height: 44,
+            child: Image.asset("assets/icons/flags/$country.png"),
+          ),
           const SizedBox(width: 10),
           Text(
             city,

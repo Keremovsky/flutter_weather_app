@@ -12,12 +12,14 @@ class WeatherCalendarScreen extends StatefulWidget {
 }
 
 class _WeatherCalendarScreenState extends State<WeatherCalendarScreen> {
+  // variable to divide city weather data to parts
   List<List<CityWeather>> cityWeathers = [[], [], [], [], [], [], []];
 
   @override
   void initState() {
     super.initState();
 
+    // get city weather data together
     int counter = 0;
     for (int i = 0; i < 40; i++) {
       cityWeathers[counter].add(widget.cityWeather[i]);

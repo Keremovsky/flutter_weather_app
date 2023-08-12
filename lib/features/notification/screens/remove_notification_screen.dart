@@ -75,8 +75,8 @@ class _RemoveNotificationsScreenState
                 children: [
                   FloatingActionButton(
                     onPressed: () {
+                      // be sure that user want to remove selected notification
                       showDialog(
-                        // be sure that user want to remove selected notification
                         context: context,
                         builder: (context) {
                           return DeleteNotificationCitiesAlert(

@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ErrorMainWeatherData extends StatelessWidget {
+  // function that refresh main_weather_box
   final Function refresh;
 
   const ErrorMainWeatherData({required this.refresh, super.key});
@@ -42,6 +43,7 @@ class ErrorMainWeatherData extends StatelessWidget {
                           children: [
                             IconButton(
                               onPressed: () {
+                                // refresh main_weather_box
                                 refresh();
                               },
                               icon: const Icon(Icons.refresh),

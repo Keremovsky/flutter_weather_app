@@ -18,13 +18,17 @@ class LocationWeatherScreen extends ConsumerStatefulWidget {
 }
 
 class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
-  final formKey = GlobalKey<FormState>();
+  // form key to get input from user
+  late GlobalKey<FormState> formKey;
 
+  // controller for map
   late MapController mapController;
 
+  // coordinates
   late String lat;
   late String lng;
 
+  // initial value for weather
   Weather weather = Weather(
     cityName: "",
     temp: 0,
@@ -36,6 +40,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
     lng: 27.2232678,
   );
 
+  // get weather data based on coordinates
   Future<Weather> getWeatherWithLocation(double lat, double lng) async {
     final result = await ref
         .read(weatherControllerProvider.notifier)
@@ -48,6 +53,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
   void initState() {
     super.initState();
 
+    formKey = GlobalKey<FormState>();
     mapController = MapController();
   }
 
@@ -138,11 +144,16 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
                     onPressed: () async {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+
                         weather = await getWeatherWithLocation(
-                            double.parse(lat), double.parse(lng));
+                          double.parse(lat),
+                          double.parse(lng),
+                        );
 
                         mapController.move(
-                            LatLng(weather.lat, weather.lng), 12);
+                          LatLng(weather.lat, weather.lng),
+                          12,
+                        );
 
                         setState(() {});
                       }

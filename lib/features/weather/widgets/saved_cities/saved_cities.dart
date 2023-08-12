@@ -14,21 +14,18 @@ class SavedCities extends ConsumerStatefulWidget {
 }
 
 class _SavedCitiesState extends ConsumerState<SavedCities> {
+  // variable to hold city's weather data
   late Future<List<CityWeather>> weather;
+  // variable to hold saved cities
   late List<String> savedCities;
 
-  Future<List<CityWeather>> _updateSavedCitiesWeather(
-      List<String> cities) async {
+  // get weather data based on saved cities
+  Future<List<CityWeather>> _getSavedCitiesWeather(List<String> cities) async {
     final result = await ref
         .read(weatherControllerProvider.notifier)
         .getSavedCitiesWeather(context, cities);
 
     return result;
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -39,12 +36,14 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
     return FutureBuilder(
       future: weather,
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
+        // while fetching data
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Expanded(child: LoadingIndicator());
         }
 
         final data = snapshot.data!;
 
+        // if there is no data
         if (data.isEmpty) {
           return const Expanded(
             child: Column(
@@ -57,7 +56,9 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
               ],
             ),
           );
-        } else {
+        }
+        // if data received
+        else {
           return Expanded(
             child: Column(
               children: [
@@ -77,7 +78,8 @@ class _SavedCitiesState extends ConsumerState<SavedCities> {
     );
   }
 
+  // update saved cities
   void _updateSavedCities(List<String> cities) {
-    weather = _updateSavedCitiesWeather(cities);
+    weather = _getSavedCitiesWeather(cities);
   }
 }
