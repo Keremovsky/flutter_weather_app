@@ -22,6 +22,7 @@ class SavedCityWeatherBox extends ConsumerWidget {
         width: double.infinity,
         child: Card(
           child: InkWell(
+            borderRadius: BorderRadius.circular(10),
             onTap: () {
               // get city weather details
               showModalBottomSheet(

@@ -17,6 +17,7 @@ class HourlyWeatherBox extends ConsumerWidget {
 
     return Card(
       child: InkWell(
+        borderRadius: BorderRadius.circular(10),
         onTap: () {
           // get city weather details
           showModalBottomSheet(
