@@ -61,6 +61,7 @@ class _NotificationsScreenState
       appBar: AppBar(
         title: const Text("Create Notification"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
         actions: [
           IconButton(
             onPressed: () {

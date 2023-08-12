@@ -38,6 +38,7 @@ class _RemoveNotificationsScreenState
       appBar: AppBar(
         title: const Text("Remove Notification"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: Padding(

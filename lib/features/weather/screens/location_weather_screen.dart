@@ -65,6 +65,7 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
       appBar: AppBar(
         title: const Text("Get Weather"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: Column(

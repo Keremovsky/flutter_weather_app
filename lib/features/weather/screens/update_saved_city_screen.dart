@@ -59,6 +59,7 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
       appBar: AppBar(
         title: const Text("Update Saved Cities"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: Padding(

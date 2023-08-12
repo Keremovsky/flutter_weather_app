@@ -13,6 +13,7 @@ class NotificationsScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Notifications"),
         centerTitle: true,
+        scrolledUnderElevation: 0,
       ),
       body: SafeArea(
         child: Column(
