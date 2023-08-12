@@ -93,48 +93,21 @@ class _AddSavedCityScreenState extends ConsumerState<UpdateSavedCityScreen> {
                           ),
                         ),
                         const SizedBox(width: 20),
-                        IconButton(
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  content: DropdownButton(
-                                    items: Constants.countriesDropDownItems,
-                                    value: searchCountry,
-                                    onChanged: (value) {
-                                      searchCountry = value!;
+                        DropdownButton(
+                          items: Constants.countriesDropDownItems,
+                          value: searchCountry,
+                          onChanged: (value) {
+                            searchCountry = value!;
 
-                                      cityListDisplay = _applyFilter(
-                                        cityListDisplay,
-                                        cityList,
-                                        searchCityName,
-                                        searchCountry,
-                                      );
-                                      setState(() {});
-                                    },
-                                  ),
-                                );
-                              },
+                            cityListDisplay = _applyFilter(
+                              cityListDisplay,
+                              cityList,
+                              searchCityName,
+                              searchCountry,
                             );
+                            setState(() {});
                           },
-                          icon: const Icon(Icons.flag),
-                        )
-                        //   DropdownButton(
-                        //     items: Constants.countriesDropDownItems,
-                        //     value: searchCountry,
-                        //     onChanged: (value) {
-                        //       searchCountry = value!;
-
-                        //       cityListDisplay = _applyFilter(
-                        //         cityListDisplay,
-                        //         cityList,
-                        //         searchCityName,
-                        //         searchCountry,
-                        //       );
-                        //       setState(() {});
-                        //     },
-                        //   ),
+                        ),
                       ],
                     ),
                   ),
