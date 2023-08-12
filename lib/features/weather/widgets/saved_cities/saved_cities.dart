@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/common/loading_indicator.dart';
 import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
-import 'package:flutter_weather_app/features/weather/widgets/saved_city_weather_box.dart';
+import 'package:flutter_weather_app/features/weather/widgets/saved_cities/saved_city_weather_box.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../models/city_weather.dart';
-import '../controller/weather_controller.dart';
+import '../../../../models/city_weather.dart';
+import '../../controller/weather_controller.dart';
 
 class SavedCities extends ConsumerStatefulWidget {
   const SavedCities({super.key});

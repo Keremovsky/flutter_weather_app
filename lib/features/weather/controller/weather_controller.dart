@@ -97,6 +97,7 @@ class WeatherController extends StateNotifier {
         }
 
         weather = Weather(
+          cityName: "",
           temp: 0,
           state: "fail",
           pressure: 0,
@@ -108,6 +109,7 @@ class WeatherController extends StateNotifier {
       },
       // if getting data process is successful
       (right) {
+        final cityName = right["name"] == "" ? "Unknown" : right["name"];
         final temp = right["main"]["temp"].toInt();
         final state = right["weather"][0]["main"];
         final pressure = right["main"]["pressure"];
@@ -115,6 +117,7 @@ class WeatherController extends StateNotifier {
         final speed = right["wind"]["speed"];
 
         weather = Weather(
+          cityName: cityName,
           temp: temp,
           state: state,
           pressure: pressure,

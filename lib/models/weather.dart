@@ -3,6 +3,7 @@ import 'dart:convert';
 
 // help to store weather data (for getting weather based on location)
 class Weather {
+  String cityName;
   int temp;
   String state;
   int pressure;
@@ -12,6 +13,7 @@ class Weather {
   double lng;
 
   Weather({
+    required this.cityName,
     required this.temp,
     required this.state,
     required this.pressure,
@@ -22,6 +24,7 @@ class Weather {
   });
 
   Weather copyWith({
+    String? name,
     int? temp,
     String? state,
     int? pressure,
@@ -31,6 +34,7 @@ class Weather {
     double? lng,
   }) {
     return Weather(
+      cityName: name ?? this.cityName,
       temp: temp ?? this.temp,
       state: state ?? this.state,
       pressure: pressure ?? this.pressure,
@@ -43,6 +47,7 @@ class Weather {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'name': cityName,
       'temp': temp,
       'state': state,
       'pressure': pressure,
@@ -55,6 +60,7 @@ class Weather {
 
   factory Weather.fromMap(Map<String, dynamic> map) {
     return Weather(
+      cityName: map['name'] as String,
       temp: map['temp'] as int,
       state: map['state'] as String,
       pressure: map['pressure'] as int,
@@ -72,14 +78,15 @@ class Weather {
 
   @override
   String toString() {
-    return 'Weather(temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, lat: $lat, lng: $lng)';
+    return 'Weather(name: $cityName, temp: $temp, state: $state, pressure: $pressure, humidity: $humidity, speed: $speed, lat: $lat, lng: $lng)';
   }
 
   @override
   bool operator ==(covariant Weather other) {
     if (identical(this, other)) return true;
 
-    return other.temp == temp &&
+    return other.cityName == cityName &&
+        other.temp == temp &&
         other.state == state &&
         other.pressure == pressure &&
         other.humidity == humidity &&
@@ -90,7 +97,8 @@ class Weather {
 
   @override
   int get hashCode {
-    return temp.hashCode ^
+    return cityName.hashCode ^
+        temp.hashCode ^
         state.hashCode ^
         pressure.hashCode ^
         humidity.hashCode ^

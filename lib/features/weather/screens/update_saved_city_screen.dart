@@ -3,7 +3,7 @@ import 'package:flutter_weather_app/core/constants/constants.dart';
 import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_weather_app/features/weather/widgets/city_tile.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_weather_app/features/weather/widgets/delete_saved_cities_alert.dart';
+import 'package:flutter_weather_app/features/weather/widgets/saved_cities/delete_saved_cities_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateSavedCityScreen extends ConsumerStatefulWidget {

@@ -2,7 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/features/weather/widgets/end_drawer.dart';
 import 'package:flutter_weather_app/features/weather/widgets/main_weather_box/main_weather_box.dart';
-import 'package:flutter_weather_app/features/weather/widgets/saved_cities.dart';
+import 'package:flutter_weather_app/features/weather/widgets/saved_cities/saved_cities.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class WeatherHomeScreen extends ConsumerStatefulWidget {

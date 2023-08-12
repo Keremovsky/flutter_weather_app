@@ -4,8 +4,8 @@ import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.da
 import 'package:flutter_weather_app/core/utils.dart';
 import 'package:flutter_weather_app/features/weather/widgets/weather_details_box.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
-import '../../../models/city_weather.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../models/city_weather.dart';
 
 class SavedCityWeatherBox extends ConsumerWidget {
   final CityWeather cityWeather;

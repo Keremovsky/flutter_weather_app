@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/state_notifiers/saved_cities_notifier.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/common/alert_dialog_title.dart';
+import '../../../../core/common/alert_dialog_title.dart';
 
 class DeleteAllSavedCitiesAlert extends ConsumerWidget {
   const DeleteAllSavedCitiesAlert({super.key});

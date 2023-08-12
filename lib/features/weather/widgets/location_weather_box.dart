@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_weather_app/core/state_notifiers/unit_setting_notifer.dart';
 import 'package:flutter_weather_app/core/utils.dart';
 import 'package:flutter_weather_app/models/unit_setting.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import '../../../core/constants/constants.dart';
 import '../../../models/weather.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LocationWeatherBox extends ConsumerWidget {
   final Weather weather;
@@ -119,12 +121,16 @@ class LocationWeatherBox extends ConsumerWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        getTemperature(unitSetting.tempUnit, weather.temp),
-                        style: const TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      Row(
+                        children: [
+                          Text(
+                            "${weather.cityName} / ${getTemperature(unitSetting.tempUnit, weather.temp)}",
+                            style: const TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
