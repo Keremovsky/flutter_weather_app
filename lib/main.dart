@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_weather_app/core/state_notifiers/theme_notifier.dart';
 import 'package:flutter_weather_app/features/notification/screens/notifications_screen.dart';
@@ -10,6 +11,12 @@ import 'package:flutter_weather_app/features/weather/screens/weather_home_screen
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
