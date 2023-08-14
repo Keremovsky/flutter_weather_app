@@ -36,7 +36,19 @@ class _LocationWeatherMapState extends State<LocationWeatherMap> {
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: SizedBox(),
+                child: IconButton(
+                  onPressed: () {
+                    // get to the current coordinates again
+                    widget.mapController.move(
+                      LatLng(widget.weather.lat, widget.weather.lng),
+                      mapZoom,
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.restart_alt_outlined,
+                    color: Colors.black,
+                  ),
+                ),
               ),
             ],
           )
