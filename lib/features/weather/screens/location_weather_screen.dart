@@ -138,30 +138,25 @@ class _LocationWeatherScreenState extends ConsumerState<LocationWeatherScreen> {
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ElevatedButton(
-                    onPressed: () async {
-                      if (formKey.currentState!.validate()) {
-                        formKey.currentState!.save();
+              child: ElevatedButton(
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
 
-                        weather = await getWeatherWithLocation(
-                          double.parse(lat),
-                          double.parse(lng),
-                        );
+                    weather = await getWeatherWithLocation(
+                      double.parse(lat),
+                      double.parse(lng),
+                    );
 
-                        mapController.move(
-                          LatLng(weather.lat, weather.lng),
-                          12,
-                        );
+                    mapController.move(
+                      LatLng(weather.lat, weather.lng),
+                      12,
+                    );
 
-                        setState(() {});
-                      }
-                    },
-                    child: const Text("Get Weather"),
-                  ),
-                ],
+                    setState(() {});
+                  }
+                },
+                child: const Text("Get Weather"),
               ),
             ),
             const SizedBox(height: 10),

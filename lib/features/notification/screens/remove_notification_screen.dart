@@ -52,7 +52,7 @@ class _RemoveNotificationsScreenState
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "No Notification",
+                            "No Notification Yet",
                             style: TextStyle(fontSize: 28),
                           ),
                         ],

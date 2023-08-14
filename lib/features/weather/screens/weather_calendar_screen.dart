@@ -46,6 +46,8 @@ class _WeatherCalendarScreenState extends State<WeatherCalendarScreen> {
                 itemBuilder: (context, index) {
                   if (cityWeathers[index].isNotEmpty) {
                     return WeatherCalendarDay(cityWeather: cityWeathers[index]);
+                  } else {
+                    return null;
                   }
                 },
               ),
