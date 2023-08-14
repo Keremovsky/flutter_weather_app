@@ -93,27 +93,27 @@
   <tbody>
     <tr>
       <td align="center">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/0.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/1.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/2.jpg" width="300" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/0.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/1.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/2.jpg" width="250" title="test">
       </td>
     </tr>
   </tbody>
     <tbody>
     <tr>
       <td align="center">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/3.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/4.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/5.jpg" width="300" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/3.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/4.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/5.jpg" width="250" title="test">
       </td>
     </tr>
   </tbody>
     <tbody>
     <tr>
       <td align="center">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/6.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/7.jpg" width="300" title="test">
-        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/8.jpg" width="300" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/6.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/7.jpg" width="250" title="test">
+        <img src="https://github.com/Keremovsky/flutter_weather_app/blob/master/app_gallery/8.jpg" width="250" title="test">
       </td>
     </tr>
   </tbody>
