@@ -36,42 +36,7 @@ class _LocationWeatherMapState extends State<LocationWeatherMap> {
               Positioned(
                 bottom: 0,
                 right: 0,
-                child: Row(
-                  children: [
-                    IconButton(
-                      onPressed: () {
-                        // increase zoom
-                        if (mapZoom > 0) {
-                          mapZoom = mapZoom - 1;
-                        }
-                        widget.mapController.move(
-                          widget.mapController.center,
-                          mapZoom,
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.remove,
-                        color: Colors.black,
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {
-                        // decrease zoom
-                        if (mapZoom < 18) {
-                          mapZoom = mapZoom + 1;
-                        }
-                        widget.mapController.move(
-                          widget.mapController.center,
-                          mapZoom,
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
+                child: SizedBox(),
               ),
             ],
           )

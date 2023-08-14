@@ -44,9 +44,7 @@ class _WeatherCalendarScreenState extends State<WeatherCalendarScreen> {
               child: ListView.builder(
                 itemCount: cityWeathers.length - 1,
                 itemBuilder: (context, index) {
-                  if (cityWeathers[cityWeathers.length - 1].isNotEmpty) {
-                    return WeatherCalendarDay(cityWeather: cityWeathers[index]);
-                  } else {
+                  if (cityWeathers[index].isNotEmpty) {
                     return WeatherCalendarDay(cityWeather: cityWeathers[index]);
                   }
                 },
